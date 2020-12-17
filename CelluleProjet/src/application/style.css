@@ -1,0 +1,66 @@
+	/*.buttons{
+		-fx-background-radius:30;
+		-fx-font-size:15; 
+		-fx-text-fill:white;
+		-fx-font-weight:bold; 
+		-fx-background-color:gray;
+		-fx-border-color:white;
+		-fx-border-radius:30;
+		-fx-cursor: hand;
+		
+}
+
+ 	 .buttons:pressed {
+        -fx-scale-y: 0.9;
+        -fx-scale-x: 0.9;
+}
+
+
+		.buttons:hover {
+        -fx-background-color: #383838;
+        -fx-scale-y: 1.1;
+}
+
+
+	.mainbutton{
+		-fx-cursor: hand;
+		-fx-font-size:15; 
+		-fx-text-fill:black;
+	
+		-fx-font-weight:bold; 
+		
+		
+}
+
+	.rectangleshape{
+		-fx-arc-width:30;
+		-fx-arc-height:30;
+		-fx-fill: rgb(56,67,87);
+		-fx-opacity:1;
+		-fx-stroke:white;
+		-fx-stroke-width:3;
+		}
+		
+	.pane{
+		 -fx-background-color: rgb(56,67,87);
+	}
+	
+		/* -fx-background-color: rgb(255,202,8); 
+		 * 
+		 * 		-fx-fill: rgb(56,67,87);
+		-fx-stroke:rgb(56,67,87);
+		 * */
+
+	.toprectangle{
+		-fx-fill: rgb(255,202,8);
+		-fx-stroke:rgb(255,202,8);
+		
+}
+
+
+	.tablesstyle{
+		
+
+}
+
+

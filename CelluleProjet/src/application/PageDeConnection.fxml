@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PageDeConnectionController">
+   <children>
+      <Pane layoutY="48.0" prefHeight="652.0" prefWidth="230.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1120.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#pagecampagnes" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Campagnes" />
+            <Button layoutY="521.0" mnemonicParsing="false" onAction="#pagegestionadmin" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Gestion Admin" />
+            <Button layoutY="391.0" mnemonicParsing="false" onAction="#pagemoncompte" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Mon Compte" />
+            <Button layoutY="261.0" mnemonicParsing="false" onAction="#pageajouterimage" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Ajouter Image" />
+            <Button layoutY="130.0" mnemonicParsing="false" onAction="#pageessais" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Essais" />
+         </children>
+      </Pane>
+      <Pane layoutX="-13.0" layoutY="-3.0" prefHeight="47.0" prefWidth="1350.0" style="-fx-background-color: rgb(255,202,8);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="45.0" layoutX="41.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cellule2.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="95.0" layoutY="15.0" text="CellulesCount" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="pagecampagnes" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView layoutX="22.0" layoutY="72.0" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+              <columns>
+                <TableColumn prefWidth="361.0" text="Nom" />
+                <TableColumn prefWidth="359.0" text="Description" />
+              </columns>
+            </TableView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Button layoutX="777.0" layoutY="404.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Camagnes" textFill="WHITE" />
+            <Button layoutX="777.0" layoutY="466.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Camapagnes" textFill="#ff8800" />
+            <Button layoutX="777.0" layoutY="527.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Camagnes" textFill="#ff2e2e" />
+            <Button layoutX="777.0" layoutY="628.0" mnemonicParsing="false" onAction="#pageresultatcampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
+            <Label layoutX="804.0" layoutY="108.0" text="Nom" />
+            <TextField layoutX="801.0" layoutY="129.0" />
+            <Label layoutX="801.0" layoutY="173.0" text="Description" />
+            <TextArea layoutX="801.0" layoutY="194.0" prefHeight="139.0" prefWidth="262.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Campagnes" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pageresultatcampagnes" layoutX="230.0" layoutY="9.0" prefHeight="691.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="144.0" layoutY="145.0" text="Nombre Totale D'Images">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="144.0" layoutY="201.0" text="Nombre Totale De Cellules Detectes">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="816.0" layoutY="585.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
+            <Label layoutX="46.0" layoutY="57.0" text="Return">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="45.0" fitWidth="44.0" layoutY="46.0" onMouseClicked="#pagecampagnes" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/arrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="144.0" layoutY="257.0" prefHeight="30.0" prefWidth="250.0" text="Moyenne De cellules Image">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField editable="false" layoutX="517.0" layoutY="147.0" prefHeight="31.0" prefWidth="91.0" />
+            <TextField editable="false" layoutX="517.0" layoutY="203.0" prefHeight="31.0" prefWidth="91.0" />
+            <TextField editable="false" layoutX="517.0" layoutY="259.0" prefHeight="31.0" prefWidth="91.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Resultat" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pageessais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView layoutX="22.0" layoutY="72.0" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+              <columns>
+                <TableColumn prefWidth="240.0" text="Nom" />
+                  <TableColumn prefWidth="240.0" text="description" />
+                  <TableColumn prefWidth="240.0" text="Date" />
+              </columns>
+            </TableView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Button layoutX="777.0" layoutY="399.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
+            <Button layoutX="777.0" layoutY="460.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
+            <Button layoutX="777.0" layoutY="520.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
+            <Button layoutX="777.0" layoutY="628.0" mnemonicParsing="false" onAction="#pageresultatessai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Label layoutX="801.0" layoutY="100.0" text="Campagnes Correspondante" />
+            <ComboBox layoutX="801.0" layoutY="121.0" prefHeight="31.0" prefWidth="262.0" />
+            <Label layoutX="801.0" layoutY="168.0" text="Algorithme Correspondante" />
+            <ComboBox layoutX="801.0" layoutY="189.0" prefHeight="31.0" prefWidth="262.0" />
+            <Label layoutX="805.0" layoutY="231.0" text="Attacher Nouvelle Image" />
+            <Button layoutX="805.0" layoutY="252.0" mnemonicParsing="false" text="Import Image" />
+            <Label layoutX="805.0" layoutY="293.0" text="Description" />
+            <TextArea layoutX="805.0" layoutY="314.0" prefHeight="71.0" prefWidth="262.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Essais" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pageresultatessai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <Label layoutX="77.0" layoutY="118.0" text="Nombre Totale d'Image">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="334.0" text="Selectionner Une Image Pour Les Detailles">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="825.0" layoutY="597.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
+            <Label layoutX="46.0" layoutY="61.0" text="Return">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="45.0" fitWidth="44.0" layoutY="50.0" onDragDetected="#pageessais" onMouseClicked="#pageessais" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/arrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="77.0" layoutY="264.0" prefHeight="30.0" prefWidth="308.0" text="Moyenne De cellule Image">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="77.0" layoutY="189.0" text="Nombre Totale de Cellule Detectes">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField editable="false" layoutX="404.0" layoutY="118.0" prefHeight="31.0" prefWidth="91.0" />
+            <TextField editable="false" layoutX="404.0" layoutY="189.0" prefHeight="31.0" prefWidth="91.0" />
+            <TextField editable="false" layoutX="404.0" layoutY="264.0" prefHeight="31.0" prefWidth="91.0" />
+            <ListView layoutX="70.0" layoutY="372.0" prefHeight="225.0" prefWidth="585.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Resultat" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pageajouterimage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView layoutX="33.0" layoutY="104.0" prefHeight="463.0" prefWidth="1054.0" />
+            <Button layoutX="857.0" layoutY="606.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Ajouter Image">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="33.0" layoutY="74.0" text="Liste Des Images">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Ajouter Image" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pagemoncompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="53.0" layoutY="177.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
+            <Label layoutX="85.0" layoutY="209.0" text="Prenom :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="248.0" text="Nom :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="409.0" text="Modifier Prenom :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="447.0" text="Modifier Nom :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="485.0" text="Modifier mot de passe :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField layoutX="321.0" layoutY="409.0" prefHeight="31.0" prefWidth="250.0" />
+            <TextField layoutX="321.0" layoutY="447.0" prefHeight="31.0" prefWidth="250.0" />
+            <PasswordField layoutX="321.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" />
+            <Button layoutX="911.0" layoutY="607.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="159.0" styleClass="buttons" text="Valider">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="639.0" layoutY="607.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="250.0" styleClass="buttons" text="Supprimer Mon Compte">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="89.0" fitWidth="80.0" layoutX="53.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cellule.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="991.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cellule2.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Mon Compte" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pagegestionadmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView layoutX="22.0" layoutY="72.0" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+              <columns>
+                <TableColumn prefWidth="240.0" text="Nom" />
+                <TableColumn prefWidth="240.0" text="Prenom" />
+                  <TableColumn prefWidth="240.0" text="Position" />
+              </columns>
+            </TableView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Button layoutX="776.0" layoutY="231.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Position" />
+            <Button layoutX="776.0" layoutY="310.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Utilisateur" />
+            <Label layoutX="800.0" layoutY="109.0" text="Position" />
+            <ComboBox fx:id="comboboxposition" layoutX="800.0" layoutY="130.0" prefHeight="31.0" prefWidth="262.0" promptText="Position" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
+            <Label layoutX="390.0" text="Gestion Admin" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
