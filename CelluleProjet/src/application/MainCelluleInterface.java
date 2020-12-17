@@ -21,7 +21,7 @@ public class MainCelluleInterface extends Application {
 			e.printStackTrace();
 		}
 	}
-	// Test commit beta
+	// Test commit beta 2
 	public static void main(String[] args) {
 		launch(args);
 	}
