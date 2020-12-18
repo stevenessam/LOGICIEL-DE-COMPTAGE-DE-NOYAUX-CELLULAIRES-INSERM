@@ -1,8 +1,16 @@
-package application;
+/**
+ * Class PageDeConnectionController qui implements Initializable 
+ * Cet Class controlleur qui permet le déplacement entre les pages
+ * Chaque methode est connecter avec les boutons dans l'ineterface 
+ * Ces boutons sont: Campagnes, Essais, ajouter une image dans le système, mon compte et Gestion Admin
+ * 
+ * @author ST3VOS
+ */
 
+
+package application;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,6 +40,14 @@ public class PageDeConnectionController implements Initializable {
 
 	// Debut deplacement entre les page
 
+	
+	
+	/**
+	 * Method qui permet de faire visible la page pagecampagnes
+	 * @author ST3VOS
+	 */
+	
+	
 	public void pagecampagnes() {
 		pagecampagnes.setVisible(true);
 		pageessais.setVisible(false);
@@ -43,6 +59,12 @@ public class PageDeConnectionController implements Initializable {
 
 
 	}
+	
+	
+	/**
+	 * Method qui permet de faire visible la page pageessais
+	 * @author ST3VOS
+	 */
 
 	public void pageessais() {
 		pagecampagnes.setVisible(false);
@@ -55,6 +77,11 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	/**
+	 * Method qui permet de faire visible la page pageajouterimage
+	 * @author ST3VOS
+	 */
+	
 	public void pageajouterimage() {
 		pagecampagnes.setVisible(false);
 		pageessais.setVisible(false);
@@ -66,6 +93,11 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	/**
+	 * Method qui permet de faire visible la page pagemoncompte 
+	 * @author ST3VOS
+	 */
+	
 	public void pagemoncompte() {
 		pagecampagnes.setVisible(false);
 		pageessais.setVisible(false);
@@ -77,6 +109,11 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	/**
+	 * Method qui permet de faire visible la page pagegestionadmin
+	 * @author ST3VOS
+	 */
+	
 	public void pagegestionadmin() {
 		pagecampagnes.setVisible(false);
 		pageessais.setVisible(false);
@@ -89,6 +126,11 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	
+	/**
+	 * Method qui permet de faire visible la page pageresultatcampagnes
+	 * @author ST3VOS
+	 */
 
 
 	public void pageresultatcampagnes() {
@@ -103,6 +145,11 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	
+	/**
+	 * Method qui permet de faire visible la page pageresultatessai
+	 * @author ST3VOS
+	 */
 
 	public void pageresultatessai() {
 		pagecampagnes.setVisible(false);
@@ -115,14 +162,6 @@ public class PageDeConnectionController implements Initializable {
 		
 		
 		//Fin deplacement entre les page
-
-
-
-		
-		
-		
-
-
 
 
 	}

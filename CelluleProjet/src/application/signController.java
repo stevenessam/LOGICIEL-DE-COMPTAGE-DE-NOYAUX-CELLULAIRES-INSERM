@@ -1,11 +1,14 @@
+/**
+ * Class signController qui implements Initializable
+ * Cet Class est  un class controlleur qui permet de controller le sign.fxml
+ * 
+ * @author ST3VOS
+ */
+
 package application;
-
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

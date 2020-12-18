@@ -1,5 +1,11 @@
-package application;
-	
+/**
+ * Main class "MaincelluleInterface" qui extends Application
+ * 
+ * 
+ * @author ST3VOS
+ */
+
+package application;	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -12,7 +18,7 @@ public class MainCelluleInterface extends Application {
 	public void start(Stage stage) {
 		try {
 			
-			Parent parent =FXMLLoader.load(getClass().getResource("sign.fxml"));
+			Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
 			
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);
