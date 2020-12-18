@@ -3,7 +3,7 @@
  * Cette Class est  un class controlleur qui permet de controller le sign.fxml
  * Cette classe permet également lorsqu'un utilisateur est connecté de passer du page sign.fxml à page PageDeConnection.fxml 
  * La scène est positionnée au milieu de l'écran lors du déplacement entre les deux pages
- * 
+ *    
  * @author ST3VOS
  * 
  * 
