@@ -45,12 +45,12 @@ public class PageDeConnectionController implements Initializable {
 	@FXML
 	ComboBox comboboxposition;
 
-	// Debut deplacement entre les page
+	// Début du déplacement entre les pages
 
 	
 	
 	/**
-	 * Method qui permet de faire visible la page pagecampagnes
+	 * Méthode qui permet de rendre visible la page 'pagecampagnes'
 	 * @author ST3VOS
 	 */
 	
@@ -69,7 +69,7 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	/**
-	 * Method qui permet de faire visible la page pageessais
+	 * Méthode qui permet de rendre visible la page pageessais
 	 * @author ST3VOS
 	 */
 
@@ -85,7 +85,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Method qui permet de faire visible la page pageajouterimage
+	 * Méthode qui permet de rendre visible la page pageajouterimage
 	 * @author ST3VOS
 	 */
 	
@@ -101,7 +101,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Method qui permet de faire visible la page pagemoncompte 
+	 * Méthode qui permet de rendre visible la page pagemoncompte 
 	 * @author ST3VOS
 	 */
 	
@@ -117,7 +117,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Method qui permet de faire visible la page pagegestionadmin
+	 * Méthode qui permet de rendre visible la page pagegestionadmin
 	 * @author ST3VOS
 	 */
 	
@@ -135,7 +135,7 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 * Method qui permet de faire visible la page pageresultatcampagnes
+	 * Méthode qui permet de rendre visible la page pageresultatcampagnes
 	 * @author ST3VOS
 	 */
 
@@ -154,7 +154,7 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 * Method qui permet de faire visible la page pageresultatessai
+	 * Méthode qui permet de rendre visible la page pageresultatessai
 	 * @author ST3VOS
 	 */
 
@@ -168,7 +168,7 @@ public class PageDeConnectionController implements Initializable {
 		pageresultatessai.setVisible(true);
 		
 		
-		//Fin deplacement entre les page
+		//Fin du déplacement entre les pages
 
 
 	}
@@ -180,7 +180,7 @@ public class PageDeConnectionController implements Initializable {
 
 		
 
-		// Debut actionner les button,les textfields,etc...
+		// Activation des boutons,textfields,etc...
 		
 		
 		
@@ -194,7 +194,7 @@ public class PageDeConnectionController implements Initializable {
 		
 		
 		
-		// Fin actionner les button,les textfields,etc...
+		// Fin de l'activation des boutons,les textfields,etc...
 		
 		
 		
