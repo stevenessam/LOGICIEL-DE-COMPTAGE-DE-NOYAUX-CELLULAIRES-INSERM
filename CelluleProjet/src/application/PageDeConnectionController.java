@@ -1,7 +1,7 @@
 /**
- * Class PageDeConnectionController qui implements Initializable 
- * Cette Class controlleur qui permet le déplacement entre les pages
- * Chaque methode est connecter avec les boutons dans l'ineterface 
+ * Class PageDeConnectionController qui implémente Initializable 
+ * Cette Class controlleur permet le déplacement entre les pages
+ * Chaque méthode est connectée avec les boutons dans l'interface 
  * Ces boutons sont: Campagnes, Essais, ajouter une image dans le système, mon compte et Gestion Admin
  *  
  * 
@@ -24,8 +24,8 @@ public class PageDeConnectionController implements Initializable {
 	
 	/**
 	 * Connection entre scenebuilder et javafx sur eclipse
-	 * Chaque pane est representer par un boutton
-	 * Chaque button permet de mettre une page visible et les autre invisible
+	 * Chaque pane est representé par un bouton
+	 * Chaque bouton permet de mettre une page visible et les autres invisible
 	 */
 
 	@FXML

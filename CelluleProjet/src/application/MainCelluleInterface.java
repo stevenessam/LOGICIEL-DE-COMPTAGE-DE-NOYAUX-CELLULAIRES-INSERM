@@ -1,5 +1,5 @@
 /**
- * Main class "MaincelluleInterface" qui extends Application
+ * Main class "MaincelluleInterface" qui étend Application
  * Cette classe est utilisée pour coder le STAGE principal
  * 
  *  
