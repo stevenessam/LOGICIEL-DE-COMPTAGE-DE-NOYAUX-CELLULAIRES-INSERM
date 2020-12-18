@@ -1,6 +1,6 @@
 /**
  * Main class "MaincelluleInterface" qui extends Application
- * 
+ * Cette classe est utilisée pour coder le STAGE principal
  * 
  * 
  * @author ST3VOS

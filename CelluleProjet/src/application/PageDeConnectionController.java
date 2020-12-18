@@ -1,6 +1,6 @@
 /**
  * Class PageDeConnectionController qui implements Initializable 
- * Cet Class controlleur qui permet le déplacement entre les pages
+ * Cette Class controlleur qui permet le déplacement entre les pages
  * Chaque methode est connecter avec les boutons dans l'ineterface 
  * Ces boutons sont: Campagnes, Essais, ajouter une image dans le système, mon compte et Gestion Admin
  * 
@@ -21,6 +21,12 @@ import javafx.scene.layout.Pane;
 
 public class PageDeConnectionController implements Initializable {
 
+	
+	/**
+	 * Connection entre scenebuilder et javafx sur eclipse
+	 * Chaque pane est representer par un boutton
+	 * Chaque button permet de mettre une page visible et les autre invisible
+	 */
 
 	@FXML
 	Pane pagecampagnes;
