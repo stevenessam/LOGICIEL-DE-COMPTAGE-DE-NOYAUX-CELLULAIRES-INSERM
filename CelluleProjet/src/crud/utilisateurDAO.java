@@ -19,6 +19,10 @@ public class utilisateurDAO {
 			cn= SingleConnection.getInstance(url, login, password);
 	}
 
+	/**
+	 * Cherche dans la base de données tous les utilisateurs et leurs informations correspondantes
+	 * @return Liste des utilisateurs inscrits dans la base de données
+	 */
 	public List<utilisateur> findALL(){
 
 		List<utilisateur> l = new ArrayList<utilisateur>();

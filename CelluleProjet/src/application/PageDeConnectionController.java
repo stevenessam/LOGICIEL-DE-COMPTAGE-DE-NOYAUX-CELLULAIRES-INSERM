@@ -1,14 +1,3 @@
-/**
- * Class PageDeConnectionController qui implémente Initializable 
- * Cette Class controlleur permet le déplacement entre les pages
- * Chaque méthode est connectée avec les boutons dans l'interface 
- * Ces boutons sont: Campagnes, Essais, ajouter une image dans le système, mon compte et Gestion Admin
- *  
- * 
- * @author ST3VOS
- */
-
-
 package application;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 
+
+/**
+ * Class PageDeConnectionController qui implémente Initializable 
+ * Cette Class controlleur permet le déplacement entre les pages
+ * Chaque méthode est connectée avec les boutons dans l'interface 
+ * Ces boutons sont: Campagnes, Essais, ajouter une image dans le système, mon compte et Gestion Admin
+ *  
+ * 
+ * @author ST3VOS
+ */
 public class PageDeConnectionController implements Initializable {
 
 	

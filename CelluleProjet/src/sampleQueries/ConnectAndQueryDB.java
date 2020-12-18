@@ -11,7 +11,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-
+/**
+ * Cette classe teste le lien du logiciel à la base de données en effectuant une simple
+ * requête SQL
+ * @author Cinna
+ *
+ */
 public class ConnectAndQueryDB {
 
 	public static void main(String[] args) throws NamingException, SQLException {

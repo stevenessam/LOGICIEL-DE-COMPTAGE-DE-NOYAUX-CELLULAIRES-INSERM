@@ -1,14 +1,3 @@
-/**
- * Class signController qui implémente 'Initializable'
- * Cette Class est  une classe controlleur qui permet de controller 'sign.fxml'
- * Cette classe permet également, lorsqu'un utilisateur est connecté, de passer de la page 'sign.fxml' à la page 'PageDeConnection.fxml' 
- * La scène est positionnée au milieu de l'écran lors du déplacement entre les deux pages
- *    
- * @author ST3VOS
- * 
- * 
- */
-
 package application;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +15,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Class signController qui implémente 'Initializable'
+ * Cette Class est  une classe controlleur qui permet de controller 'sign.fxml'
+ * Cette classe permet également, lorsqu'un utilisateur est connecté, de passer de la page 'sign.fxml' à la page 'PageDeConnection.fxml' 
+ * La scène est positionnée au milieu de l'écran lors du déplacement entre les deux pages
+ *    
+ * @author ST3VOS
+ * 
+ * 
+ */
 public class signController implements Initializable{
 	
 	@FXML

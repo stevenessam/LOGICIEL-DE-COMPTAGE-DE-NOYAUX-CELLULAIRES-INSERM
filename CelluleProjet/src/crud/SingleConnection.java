@@ -14,7 +14,14 @@ public class SingleConnection {
 
 	private static Connection connect;
 
-	//Constructeur privÃ© pour une connexion avec DriverManager
+	/**
+	 * Constructeur privé pour une connection avec DriverManager
+	 * @param url
+	 * @param login Login pour entrer dans la base de données
+	 * @param password Mot de passe pour entrer dans la base de données
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private SingleConnection(String url, String login, String password) throws ClassNotFoundException, SQLException{
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -22,7 +29,16 @@ public class SingleConnection {
 
 	}
 
-	//Constructeur privÃ© pour une connexion avec MysqlDataSource
+	/**
+	 * Constructeur privé pour une connection avec MysqlDataSource
+	 * @param serverName Nom du serveur
+	 * @param dbName Nom de la base de données
+	 * @param login Login pour entrer dans la base de données
+	 * @param password Mot de passe pour entrer dans la base de données
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	private SingleConnection(String serverName, String dbName, String login, String password) throws ClassNotFoundException, SQLException, NamingException{
 
 		MysqlDataSource mysqlDS = new MysqlDataSource();
@@ -38,7 +54,15 @@ public class SingleConnection {
 
 	}
 
-	//MÃ©thode qui crÃ©e/retourne lâ€™instance unique avec DriverManager
+	/**
+	 * Méthode qui crée/retourne l'instance unique avec DriverManager
+	 * @param url
+	 * @param login Login pour la connection
+	 * @param password Mot de passe pour entrer dans la base de données
+	 * @return Retourne un objet 'Connection'
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static Connection getInstance(String url, String login, String password) throws ClassNotFoundException, SQLException{
 		if(connect == null){  
 			new SingleConnection(url, login, password);
@@ -46,7 +70,17 @@ public class SingleConnection {
 		return connect;   
 	}
 
-	//MÃ©thode qui crÃ©e/retourne lâ€™instance unique avec DriverManager
+	/**
+	 * Méthode qui crée/retourne l'instance unique avec DriverManager
+	 * @param serverName Nom du serveur
+	 * @param dbName Nom de la base de données
+	 * @param login Login pour entrer dans la base de données
+	 * @param password Mot de passe pour entrer dans la base de données
+	 * @return Retourne un objet 'Connection'
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	public static Connection getInstance(String serverName, String dbName, String login, String password) throws ClassNotFoundException, SQLException, NamingException{
 		if(connect == null){  
 			new SingleConnection(serverName, dbName, login, password);
