@@ -28,21 +28,21 @@ public class PageDeConnectionController implements Initializable {
 	 */
 
 	@FXML
-	Pane pagecampagnes;
+	Pane pageCampagnes;
 	@FXML
-	Pane pageessais;
+	Pane pageEssais;
 	@FXML
-	Pane pageajouterimage;
+	Pane pageAjouterImage;
 	@FXML
-	Pane pagemoncompte;
+	Pane pageMonCompte;
 	@FXML
-	Pane pagegestionadmin;
+	Pane pageGestionAdmin;
 	@FXML
-	Pane pageresultatcampagnes;
+	Pane pageResultatCampagnes;
 	@FXML
-	Pane pageresultatessai;
+	Pane pageResultatEssai;
 	@FXML
-	ComboBox comboboxposition;
+	ComboBox comboBoxPosition;
 
 	// Début du déplacement entre les pages
 
@@ -54,14 +54,14 @@ public class PageDeConnectionController implements Initializable {
 	 */
 	
 	
-	public void pagecampagnes() {
-		pagecampagnes.setVisible(true);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(false);
+	public void pageCampagnes() {
+		pageCampagnes.setVisible(true);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
 
 
 	}
@@ -72,14 +72,14 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 
-	public void pageessais() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(true);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(false);
+	public void pageEssais() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(true);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
 
 	}
 
@@ -88,14 +88,14 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 	
-	public void pageajouterimage() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(true);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(false);
+	public void pageAjouterImage() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(true);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
 
 	}
 
@@ -104,14 +104,14 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 	
-	public void pagemoncompte() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(true);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(false);
+	public void pageMonCompte() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(true);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
 
 	}
 
@@ -120,14 +120,14 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 	
-	public void pagegestionadmin() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(true);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(false);
+	public void pageGestionAdmin() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(true);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
 
 
 	}
@@ -139,14 +139,14 @@ public class PageDeConnectionController implements Initializable {
 	 */
 
 
-	public void pageresultatcampagnes() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(true);
-		pageresultatessai.setVisible(false);
+	public void pageResultatCampagnes() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(true);
+		pageResultatEssai.setVisible(false);
 
 
 	}
@@ -157,14 +157,14 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 
-	public void pageresultatessai() {
-		pagecampagnes.setVisible(false);
-		pageessais.setVisible(false);
-		pageajouterimage.setVisible(false);
-		pagemoncompte.setVisible(false);
-		pagegestionadmin.setVisible(false);
-		pageresultatcampagnes.setVisible(false);
-		pageresultatessai.setVisible(true);
+	public void pageResultatEssai() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(true);
 		
 		
 		//Fin du déplacement entre les pages
@@ -185,7 +185,7 @@ public class PageDeConnectionController implements Initializable {
 		
 		ObservableList listcomboboxposition = FXCollections.observableArrayList("Chercheur","Admin");
 		
-		comboboxposition.setItems(listcomboboxposition);
+		comboBoxPosition.setItems(listcomboboxposition);
 		
 		
 		
