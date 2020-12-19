@@ -3,14 +3,14 @@ package crud;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TestUtilisateurBD {
+public class TestAlgorithmeBD {
 	public static void main(String[] args)
 	{
-		UtilisateurDAO edao;
+		AlgorithmeDAO edao;
 		try {
-			edao = new UtilisateurDAO();
-			List<Utilisateur> all = edao.findALL();
-			for(Utilisateur e : all)
+			edao = new AlgorithmeDAO();
+			List<Algorithme> all = edao.findALL();
+			for(Algorithme e : all)
 				System.out.println(e.toString());
 			
 		} 

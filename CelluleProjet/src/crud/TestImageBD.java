@@ -3,14 +3,14 @@ package crud;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TestUtilisateurBD {
+public class TestImageBD {
 	public static void main(String[] args)
 	{
-		UtilisateurDAO edao;
+		ImageDAO edao;
 		try {
-			edao = new UtilisateurDAO();
-			List<Utilisateur> all = edao.findALL();
-			for(Utilisateur e : all)
+			edao = new ImageDAO();
+			List<Image> all = edao.findALL();
+			for(Image e : all)
 				System.out.println(e.toString());
 			
 		} 

@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class utilisateurDAO {
+public class UtilisateurDAO {
 
 	private String url="jdbc:mysql://localhost:3306/ProjetL2";
 	private String login="root";
@@ -15,26 +15,23 @@ public class utilisateurDAO {
 	private Connection cn=null;
 	private Statement st = null;
 
-	public utilisateurDAO() throws ClassNotFoundException, SQLException {
+	public UtilisateurDAO() throws ClassNotFoundException, SQLException {
 			cn= SingleConnection.getInstance(url, login, password);
 	}
 
-	/**
-	 * Cherche dans la base de données tous les utilisateurs et leurs informations correspondantes
-	 * @return Liste des utilisateurs inscrits dans la base de données
-	 */
-	public List<utilisateur> findALL(){
+	public List<Utilisateur> findALL(){
 
-		List<utilisateur> l = new ArrayList<utilisateur>();
+		List<Utilisateur> l = new ArrayList<Utilisateur>();
 		try {
 			st=cn.createStatement();
 			ResultSet res=st.executeQuery("Select * from utilisateur");
 			while(res.next()) {
-				utilisateur e=new utilisateur();
+				Utilisateur e=new Utilisateur();
 				e.setIdUtilisateur(res.getInt("idUtilisateur"));
-				e.setNom(res.getString("Nom"));
+				e.setNom(res.getString("nom"));
 				e.setPrenom(res.getString("prenom"));
 				e.setMotDePasse(res.getString("motDePasse"));
+				e.setLogin(res.getString("login"));
 				l.add(e);
 			}	
 		}
