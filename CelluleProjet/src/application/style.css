@@ -1,9 +1,47 @@
-	/*.buttons{
+
+
+	.pane{
+		 -fx-background-color: #2d3447;
+	}
+
+
+	.toprectangle{
+		-fx-fill: rgb(0,100,170);
+		-fx-stroke:rgb(0,100,170);
+		
+}
+
+
+	.tablesstyle{
+		
+    -fx-background-color: rgb(47,47,47);
+
+}
+
+
+.tablerow{
+	
+	    -fx-background-color: rgb(0,100,170);
+	        -fx-text-background-color: white;
+	    
+
+}
+
+	.rectangleshape{
+		-fx-arc-width:30;
+		-fx-arc-height:30;
+		-fx-fill: #2d3447;
+		-fx-opacity:1;
+		-fx-stroke:rgb(0,100,170);
+		-fx-stroke-width:3;
+		}
+
+			.buttons{
 		-fx-background-radius:30;
 		-fx-font-size:15; 
 		-fx-text-fill:white;
 		-fx-font-weight:bold; 
-		-fx-background-color:gray;
+		-fx-background-color:rgb(0,100,170);
 		-fx-border-color:white;
 		-fx-border-radius:30;
 		-fx-cursor: hand;
@@ -17,50 +55,71 @@
 
 
 		.buttons:hover {
-        -fx-background-color: #383838;
+        -fx-background-color: rgb(47,47,47);
         -fx-scale-y: 1.1;
 }
 
 
 	.mainbutton{
 		-fx-cursor: hand;
-		-fx-font-size:15; 
-		-fx-text-fill:black;
-	
+		-fx-font-size:17; 
+		-fx-text-fill:white;
+		-fx-background-color:rgb(0,100,170);
 		-fx-font-weight:bold; 
-		
-		
-}
-
-	.rectangleshape{
-		-fx-arc-width:30;
-		-fx-arc-height:30;
-		-fx-fill: rgb(56,67,87);
-		-fx-opacity:1;
-		-fx-stroke:white;
-		-fx-stroke-width:3;
+		-fx-border-color:rgb(47,47,47);
 		}
 		
-	.pane{
-		 -fx-background-color: rgb(56,67,87);
-	}
+		
+		.mainbutton:hover {
+        -fx-background-color: rgb(47,47,47);
+      	-fx-font-size:20; 
+        
+        }
+        
+        .mainbutton:pressed {
+		-fx-font-size:17; 
+}
+
+		.returnarrow:hover {
+       -fx-scale-y: 1.1;
+        -fx-scale-x: 1.1;
+}
+	.returnarrow:pressed{
+	  -fx-scale-y: 0.9;
+        -fx-scale-x: 0.9;
 	
-		/* -fx-background-color: rgb(255,202,8); 
-		 * 
-		 * 		-fx-fill: rgb(56,67,87);
-		-fx-stroke:rgb(56,67,87);
-		 * */
+}
+/*---------------------------------------------------------------------------------------------------------------------- */
 
-	.toprectangle{
-		-fx-fill: rgb(255,202,8);
-		-fx-stroke:rgb(255,202,8);
-		
+
+/*-------------------Sign Page------------------------------------------------------------------------------------------ */
+
+
+.signsbuttons{
+		-fx-background-radius:30;
+		-fx-font-size:20; 
+		-fx-text-fill:white;
+		-fx-font-weight:bold; 
+		-fx-background-color:rgb(0,100,170);
+		-fx-border-color:white;
+		-fx-border-radius:30;
+		-fx-cursor: hand;
+	
+	
+}
+
+		.signsbuttons:hover {
+        -fx-background-color: rgb(47,47,47);
+        -fx-scale-x: 1.1;
+        -fx-scale-y: 1.1;
 }
 
 
-	.tablesstyle{
-		
-
+ 	 .signsbuttons:pressed {
+        -fx-scale-y: 0.9;
+        -fx-scale-x: 0.9;
 }
+
+
 
 

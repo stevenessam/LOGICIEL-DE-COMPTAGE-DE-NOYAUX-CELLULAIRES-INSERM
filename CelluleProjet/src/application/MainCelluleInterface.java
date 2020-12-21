@@ -17,7 +17,7 @@ public class MainCelluleInterface extends Application {
 	public void start(Stage stage) {
 		try {
 			
-			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
+			Parent parent =FXMLLoader.load(getClass().getResource("PagedeConnection.fxml"));
 			
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);

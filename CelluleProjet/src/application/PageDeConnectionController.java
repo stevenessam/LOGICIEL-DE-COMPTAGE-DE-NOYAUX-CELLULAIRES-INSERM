@@ -1,11 +1,20 @@
 package application;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import crud.Campagne;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 
@@ -21,12 +30,14 @@ import javafx.scene.layout.Pane;
 public class PageDeConnectionController implements Initializable {
 
 	
+	private Object object;
 	/**
 	 * Connection entre scenebuilder et javafx sur eclipse
 	 * Chaque pane est representé par un bouton
 	 * Chaque bouton permet de mettre une page visible et les autres invisible
 	 */
 
+//------------------------pages-----------------------------------------------
 	@FXML
 	Pane pageCampagnes;
 	@FXML
@@ -43,7 +54,53 @@ public class PageDeConnectionController implements Initializable {
 	Pane pageResultatEssai;
 	@FXML
 	ComboBox comboBoxPosition;
+//------------------------------creation-----------------------------------------
+	@FXML
+	TextField nomCampagnes;
+	@FXML
+	TextArea descriptionCampagnes;
+	@FXML
+	TextArea descriptionEssais;
+//-----------------------------------------------------------------------
 
+	
+//----------------------------table-------------------------------------------
+
+	/* not finish connection
+	
+	@FXML
+	TableView<Campagne> tableCampagnes;
+	@FXML
+	TableColumn<Campagne, String>tableNomCampagnes;
+	@FXML
+	TableColumn<Campagne, String>tableDescriptionCampagnes;
+	
+	
+	
+	
+	
+	
+	
+//----------------------------Lists-------------------------------------------	
+
+	
+	ArrayList<Campagne> listCampagnes;
+	
+	
+//-----------------------------------------------------------------------		
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// Début du déplacement entre les pages
 
 	
@@ -173,10 +230,55 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	
+	/**
+	 * Method cree Compagnes
+	 *  
+	 */
+	
+	
+	public void creeCampagnes() {
+		String nomCompagne = nomCampagnes.getText();
+		String descriptionCampagne = descriptionCampagnes.getText();
+		
+		
+		
+	}
+	
+	public void creeEssai() {
+		String descriptionEssai = descriptionEssais.getText();
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		
+		
+		
+	/*	connection pas fini
+	 * 
+		tableNomCampagnes.setCellValueFactory(new PropertyValueFactory<Campagne , String>("Nom Campagne"));
+		tableDescriptionCampagnes.setCellValueFactory(new PropertyValueFactory<Campagne , String>("Description Campagne"));
+		
+		
+		
+		
+		*/
+		
+		
 		
 
 		// Activation des boutons,textfields,etc...
@@ -186,6 +288,7 @@ public class PageDeConnectionController implements Initializable {
 		ObservableList listcomboboxposition = FXCollections.observableArrayList("Chercheur","Admin");
 		
 		comboBoxPosition.setItems(listcomboboxposition);
+		
 		
 		
 		
