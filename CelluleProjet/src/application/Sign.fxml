@@ -14,58 +14,6 @@
 <AnchorPane fx:id="signLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.signController">
    <children>
       <Line endX="8.0" endY="-105.0" layoutX="442.0" layoutY="105.0" startX="8.0" startY="495.0" />
-      <Label layoutX="209.0" layoutY="188.0" text="Nom">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField layoutX="108.0" layoutY="218.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
-      <Label layoutX="196.0" layoutY="263.0" text="Prenom">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField layoutX="108.0" layoutY="293.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
-      <Label layoutX="188.0" layoutY="339.0" text="Password">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <PasswordField layoutX="108.0" layoutY="369.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button layoutX="158.0" layoutY="505.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 30;" text="Signup">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Label layoutX="658.0" layoutY="188.0" text="Nom">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="signInNom" layoutX="557.0" layoutY="218.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
-      <Label layoutX="645.0" layoutY="263.0" text="Prenom">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="signInPrenom" layoutX="557.0" layoutY="293.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
-      <Label layoutX="637.0" layoutY="339.0" text="Password">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="signInPassword" layoutX="557.0" layoutY="369.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button layoutX="607.0" layoutY="425.0" mnemonicParsing="false" onAction="#signin" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 30;" text="Signin">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Label layoutX="171.0" layoutY="416.0" text="Confirmation">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <PasswordField layoutX="108.0" layoutY="446.0" prefHeight="31.0" prefWidth="250.0" promptText="Confirmation Password" style="-fx-background-radius: 30;" />
       <ImageView fitHeight="135.0" fitWidth="135.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/cellule.png" />
@@ -81,23 +29,75 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="615.0" layoutY="43.0" text="Signin" textFill="#0073ff">
-         <font>
-            <Font name="System Bold" size="40.0" />
-         </font>
-      </Label>
       <Label layoutX="185.0" layoutY="116.0" text="Username">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="108.0" layoutY="149.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <TextField fx:id="userNameSignup" layoutX="108.0" layoutY="149.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="209.0" layoutY="188.0" text="Nom">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomSignup" layoutX="108.0" layoutY="218.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="196.0" layoutY="263.0" text="Prenom">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prenomSignup" layoutX="108.0" layoutY="293.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
+      <Label layoutX="188.0" layoutY="339.0" text="Password">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passowrdSignup" layoutX="108.0" layoutY="369.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
+      <Label layoutX="171.0" layoutY="416.0" text="Confirmation">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="confirmationPasswordSignup" layoutX="108.0" layoutY="446.0" prefHeight="31.0" prefWidth="250.0" promptText="Confirmation Password" style="-fx-background-radius: 30;" />
+      <Button fx:id="signupButton" layoutX="158.0" layoutY="505.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 30;" text="Signup">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="615.0" layoutY="43.0" text="Signin" textFill="#0073ff">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
       <Label layoutX="634.0" layoutY="117.0" text="Username">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="557.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <TextField fx:id="userNameSignin" layoutX="557.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="658.0" layoutY="188.0" text="Nom">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomSignin" layoutX="557.0" layoutY="218.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="645.0" layoutY="263.0" text="Prenom">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prenomSignin" layoutX="557.0" layoutY="293.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
+      <Label layoutX="637.0" layoutY="339.0" text="Password">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passowrdSignin" layoutX="557.0" layoutY="369.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
+      <Button fx:id="signinButton" layoutX="607.0" layoutY="425.0" mnemonicParsing="false" onAction="#signin" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 30;" text="Signin">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
    <effect>
       <Glow level="0.41" />

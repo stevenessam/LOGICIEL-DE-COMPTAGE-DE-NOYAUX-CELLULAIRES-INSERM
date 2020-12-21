@@ -28,18 +28,18 @@ import javafx.stage.Stage;
 public class signController implements Initializable{
 	
 	@FXML
-	TextField userName;
+	TextField userNameSignin;
 	@FXML
-	TextField signInNom;
+	TextField nomSignin;
 	@FXML
-	TextField signInPrenom;
+	TextField prenomSignin;
 	@FXML
-	PasswordField signInPassword;
+	PasswordField passowrdSignin;
 	
 	public void signin (Event e) {
 		
 	try {
-		if(userName.getText().trim().matches("[aA]dmin")&&signInNom.getText().trim().matches("[aA]dmin")&& signInPrenom.getText().trim().matches("[aA]dmin")&& signInPassword.getText().equals("123")) {
+		if(userNameSignin.getText().trim().matches("[aA]dmin")&&nomSignin.getText().trim().matches("[aA]dmin")&& prenomSignin.getText().trim().matches("[aA]dmin")&& passowrdSignin.getText().equals("123")) {
 			Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
 			Scene scene = new Scene(parent);
 			Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
