@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -57,9 +58,48 @@ public class signController implements Initializable{
 	}
 		
 	}
+	/*----------------------------------------------------------------*/
+	
+	double xmouse,ymouse;
 	
 	
 	
+	
+	public void closeApp(MouseEvent event) 
+	{
+		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stages.close();
+		}
+	
+	
+	
+	public void miniApp(MouseEvent event) 
+	{
+		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stages.setIconified(true);
+		}
+	
+	
+	public void btnDraggApp(MouseEvent event) 
+	{
+		Stage s = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		s.setX(event.getScreenX()-xmouse);
+		s.setY(event.getScreenY()-ymouse);
+		}
+
+
+	
+	
+	public void pressDraggApp(MouseEvent event) 
+	{
+		xmouse =event.getSceneX();
+		ymouse = event.getSceneY();
+		}
+	
+	
+	
+	
+	/*----------------------------------------------------------------*/
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

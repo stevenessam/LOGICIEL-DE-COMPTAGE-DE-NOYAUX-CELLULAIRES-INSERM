@@ -1,9 +1,13 @@
 package application;	
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Main class "MaincelluleInterface" qui étend Application
@@ -13,6 +17,8 @@ import javafx.scene.Scene;
  * @author ST3VOS
  */
 public class MainCelluleInterface extends Application {
+	
+
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -21,15 +27,22 @@ public class MainCelluleInterface extends Application {
 			
 			Scene scene = new Scene(parent);
 			stage.setTitle("Cellule Count");
-			stage.resizableProperty().setValue(Boolean.FALSE);
+	
 			stage.setScene(scene);
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 	}
+	
+	
 	// Test commit beta 3
 	public static void main(String[] args) {
 		launch(args);
+		
 	}
 }

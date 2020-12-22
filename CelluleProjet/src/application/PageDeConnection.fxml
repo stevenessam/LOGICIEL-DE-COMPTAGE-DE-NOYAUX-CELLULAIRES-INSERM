@@ -272,11 +272,6 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="1068.0" layoutY="8.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true" styleClass="logoutimg">
-               <image>
-                  <Image url="@Images/deconnexion.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -304,5 +299,25 @@
             </Label>
          </children>
       </Pane>
+      <Pane layoutX="1150.0" prefHeight="47.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="68.0" layoutY="8.0" onMouseClicked="#logoutCompte" pickOnBounds="true" preserveRatio="true" styleClass="logoutimg">
+               <image>
+                  <Image url="@Images/deconnexion.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exitimg" fitHeight="30.0" fitWidth="26.0" layoutX="156.0" layoutY="11.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true" styleClass="titleimg">
+               <image>
+                  <Image url="@Images/exitimg.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="miniimg" fitHeight="44.0" fitWidth="44.0" layoutX="103.0" layoutY="1.0" onMouseClicked="#miniApp" pickOnBounds="true" preserveRatio="true" styleClass="titleimg">
+               <image>
+                  <Image url="@Images/minimizeimg.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="230.0" layoutY="2.0" onMouseDragged="#btnDraggApp" onMousePressed="#pressDraggApp" prefHeight="45.0" prefWidth="983.0" />
    </children>
 </AnchorPane>

@@ -1,10 +1,6 @@
 package application;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import crud.Campagne;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -20,7 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -62,6 +59,17 @@ public class PageDeConnectionController implements Initializable {
 	Pane pageResultatEssai;
 	@FXML
 	ComboBox comboBoxPosition;
+	
+	
+	//------------------------------exit et minimize-----------------------------------------
+	
+	@FXML
+	ImageView exitimg;
+	@FXML
+	ImageView miniimg;
+	//------------------------------Fin exit et minimiz-----------------------------------------
+	
+	
 //------------------------------creation-----------------------------------------
 	@FXML
 	TextField nomCampagnes;
@@ -266,28 +274,63 @@ public class PageDeConnectionController implements Initializable {
 	
 	/* ---------------------------logout button-------------------------------*/
 	
+
+	double xmouse,ymouse;
 	
-	public void logout(Event e) {
+	
+	
+	
+	public void closeApp(MouseEvent event) 
+	{
+		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stages.close();
+		}
+	
+	
+	
+	public void miniApp(MouseEvent event) 
+	{
+		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stages.setIconified(true);
+		}
+	
+	
+	public void btnDraggApp(MouseEvent event) 
+	{
+		Stage s = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		s.setX(event.getScreenX()-xmouse);
+		s.setY(event.getScreenY()-ymouse);
+		}
+
+
+	
+	
+	public void pressDraggApp(MouseEvent event) 
+	{
+		xmouse =event.getSceneX();
+		ymouse = event.getSceneY();
+		}
+	
+	public void logoutCompte(Event evee) {
 		
-	try {
+		try {		
+			
+			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
+			Scene scene = new Scene(parent);
+			Stage stage = (Stage)((Node) evee.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Main Page");
+			Rectangle2D rd =Screen.getPrimary().getVisualBounds();
+			stage.setX((rd.getWidth()-stage.getWidth())/2);
+			stage.setY((rd.getHeight()-stage.getHeight())/2);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
-		Scene scene = new Scene(parent);
-		Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.setTitle("Sign Page");
-		Rectangle2D rd =Screen.getPrimary().getVisualBounds();
-		stage.setX((rd.getWidth()-stage.getWidth())/2);
-		stage.setY((rd.getHeight()-stage.getHeight())/2);
-		
-		
-	} catch (Exception ee) {
-	}	
 		
 		
 	}
-	
-	
 	
 /*------------------------------------Fin logout button----------------------------------------------*/	
 	
