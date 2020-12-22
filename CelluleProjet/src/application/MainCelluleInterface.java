@@ -17,9 +17,11 @@ public class MainCelluleInterface extends Application {
 	public void start(Stage stage) {
 		try {
 			
-			Parent parent =FXMLLoader.load(getClass().getResource("PagedeConnection.fxml"));
+			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
 			
 			Scene scene = new Scene(parent);
+			stage.setTitle("Cellule Count");
+			stage.resizableProperty().setValue(Boolean.FALSE);
 			stage.setScene(scene);
 			stage.show();
 		} catch(Exception e) {

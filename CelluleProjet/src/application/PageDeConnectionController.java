@@ -7,8 +7,14 @@ import java.util.ResourceBundle;
 import crud.Campagne;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,6 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 
 /**
@@ -256,9 +264,32 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	
+	/* ---------------------------logout button-------------------------------*/
+	
+	
+	public void logout(Event e) {
+		
+	try {
+		
+		Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
+		Scene scene = new Scene(parent);
+		Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Sign Page");
+		Rectangle2D rd =Screen.getPrimary().getVisualBounds();
+		stage.setX((rd.getWidth()-stage.getWidth())/2);
+		stage.setY((rd.getHeight()-stage.getHeight())/2);
+		
+		
+	} catch (Exception ee) {
+	}	
+		
+		
+	}
 	
 	
 	
+/*------------------------------------Fin logout button----------------------------------------------*/	
 	
 	
 
