@@ -10,6 +10,18 @@ public class Campagne {
 	}
 	
 	
+	
+	
+	public Campagne(int idCampagne, String nom, String description) {
+		super();
+		this.idCampagne = idCampagne;
+		this.nom = nom;
+		this.description = description;
+	}
+
+
+
+
 	public int getIdCampagne() {
 		return idCampagne;
 	}

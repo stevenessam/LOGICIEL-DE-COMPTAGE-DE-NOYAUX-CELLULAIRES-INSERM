@@ -1,4 +1,4 @@
-package crud;
+/*package crud;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,4 +21,4 @@ public class TestCampagneBD {
 		
 	}
 
-}
+}*/

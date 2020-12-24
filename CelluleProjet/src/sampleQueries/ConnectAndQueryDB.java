@@ -1,4 +1,4 @@
-package sampleQueries;
+/*package sampleQueries;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -479,4 +479,4 @@ public class ConnectAndQueryDB {
 		
 	}
 
-}
+}*/
