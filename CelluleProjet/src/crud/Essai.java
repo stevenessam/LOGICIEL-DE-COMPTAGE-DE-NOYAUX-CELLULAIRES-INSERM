@@ -10,6 +10,14 @@ public class Essai {
 	}
 	
 	
+	public Essai(int idEssai, String date, String description) {
+		super();
+		this.idEssai = idEssai;
+		this.date = date;
+		this.description = description;
+	}
+
+
 	public int getIdEssai() {
 		return idEssai;
 	}

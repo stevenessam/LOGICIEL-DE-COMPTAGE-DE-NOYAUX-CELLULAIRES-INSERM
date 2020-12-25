@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import crud.Campagne;
+import crud.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -67,8 +68,7 @@ public class PageDeConnectionController implements Initializable {
 	Pane pageResultatCampagnes;
 	@FXML
 	Pane pageResultatEssai;
-	@FXML
-	ComboBox comboBoxPosition;
+
 
 
 	//------------------------------exit et minimize-----------------------------------------
@@ -279,7 +279,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 	@FXML
-	void getSelected (MouseEvent event){
+	void getSelectedCampagne (MouseEvent event){
 		index = tableCampagnes.getSelectionModel().getSelectedIndex();
 		if (index <= -1){
 
@@ -329,6 +329,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 
+
 	public void refreshTableCampagne(){
 
 
@@ -347,6 +348,98 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/*--------------------------------Fin------Page Campagnes-----------------------------------------------------------*/
+	
+	
+	
+	/*------------------------------------Page Gestion Admin-----------------------------------------------------------*/
+	
+	
+	@FXML
+	TextField idUtilisateur;
+	@FXML
+	ComboBox comboBoxPosition;
+
+	@FXML
+	private TableView<Utilisateur> tableGestioadmin;
+	@FXML
+	private TableColumn<Utilisateur, Integer> tableIdGestionAdmin;
+	@FXML
+	private TableColumn<Utilisateur, String>tableNomGestioadmin;
+	@FXML
+	private TableColumn<Utilisateur, String>tablePrenomGestioadmin;
+	@FXML
+	private TableColumn<Utilisateur, String>tablePositionGestioadmin;
+
+	ObservableList<Utilisateur> listGestioadmin;
+
+	
+	
+
+	@FXML
+	void getSelectedUser(MouseEvent event){
+		index = tableGestioadmin.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return;
+		}
+		idUtilisateur.setText(tableIdGestionAdmin.getCellData(index).toString());
+
+
+
+	}
+	
+	public void deleteUtilisateur(){
+		conn = mysqlconnect.ConnectDb();
+		String sql = "delete from utilisateur where idUtilisateur = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, idUtilisateur.getText());
+			pst.execute();
+		//	JOptionPane.showMessageDialog(null, "Delete");
+			refreshTableGestioadmin();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+	
+	
+
+	public void editUtilisateur (){   
+		try {
+			conn = mysqlconnect.ConnectDb();
+			String value1 = idUtilisateur.getText();
+			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
+			
+			String sql = "update utilisateur set idUtilisateur= '"+value1+"',position= '"+value2+"' where idUtilisateur='"+value1+"' ";
+			pst= conn.prepareStatement(sql);
+			pst.execute();
+			//JOptionPane.showMessageDialog(null, "Update");
+			refreshTableGestioadmin();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+	
+	
+	public void refreshTableGestioadmin(){
+
+
+		tableIdGestionAdmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , Integer>("idUtilisateur"));
+		tableNomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("nom"));
+		tablePrenomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("prenom"));
+		tablePositionGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("position"));
+
+		listGestioadmin= mysqlconnect.getDataUtilisateur();
+
+		tableGestioadmin.setItems(listGestioadmin);
+	}
+	
+	
+	
+	
+	/*--------------------------------Fin------Page Gestion Admin-----------------------------------------------------------*/
 
 
 
@@ -423,7 +516,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 		refreshTableCampagne();
-
+		refreshTableGestioadmin();
 
 		// Activation des boutons,textfields,etc...
 

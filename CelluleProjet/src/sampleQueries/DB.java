@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import crud.Campagne;
+import crud.Essai;
+import crud.Utilisateur;
 
 
 public class DB {
@@ -43,6 +45,48 @@ public class DB {
 	        }
 	        return list;
 	    }
+	    
+	    
+	    
+	    
+	    public static ObservableList<Essai> getDataEssai(){
+	        Connection conn = ConnectDb();
+	        ObservableList<Essai> list = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("select * from essai");
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    list.add(new Essai(Integer.parseInt(rs.getString("idEssai")),rs.getString("description") , rs.getString("date")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return list;
+	    }
+
+	    
+	    
+	    
+	    
+	    public static ObservableList<Utilisateur> getDataUtilisateur(){
+	        Connection conn = ConnectDb();
+	        ObservableList<Utilisateur> list = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("select * from utilisateur");
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom"), rs.getString("position")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return list;
+	    }
+	    
+	    
+	    
 	    
 	    
 	}

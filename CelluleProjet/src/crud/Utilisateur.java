@@ -3,13 +3,33 @@ package crud;
 public class Utilisateur {
 	
 	private int idUtilisateur;
-	private String nom, prenom, motDePasse, login;
+	private String nom, prenom, motDePasse, login, position;
 	
 	public Utilisateur() {
 		
 	}
 	
 	
+	public Utilisateur(int idUtilisateur, String nom, String prenom,String position) {
+		super();
+		this.idUtilisateur = idUtilisateur;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.position= position;
+
+	}
+
+
+	public String getPosition() {
+		return position;
+	}
+
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}

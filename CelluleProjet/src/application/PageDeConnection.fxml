@@ -39,7 +39,7 @@
       </Pane>
       <Pane fx:id="pageCampagnes" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelected" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" />
                 <TableColumn fx:id="tableNomCampagnes" prefWidth="349.0" styleClass="tablerow" text="Nom" />
@@ -111,11 +111,12 @@
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssais" layoutX="22.0" layoutY="72.0" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssais" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
-                <TableColumn fx:id="tableNomEssais" prefWidth="240.0" styleClass="tablerow" text="Nom" />
-                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="240.0" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="240.0" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableIdEssai" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="tableNomEssais" prefWidth="196.0" styleClass="tablerow" text="Nom" />
+                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="208.0" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="266.0" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -278,16 +279,17 @@
       </Pane>
       <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
+                  <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" text="ID" />
                 <TableColumn fx:id="tableNomGestioadmin" prefWidth="240.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="240.0" styleClass="tablerow" text="Prenom" />
-                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="240.0" styleClass="tablerow" text="Position" />
+                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="273.0" styleClass="tablerow" text="Prenom" />
+                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="207.0" styleClass="tablerow" text="Position" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="modifierPositionGestioadmin" layoutX="776.0" layoutY="231.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Position" />
-            <Button fx:id="supprimerUtilisateurGestioadmin" layoutX="776.0" layoutY="310.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Utilisateur" />
+            <Button fx:id="modifierPositionGestioadmin" layoutX="776.0" layoutY="231.0" mnemonicParsing="false" onAction="#editUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Position" />
+            <Button fx:id="supprimerUtilisateurGestioadmin" layoutX="776.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Utilisateur" />
             <Label layoutX="800.0" layoutY="109.0" text="Position" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -299,6 +301,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <TextField fx:id="idUtilisateur" layoutX="1095.0" layoutY="655.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
          </children>
       </Pane>
       <Pane layoutX="1150.0" prefHeight="47.0" prefWidth="200.0">
