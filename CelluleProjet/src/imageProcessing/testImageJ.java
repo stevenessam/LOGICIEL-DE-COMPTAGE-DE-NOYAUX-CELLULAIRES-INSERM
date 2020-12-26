@@ -4,7 +4,10 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
+import crud.Algorithme;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.io.Opener;
 import ij.macro.Interpreter;
 import ij.plugin.Macro_Runner;
 
@@ -15,22 +18,18 @@ public class testImageJ {
 		
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
-		String filename = "Hello_World.ijm";
-		String filename2 = "MacroWorkWell1";
-		
+		String filename = "MacroWorkWell1";
 		String path = s + "\\macros\\"+filename;
-
-		Macro_Runner test_runner = new Macro_Runner();
-		for (int i = 0; i < 2; i++) {
-			if (i % 2 == 0) {
-				path = s + "\\macros\\"+filename;
-			} else {
-				path = s + "\\macros\\"+filename2;
-			}
-			
-			test_runner.run(path);
-			System.out.println(i+"\n\n");
-		}
+		
+		Opener opener = new Opener();  
+		String imageFilePath = s + "\\Images\\Capture.png";
+		ImagePlus imp = opener.openImage(imageFilePath);
+		
+		//Macro_Runner test_runner = new Macro_Runner();
+		//test_runner.run(path);
+		
+		Algorithme algo = new Algorithme();
+		algo.algorithme1(imp);
+		IJ.saveAs(imp, "PNG", s+"\\Images\\Result");
 	}
-
 }
