@@ -15,11 +15,22 @@ public class testImageJ {
 		
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
-		String path = s + "\\Macros\\Hellow_World.ijm";
+		String filename = "Hello_World.ijm";
+		String filename2 = "MacroWorkWell1";
 		
+		String path = s + "\\macros\\"+filename;
 
 		Macro_Runner test_runner = new Macro_Runner();
-		test_runner.runMacroFile("Hello_World.ijm", "");
+		for (int i = 0; i < 2; i++) {
+			if (i % 2 == 0) {
+				path = s + "\\macros\\"+filename;
+			} else {
+				path = s + "\\macros\\"+filename2;
+			}
+			
+			test_runner.run(path);
+			System.out.println(i+"\n\n");
+		}
 	}
 
 }
