@@ -1,4 +1,7 @@
 package application;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +12,11 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import crud.Campagne;
+import crud.Image;
 import crud.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +25,9 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -29,6 +36,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sampleQueries.DB.mysqlconnect;
@@ -442,7 +451,88 @@ public class PageDeConnectionController implements Initializable {
 	/*--------------------------------Fin------Page Gestion Admin-----------------------------------------------------------*/
 
 
+	/*--------------------------------Page Ajouter Image--------------------------------------------------------------------*/
 
+	/*
+	@FXML
+	Button ajouteImageImg;
+	@FXML
+	File file;
+	@FXML
+	private TableView<Image> tableImages;
+	@FXML
+	private TableColumn<Image, Integer> tableIdImage;
+	@FXML
+	private TableColumn<Image, String>tableImageImg;
+@FXML
+ private FileInputStream fis;
+
+
+	ObservableList<Image> listImages;
+	
+	
+	
+	public void refreshTableImage(){
+
+
+		tableIdImage.setCellValueFactory(new PropertyValueFactory<Image , Integer>("idImage"));
+		tableImageImg.setCellValueFactory(new PropertyValueFactory<Image , String>("lienImage"));
+
+
+		listImages= mysqlconnect.getDataImages();
+
+		tableImages.setItems(listImages);
+	}
+	
+	
+	
+	
+	
+	
+		public void addImage (){    
+			conn = mysqlconnect.ConnectDb();
+			String sql = "insert into image (lienImage)values(?)";
+			try {
+				pst = conn.prepareStatement(sql);
+				
+				fis = new FileInputStream(file);
+				pst.setBinaryStream(1, (InputStream)fis,(int)file.length());
+			
+				
+				pst.execute();
+	
+				//JOptionPane.showMessageDialog(null, "campagne Add succes");
+				refreshTableCampagne();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			}
+		}
+	
+		
+	
+		public void importImage(ActionEvent event) {
+			
+			FileChooser fc = new FileChooser(); 
+			
+			fc.getExtensionFilters().addAll( new ExtensionFilter("IMG Files", "*.JPG"));
+			 File seletedFile = fc.showOpenDialog(null); 
+		
+		if (seletedFile != null) {
+//			listview.getItems().add(seletedFile.getAbsolutePath()); 
+		} else { 
+				System.out.println("file is not valid"); 
+		}
+	
+			ajouteImageImg.setOnAction(e ->{	
+				file = fc.showOpenDialog(null);
+			});	
+		
+	}
+	
+	
+	*/
+	
+	/*---------------------------------Fin-----Page Ajouter Image-----------------------------------------------------------*/
 
 
 	/* ---------------------------logout button-------------------------------*/
@@ -517,7 +607,7 @@ public class PageDeConnectionController implements Initializable {
 
 		refreshTableCampagne();
 		refreshTableGestioadmin();
-
+		//refreshTableImage();
 		// Activation des boutons,textfields,etc...
 
 

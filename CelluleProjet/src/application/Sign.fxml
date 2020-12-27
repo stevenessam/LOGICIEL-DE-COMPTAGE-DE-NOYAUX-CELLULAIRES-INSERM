@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -54,7 +53,7 @@
          </font>
       </Label>
       <PasswordField fx:id="passowrdSignup" layoutX="108.0" layoutY="370.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button fx:id="signupButton" layoutX="158.0" layoutY="495.0" mnemonicParsing="false" onAction="#signUp" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignUp">
+      <Button fx:id="signupButton" layoutX="158.0" layoutY="425.0" mnemonicParsing="false" onAction="#signUp" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignUp">
          <font>
             <Font size="20.0" />
          </font>
@@ -88,7 +87,7 @@
          </font>
       </Label>
       <PasswordField fx:id="passowrdSignin" layoutX="557.0" layoutY="369.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button fx:id="signinButton" layoutX="607.0" layoutY="495.0" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignIn">
+      <Button fx:id="signinButton" layoutX="607.0" layoutY="425.0" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignIn">
          <font>
             <Font size="20.0" />
          </font>
@@ -107,7 +106,5 @@
             </ImageView>
          </children>
       </Pane>
-      <ComboBox fx:id="positionSignup" layoutX="150.0" layoutY="423.0" prefHeight="31.0" prefWidth="165.0" promptText="Position" />
-      <ComboBox fx:id="positionSignin" layoutX="599.0" layoutY="420.0" prefHeight="31.0" prefWidth="165.0" promptText="Position" />
    </children>
 </AnchorPane>

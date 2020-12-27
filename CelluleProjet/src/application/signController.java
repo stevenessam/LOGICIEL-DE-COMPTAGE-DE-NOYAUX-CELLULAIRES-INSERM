@@ -87,8 +87,7 @@ public class signController implements Initializable{
 	/*-------------------------------signin--et signup-------------------------------*/
 	@FXML
 	Button signinButton;
-	@FXML
-	ComboBox positionSignin;
+
 
 	@FXML
 	TextField userNameSignin;
@@ -109,8 +108,7 @@ public class signController implements Initializable{
 	TextField prenomSignup;
 	@FXML
 	PasswordField passowrdSignup;
-	@FXML
-	ComboBox positionSignup;
+
 
 
 	Connection conn = null;
@@ -121,7 +119,7 @@ public class signController implements Initializable{
 	@FXML  
 	private void Login (ActionEvent event) throws Exception{  
 		conn = mysqlconnect.ConnectDb();
-		String sql = "Select * from utilisateur where userName = ? and nom = ? and prenom = ? and motDePasse = ? and position = ? ";
+		String sql = "Select * from utilisateur where userName = ? and nom = ? and prenom = ? and motDePasse = ? ";
 		
 		
 		try {
@@ -130,7 +128,6 @@ public class signController implements Initializable{
 			pst.setString(2, nomSignin.getText());
 			pst.setString(3, prenomSignin.getText());
 			pst.setString(4, passowrdSignin.getText());
-			pst.setString(5, positionSignin.getValue().toString());
 
 			rs = pst.executeQuery();
 
@@ -157,7 +154,7 @@ public class signController implements Initializable{
 
 	public void signUp(ActionEvent event){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "insert into utilisateur (userName,nom,prenom,motDePasse,position) values (?,?,?,?,?)";
+		String sql = "insert into utilisateur (userName,nom,prenom,motDePasse) values (?,?,?,?)";
 		
 		if (validateInput()) {
 			
@@ -171,7 +168,6 @@ public class signController implements Initializable{
 			pst.setString(2, nomSignup.getText());
 			pst.setString(3, prenomSignup.getText());
 			pst.setString(4, passowrdSignup.getText());
-			pst.setString(5, positionSignup.getValue().toString());
 			pst.execute();
 
 			JOptionPane.showMessageDialog(null, "Compte créé avec succès");
@@ -188,8 +184,7 @@ public class signController implements Initializable{
 				userNameSignup.getText().isEmpty() | 
 				nomSignup.getText().isEmpty() | 
 				prenomSignup.getText().isEmpty() | 
-				passowrdSignup.getText().isEmpty() | 
-				positionSignup.getSelectionModel().isEmpty()
+				passowrdSignup.getText().isEmpty()
 				) {
 
 		Alert alert = new Alert(AlertType.WARNING);
@@ -211,8 +206,7 @@ public class signController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 
-		positionSignin.getItems().addAll("Chercheur","Admin");
-		positionSignup.getItems().addAll("Chercheur","Admin");
+
 
 
 

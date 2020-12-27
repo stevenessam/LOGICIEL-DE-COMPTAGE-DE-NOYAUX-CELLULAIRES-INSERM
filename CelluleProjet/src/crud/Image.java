@@ -10,6 +10,21 @@ public class Image {
 	}
 	
 	
+	public Image(int idImage, String lienImage) {
+		super();
+		this.idImage = idImage;
+		this.lienImage = lienImage;
+	}
+
+
+	public Image(int idImage, String nom, String lienImage) {
+		super();
+		this.idImage = idImage;
+		this.nom = nom;
+		this.lienImage = lienImage;
+	}
+
+
 	public int getIdImage() {
 		return idImage;
 	}

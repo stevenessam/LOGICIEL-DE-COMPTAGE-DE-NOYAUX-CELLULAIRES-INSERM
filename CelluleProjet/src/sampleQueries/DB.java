@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import crud.Campagne;
 import crud.Essai;
+import crud.Image;
 import crud.Utilisateur;
 
 
@@ -24,7 +25,7 @@ public class DB {
 	           //JOptionPane.showMessageDialog(null, "Connection Established");
 	            return conn;
 	        } catch (Exception e) {
-	            JOptionPane.showMessageDialog(null, e);
+	            JOptionPane.showMessageDialog(null, "Connexion non établie");
 	            return null;
 	        }
 	    
@@ -87,6 +88,21 @@ public class DB {
 	    
 	    
 	    
+	    public static ObservableList<Image> getDataImages(){
+	        Connection conn = ConnectDb();
+	        ObservableList<Image> list = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("select * from image");
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    list.add(new Image(Integer.parseInt(rs.getString("idImage")),rs.getString("nom") , rs.getString("lienImage")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return list;
+	    }
 	    
 	    
 	}
