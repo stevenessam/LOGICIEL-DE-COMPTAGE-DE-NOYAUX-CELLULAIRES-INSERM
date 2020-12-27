@@ -78,7 +78,7 @@ public class DB {
 	            ResultSet rs = ps.executeQuery();
 	            
 	        	while(rs.next()) {
-	        	    list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom"), rs.getString("position")))   ;  
+	        	    list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom")))   ;  
 	        		
 	    		}
 	        } catch (Exception e) {
