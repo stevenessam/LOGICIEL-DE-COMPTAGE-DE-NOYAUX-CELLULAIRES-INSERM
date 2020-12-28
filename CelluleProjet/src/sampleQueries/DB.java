@@ -58,7 +58,7 @@ public class DB {
 	            ResultSet rs = ps.executeQuery();
 	            
 	        	while(rs.next()) {
-	        	    list.add(new Essai(Integer.parseInt(rs.getString("idEssai")),rs.getString("description") , rs.getString("date")))   ;  
+	        	    list.add(new Essai(Integer.parseInt(rs.getString("idEssai")) , rs.getString("date"),rs.getString("description")))   ;  
 	        		
 	    		}
 	        } catch (Exception e) {

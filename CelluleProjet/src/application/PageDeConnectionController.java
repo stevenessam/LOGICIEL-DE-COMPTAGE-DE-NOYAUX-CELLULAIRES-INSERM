@@ -1,17 +1,27 @@
 package application;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
+import com.sun.javafx.logging.Logger;
+
 import crud.Campagne;
+import crud.Essai;
 import crud.Image;
 import crud.Utilisateur;
 import javafx.collections.FXCollections;
@@ -288,7 +298,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 	@FXML
-	void getSelectedCampagne (MouseEvent event){
+	public void getSelectedCampagne (MouseEvent event){
 		index = tableCampagnes.getSelectionModel().getSelectedIndex();
 		if (index <= -1){
 
@@ -328,7 +338,7 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idCampagnes.getText());
 			pst.execute();
-		//	JOptionPane.showMessageDialog(null, "Delete");
+			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableCampagne();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -357,12 +367,130 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/*--------------------------------Fin------Page Campagnes-----------------------------------------------------------*/
+
+	/*-------------------------------------------Page Essai-----------------------------------------------------------*/
+
+
 	
 	
+	
+	
+	
+	@FXML
+	TextField idEssai;
+	@FXML
+	TextArea descriptionEssais;
+
+
+	@FXML
+	private TableView<Essai> tableEssai;
+	@FXML
+	private TableColumn<Essai, Integer> tableIdEssai;
+	@FXML
+	private TableColumn<Essai, String >tableDescriptionEssais;
+
+
+
+	ObservableList<Essai> listEssai;
+
+
+
+
+
+	@FXML
+	public void getSelectedEssai (MouseEvent event){
+		index = tableEssai.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return;
+		}
+		idEssai.setText(tableIdEssai.getCellData(index).toString());
+		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
+
+
+	}
+
+	public void addEssai (){    
+		conn = mysqlconnect.ConnectDb();
+		String sql = "insert into essai (description)values(?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, descriptionEssais.getText());
+			
+			pst.execute();
+			refreshTableEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+
+
+
+
+
+	public void editEssai(){   
+		try {
+			conn = mysqlconnect.ConnectDb();
+			String value1 = idEssai.getText();
+			String value2 = descriptionEssais.getText();
+
+			String sql = "update essai set idEssai= '"+value1+"',description= '"+value2+"' where idEssai='"+value1+"' ";
+			pst= conn.prepareStatement(sql);
+			pst.execute();
+			//JOptionPane.showMessageDialog(null, "Update");
+			refreshTableEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+
+
+	public void deleteEssai(){
+		conn = mysqlconnect.ConnectDb();
+		String sql = "delete from essai where idEssai = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, idEssai.getText());
+			pst.execute();
+			//	JOptionPane.showMessageDialog(null, "Delete");
+			refreshTableEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+
+
+
+
+	public void refreshTableEssai(){
+
+
+		tableIdEssai.setCellValueFactory(new PropertyValueFactory<Essai , Integer>("idEssai"));
+		tableDescriptionEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
+
+		listEssai= mysqlconnect.getDataEssai();
+
+		tableEssai.setItems(listEssai);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*---------------------------------Fin-----Page Essai-----------------------------------------------------------*/
 	
 	/*------------------------------------Page Gestion Admin-----------------------------------------------------------*/
-	
-	
+
+
 	@FXML
 	TextField idUtilisateur;
 	@FXML
@@ -381,8 +509,8 @@ public class PageDeConnectionController implements Initializable {
 
 	ObservableList<Utilisateur> listGestioadmin;
 
-	
-	
+
+
 
 	@FXML
 	void getSelectedUser(MouseEvent event){
@@ -396,7 +524,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 	}
-	
+
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
 		String sql = "delete from utilisateur where idUtilisateur = ?";
@@ -404,22 +532,22 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idUtilisateur.getText());
 			pst.execute();
-		//	JOptionPane.showMessageDialog(null, "Delete");
+			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableGestioadmin();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
 
 	}
-	
-	
+
+
 
 	public void editUtilisateur (){   
 		try {
 			conn = mysqlconnect.ConnectDb();
 			String value1 = idUtilisateur.getText();
 			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
-			
+
 			String sql = "update utilisateur set idUtilisateur= '"+value1+"',position= '"+value2+"' where idUtilisateur='"+value1+"' ";
 			pst= conn.prepareStatement(sql);
 			pst.execute();
@@ -430,52 +558,207 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 	}
-	
-	
+
+
 	public void refreshTableGestioadmin(){
 
 
 		tableIdGestionAdmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , Integer>("idUtilisateur"));
 		tableNomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("nom"));
 		tablePrenomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("prenom"));
-		
+
 
 		listGestioadmin= mysqlconnect.getDataUtilisateur();
 
 		tableGestioadmin.setItems(listGestioadmin);
 	}
-	
-	
-	
-	
+
+
+
+
 	/*--------------------------------Fin------Page Gestion Admin-----------------------------------------------------------*/
 
 
 	/*--------------------------------Page Ajouter Image--------------------------------------------------------------------*/
 
-	/*
+
 	@FXML
 	Button ajouteImageImg;
-	@FXML
-	File file;
+
 	@FXML
 	private TableView<Image> tableImages;
 	@FXML
 	private TableColumn<Image, Integer> tableIdImage;
 	@FXML
-	private TableColumn<Image, String>tableImageImg;
-@FXML
- private FileInputStream fis;
+	private TableColumn<Image, String> tableNomImage;
 
+	@FXML
+	private TableColumn<Image, String>tableImageImg;
+	@FXML
+	private File file;
+	private Stage stage;
+
+	@FXML
+	private Desktop desktop= Desktop.getDesktop();
+
+	@FXML
+	private javafx.scene.image.Image imageV;
+
+
+	@FXML
+	private ImageView imageView;
 
 	ObservableList<Image> listImages;
-	
-	
-	
+
+
+
+	@FXML
+	private FileChooser fileChooser;
+
+
+
+
+
+	@FXML
+	TextField imageNom;
+
+	@FXML
+	TextField idImageImg;
+	@FXML
+	private FileInputStream fis;
+
+
+
+
+
+
+	@FXML
+	public void getSelectedImage(MouseEvent event){
+		index = tableImages.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return;
+		}
+		idImageImg.setText(tableIdImage.getCellData(index).toString());
+		imageNom.setText(tableNomImage.getCellData(index).toString());
+
+	}
+
+
+	public void  getSelectedImages() {
+		
+		tableImages.setOnMouseClicked(e ->{
+			
+			Image listI = tableImages.getItems().get(tableImages.getSelectionModel().getSelectedIndex());
+			//idImageImg.setText(listI.getIdImage());
+			imageNom.setText(listI.getNom());
+			retrieveImage(listI.getIdImage());
+			
+			
+			
+			
+			
+		});
+
+	}
+
+
+
+
+	public void retrieveImage(int idImageImg) {
+
+		try {
+			pst = conn.prepareStatement( "select lienImage from image where idImage = ?");
+			pst.setInt(1,idImageImg);
+			rs = pst.executeQuery();
+			if(rs.next())
+			{ 
+				InputStream is = rs.getBinaryStream("lienImage");
+				OutputStream os = new FileOutputStream(new File("photo.jpg"));
+				byte[] contents = new byte[1024];
+				int size = 0; 
+				while( (size = is.read(contents)) != -1){ 
+					os.write(contents, 0 ,size); 
+				}	
+
+				imageV=new javafx.scene.image.Image("file:photo.jpg",imageView.getFitWidth(), imageView.getFitHeight(), true, true);
+				imageView.setImage(imageV); 
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+	}
+
+
+
+
+
+
+
+	public void addImages (){    
+		conn = mysqlconnect.ConnectDb();
+		String sql = "insert into image (nom,lienImage)values(?,?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, imageNom.getText());
+
+			fis = new FileInputStream(file);
+			pst.setBinaryStream(2,(InputStream)fis,(int)file.length());
+
+			pst.execute();
+
+			//JOptionPane.showMessageDialog(null, "campagne Add succes");
+			refreshTableImage();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+
+
+
+
+
+	@FXML
+	private void importImages (ActionEvent event) {
+		stage= (Stage)pageAjouterImage.getScene().getWindow();
+		file = fileChooser.showOpenDialog(stage);
+		/*	try {
+			desktop.open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+
+		if (file != null) {
+			//	System.out.println(""+file.getAbsolutePath());
+			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
+			imageView.setImage(imageV);
+			imageView.setPreserveRatio(true);
+		}
+
+	}
+
+
+
+
 	public void refreshTableImage(){
 
 
 		tableIdImage.setCellValueFactory(new PropertyValueFactory<Image , Integer>("idImage"));
+		tableNomImage.setCellValueFactory(new PropertyValueFactory<Image , String>("nom"));
 		tableImageImg.setCellValueFactory(new PropertyValueFactory<Image , String>("lienImage"));
 
 
@@ -483,58 +766,101 @@ public class PageDeConnectionController implements Initializable {
 
 		tableImages.setItems(listImages);
 	}
-	
-	
-	
-	
-	
-	
-		public void addImage (){    
-			conn = mysqlconnect.ConnectDb();
-			String sql = "insert into image (lienImage)values(?)";
-			try {
-				pst = conn.prepareStatement(sql);
-				
-				fis = new FileInputStream(file);
-				pst.setBinaryStream(1, (InputStream)fis,(int)file.length());
-			
-				
-				pst.execute();
-	
-				//JOptionPane.showMessageDialog(null, "campagne Add succes");
-				refreshTableCampagne();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e);
-			}
-		}
-	
-		
-	
-		public void importImage(ActionEvent event) {
-			
-			FileChooser fc = new FileChooser(); 
-			
-			fc.getExtensionFilters().addAll( new ExtensionFilter("IMG Files", "*.JPG"));
-			 File seletedFile = fc.showOpenDialog(null); 
-		
-		if (seletedFile != null) {
-//			listview.getItems().add(seletedFile.getAbsolutePath()); 
-		} else { 
-				System.out.println("file is not valid"); 
-		}
-	
-			ajouteImageImg.setOnAction(e ->{	
-				file = fc.showOpenDialog(null);
-			});	
-		
-	}
-	
-	
-	*/
-	
+
+
+
 	/*---------------------------------Fin-----Page Ajouter Image-----------------------------------------------------------*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	/*-----------------------------------Page Compte-----------------------------------------------------------*/
 
+	@FXML
+	TextField modifierPrenomCompte;
+	@FXML
+	TextField modifierNomCompte;
+	@FXML
+	TextField modifierPasswordCompte;
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*---------------------------------Fin-----Page Compte-----------------------------------------------------------*/
 	/* ---------------------------logout button-------------------------------*/
 
 
@@ -606,9 +932,14 @@ public class PageDeConnectionController implements Initializable {
 
 
 		refreshTableCampagne();
+		refreshTableEssai();
 		refreshTableGestioadmin();
-		//refreshTableImage();
+		refreshTableImage();
 		// Activation des boutons,textfields,etc...
+
+
+		fileChooser=new FileChooser();
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images","*.JPG"));
 
 
 
