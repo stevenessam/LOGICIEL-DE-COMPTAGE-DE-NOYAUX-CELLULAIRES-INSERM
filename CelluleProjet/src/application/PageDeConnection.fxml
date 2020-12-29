@@ -192,7 +192,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="33.0" layoutY="74.0" text="Liste Des Images" textFill="WHITE">
                <font>
@@ -205,27 +205,27 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TableView fx:id="tableImages" layoutX="33.0" layoutY="106.0" onMouseClicked="#getSelectedImage" prefHeight="488.0" prefWidth="585.0">
+            <TableView fx:id="tableImages" layoutX="33.0" layoutY="106.0" onMouseClicked="#getSelectedImage" prefHeight="488.0" prefWidth="1047.0">
               <columns>
-                <TableColumn fx:id="tableIdImage" prefWidth="75.0" text="ID" />
-                  <TableColumn fx:id="tableNomImage" prefWidth="75.0" text="Nom" />
-                <TableColumn fx:id="tableImageImg" prefWidth="434.0" text="Images" />
+                <TableColumn fx:id="tableIdImage" minWidth="0.0" prefWidth="0.0" text="ID" />
+                  <TableColumn fx:id="tableNomImage" prefWidth="316.0" text="Nom" />
+                <TableColumn fx:id="tableImageImg" prefWidth="730.0" text="Images" />
               </columns>
             </TableView>
-            <TextField fx:id="idImageImg" layoutX="172.0" layoutY="629.0" />
-            <ImageView fx:id="imageView" fitHeight="343.0" fitWidth="396.0" layoutX="673.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="imageNom" layoutX="849.0" layoutY="501.0" prefHeight="31.0" prefWidth="222.0" />
-            <Label layoutX="673.0" layoutY="501.0" text="Nom de l'image" textFill="WHITE">
+            <TextField fx:id="idImageImg" layoutX="14.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
+            <TextField fx:id="imageNom" layoutX="325.0" layoutY="630.0" prefHeight="31.0" prefWidth="277.0" />
+            <Label layoutX="158.0" layoutY="630.0" text="Nom de l'image" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="importImageImg" layoutX="686.0" layoutY="602.0" mnemonicParsing="false" onAction="#importImages" prefHeight="54.0" prefWidth="124.0" styleClass="buttons" text="Import Image">
+            <Button fx:id="importImageImg" layoutX="649.0" layoutY="618.0" mnemonicParsing="false" onAction="#importImages" prefHeight="54.0" prefWidth="125.0" style="-fx-background-color: grey;" styleClass="buttons" text="Import Image">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="ajouteImage" layoutX="914.0" layoutY="602.0" mnemonicParsing="false" onAction="#addImages" text="Button" />
+            <Button fx:id="ajouteImage" layoutX="808.0" layoutY="618.0" mnemonicParsing="false" onAction="#addImages" prefHeight="54.0" prefWidth="222.0" styleClass="buttons" text="Ajouter Image" />
+            <TextField fx:id="ImageImg" layoutX="52.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
          </children>
       </Pane>
       <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

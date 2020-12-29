@@ -609,8 +609,8 @@ public class PageDeConnectionController implements Initializable {
 	private javafx.scene.image.Image imageV;
 
 
-	@FXML
-	private ImageView imageView;
+//	@FXML
+//	private ImageView imageView;
 
 	ObservableList<Image> listImages;
 
@@ -625,7 +625,8 @@ public class PageDeConnectionController implements Initializable {
 
 	@FXML
 	TextField imageNom;
-
+	@FXML
+	TextField ImageImg;
 	@FXML
 	TextField idImageImg;
 	@FXML
@@ -645,19 +646,19 @@ public class PageDeConnectionController implements Initializable {
 		}
 		idImageImg.setText(tableIdImage.getCellData(index).toString());
 		imageNom.setText(tableNomImage.getCellData(index).toString());
-
+		ImageImg.setText(tableImageImg.getCellData(index).toString());
 	}
 
-
+/*
 	public void  getSelectedImages() {
 		
 		tableImages.setOnMouseClicked(e ->{
 			
 			Image listI = tableImages.getItems().get(tableImages.getSelectionModel().getSelectedIndex());
-			//idImageImg.setText(listI.getIdImage());
+			idImageImg.setText(listI.getIdImage());
 			imageNom.setText(listI.getNom());
-			retrieveImage(listI.getIdImage());
 			
+			retrieveImage(listI.getIdImage());
 			
 			
 			
@@ -665,9 +666,9 @@ public class PageDeConnectionController implements Initializable {
 		});
 
 	}
+*/
 
-
-
+/*
 
 	public void retrieveImage(int idImageImg) {
 
@@ -704,7 +705,7 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
-
+*/
 
 
 
@@ -759,12 +760,12 @@ public class PageDeConnectionController implements Initializable {
 		}*/
 
 
-		if (file != null) {
-			//	System.out.println(""+file.getAbsolutePath());
-			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
-			imageView.setImage(imageV);
-			imageView.setPreserveRatio(true);
-		}
+//		if (file != null) {
+//			//	System.out.println(""+file.getAbsolutePath());
+//			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
+//			imageView.setImage(imageV);
+//			imageView.setPreserveRatio(true);
+//		}
 
 	}
 
