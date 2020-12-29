@@ -43,7 +43,7 @@
               <columns>
                   <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" />
                 <TableColumn fx:id="tableNomCampagnes" prefWidth="349.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="446.0" styleClass="tablerow" text="Description" />
+                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="371.0" styleClass="tablerow" text="Description" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -192,7 +192,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="33.0" layoutY="74.0" text="Liste Des Images" textFill="WHITE">
                <font>

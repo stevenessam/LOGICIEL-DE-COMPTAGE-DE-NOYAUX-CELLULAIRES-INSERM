@@ -281,6 +281,60 @@ public class PageDeConnectionController implements Initializable {
 	PreparedStatement pst = null;
 
 
+	
+	
+	
+	public void addCampagnes (){    
+		conn = mysqlconnect.ConnectDb();
+		
+		String sqlT = "Select * from campagne where idCampagne = ? and nom = ? and description = ? ";
+		String sql = "insert into campagne (nom,description)values(?,?)";
+		
+		try {
+			pst = conn.prepareStatement(sqlT);
+			pst.setString(1, idCampagnes.getText());
+			pst.setString(2, nomCampagnes.getText());
+			pst.setString(3, descriptionCampagnes.getText());
+			
+
+			rs = pst.executeQuery();
+			 boolean recordAdded = false;
+	
+		if(!rs.next()){
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, nomCampagnes.getText());
+			pst.setString(2, descriptionCampagnes.getText());
+			pst.execute();
+
+			//JOptionPane.showMessageDialog(null, "campagne Add succes");
+		
+	         recordAdded = true;
+	     	refreshTableCampagne();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		 if( recordAdded ){
+		    //  JOptionPane.showMessageDialog(null, "Record added");
+		    }else{
+		       JOptionPane.showMessageDialog(null, "Record already exists");
+		    }
+		}}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
+	
+	
+	
+
+	
+	/*
+// methode qui verifie pas si il existe	
+	
 	public void addCampagnes (){    
 		conn = mysqlconnect.ConnectDb();
 		String sql = "insert into campagne (nom,description)values(?,?)";
@@ -298,6 +352,17 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 	@FXML
