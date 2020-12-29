@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -625,7 +628,7 @@ public class PageDeConnectionController implements Initializable {
 	@FXML
 	TextField idImageImg;
 	@FXML
-	private FileInputStream fis;
+	private File fis;
 
 
 
@@ -708,17 +711,30 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addImages (){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "insert into image (nom,lienImage)values(?,?)";
+		String sql = "INSERT INTO image (nom,lienImage) VALUES (?,?)";
 		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, imageNom.getText());
-
-			fis = new FileInputStream(file);
-			pst.setBinaryStream(2,(InputStream)fis,(int)file.length());
-
-			pst.execute();
-
-			//JOptionPane.showMessageDialog(null, "campagne Add succes");
+			if (file != null) {
+				// Copie du fichier dans le dossier du logiciel
+				File originalFile = file;
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String path = s + "\\Images\\"+originalFile.getName();
+				File copiedFile = new File(path);
+				
+				try {
+					Files.copy(originalFile.toPath(), copiedFile.toPath());
+				} catch (Exception e) {
+					
+				}
+				//Requête SQL
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, copiedFile.getName());
+				pst.setString(2, copiedFile.getAbsolutePath());
+				pst.execute();
+				//JOptionPane.showMessageDialog(null, "campagne Add succes");
+			} else {
+				System.out.println("File not selected");
+			}
 			refreshTableImage();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
