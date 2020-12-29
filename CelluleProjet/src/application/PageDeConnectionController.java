@@ -391,7 +391,8 @@ public class PageDeConnectionController implements Initializable {
 	private TableColumn<Essai, Integer> tableIdEssai;
 	@FXML
 	private TableColumn<Essai, String >tableDescriptionEssais;
-
+	@FXML
+	private TableColumn<Essai, String >tableDateEssais;
 
 
 	ObservableList<Essai> listEssai;
@@ -415,7 +416,7 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "insert into essai (description)values(?)";
+		String sql = "insert into essai (description,date)values(?,NOW())";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, descriptionEssais.getText());
@@ -473,7 +474,7 @@ public class PageDeConnectionController implements Initializable {
 
 		tableIdEssai.setCellValueFactory(new PropertyValueFactory<Essai , Integer>("idEssai"));
 		tableDescriptionEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
-
+		tableDateEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("date"));
 		listEssai= mysqlconnect.getDataEssai();
 
 		tableEssai.setItems(listEssai);
