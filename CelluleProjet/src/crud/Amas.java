@@ -5,8 +5,10 @@ public class Amas {
 	private int idAmas, poids;
 	private float coordonneesX, coordonneesY;
 	
-	public Amas() {
-		
+	public Amas(int p, float X, float Y) {
+		this.poids = p;
+		this.coordonneesX = X;
+		this.coordonneesY = Y;
 	}
 	
 	

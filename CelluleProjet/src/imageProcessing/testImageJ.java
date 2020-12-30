@@ -1,15 +1,18 @@
 package imageProcessing;
 
+import java.awt.List;
 import java.io.File;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import crud.Algorithme;
+import crud.Amas;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.io.Opener;
-import ij.macro.Interpreter;
-import ij.plugin.Macro_Runner;
+import ij.measure.ResultsTable;
 
 
 public class testImageJ {
@@ -18,8 +21,6 @@ public class testImageJ {
 		
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
-		String filename = "MacroWorkWell1";
-		String path = s + "\\macros\\"+filename;
 		
 		Opener opener = new Opener();  
 		String imageFilePath = s + "\\Images\\Capture.png";
@@ -29,7 +30,17 @@ public class testImageJ {
 		//test_runner.run(path);
 		
 		Algorithme algo = new Algorithme();
-		algo.algorithme1(imp);
-		IJ.saveAs(imp, "PNG", s+"\\Images\\Result");
+		algo.ExecuteAlgorithm(1, imp);
+		
+		ResultsTable RT1 = ResultsTable.getResultsTable();
+		int rowNbr = RT1.getCounter();
+		ArrayList<Amas> list = new ArrayList<>();
+		
+		for (int i = 0; i < rowNbr; i++) {
+			
+			list.add(new Amas(1, (float)RT1.getValue("X", i), (float)RT1.getValue("Y", i)));
+		}
+		
+		//IJ.saveAs(imp, "PNG", s+"\\Images\\Result");
 	}
 }

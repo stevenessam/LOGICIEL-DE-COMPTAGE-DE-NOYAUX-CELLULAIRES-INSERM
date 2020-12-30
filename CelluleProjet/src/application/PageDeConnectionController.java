@@ -463,7 +463,7 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Essai> listEssai;
 
 
-
+	int idEssai = 0;
 
 
 	@FXML
@@ -474,12 +474,35 @@ public class PageDeConnectionController implements Initializable {
 			return;
 		}
 		
+		idEssaiTextField.setText(tableIdEssai.getCellData(index).toString());
+		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
+		String text = idEssaiTextField.getText();
+		idEssai = Integer.parseInt(text);
+		refreshTableImageEssai();
+	}
+	
+	
+	/*
+	public int getSelectedEssaiID (MouseEvent event){
+		index = tableEssai.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return 0;
+		}
 		
 		idEssaiTextField.setText(tableIdEssai.getCellData(index).toString());
 		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
-
-
+		
+		String text = idEssaiTextField.getText();
+		int idEssai = Integer.parseInt(text);
+		System.out.println(idEssai);
+		return idEssai;
 	}
+	
+	
+	
+	*/
+	
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
@@ -586,7 +609,7 @@ public class PageDeConnectionController implements Initializable {
 
 		tableImageEssaiIMG.setCellValueFactory(new PropertyValueFactory<Image ,String>("nom"));
 		
-	//	listImageEssai= mysqlconnect.getDataImagesEssai();
+		listImageEssai= mysqlconnect.getDataImagesEssai(idEssai);
 
 		tableImageE.setItems(listImageEssai);
 	}

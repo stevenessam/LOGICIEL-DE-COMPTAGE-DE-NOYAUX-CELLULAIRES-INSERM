@@ -26,7 +26,7 @@ public class AmasDAO {
 			st=cn.createStatement();
 			ResultSet res=st.executeQuery("Select * from amas");
 			while(res.next()) {
-				Amas e=new Amas();
+				Amas e=new Amas(1, 2, 2);
 				e.setIdAmas(res.getInt("idAmas"));
 				e.setCoordonneesX(res.getFloat("CoordonneesX"));
 				e.setCoordonneesY(res.getFloat("CoordonneesX"));
