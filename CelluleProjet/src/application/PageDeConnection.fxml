@@ -41,7 +41,7 @@
          <children>
             <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" />
+                  <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                 <TableColumn fx:id="tableNomCampagnes" prefWidth="349.0" styleClass="tablerow" text="Nom" />
                 <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="371.0" styleClass="tablerow" text="Description" />
               </columns>
@@ -109,13 +109,13 @@
             <Button fx:id="exporterCampagnes" layoutX="823.0" layoutY="586.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
          </children>
       </Pane>
-      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="430.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="0.0" text="ID" />
-                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="451.0" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="269.0" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="102.0" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="304.0" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -132,7 +132,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <Button fx:id="importImageEssais" layoutX="803.0" layoutY="200.0" mnemonicParsing="false" text="Import Image" />
+            <Button fx:id="importImageEssais" layoutX="803.0" layoutY="200.0" mnemonicParsing="false" onAction="#addEssaiImage" text="Import Image" />
             <Label layoutX="803.0" layoutY="241.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -144,7 +144,13 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="idEssai" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
+            <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
+            <TableView fx:id="tableImageE" layoutX="470.0" layoutY="72.0" prefHeight="610.0" prefWidth="277.0">
+              <columns>
+                  <TableColumn fx:id="tableImageEId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="276.0" text="Images" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
@@ -207,7 +213,7 @@
             </Label>
             <TableView fx:id="tableImages" layoutX="33.0" layoutY="106.0" onMouseClicked="#getSelectedImage" prefHeight="488.0" prefWidth="1047.0">
               <columns>
-                <TableColumn fx:id="tableIdImage" minWidth="0.0" prefWidth="0.0" text="ID" />
+                <TableColumn fx:id="tableIdImage" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                   <TableColumn fx:id="tableNomImage" prefWidth="316.0" text="Nom" />
                 <TableColumn fx:id="tableImageImg" prefWidth="730.0" text="Images" />
               </columns>
@@ -225,7 +231,7 @@
                </font>
             </Button>
             <Button fx:id="ajouteImage" layoutX="808.0" layoutY="618.0" mnemonicParsing="false" onAction="#addImages" prefHeight="54.0" prefWidth="222.0" styleClass="buttons" text="Ajouter Image" />
-            <TextField fx:id="ImageImg" layoutX="52.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
+            <TextField fx:id="ImageImg" layoutX="46.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
          </children>
       </Pane>
       <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -291,7 +297,7 @@
          <children>
             <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" text="ID" />
+                  <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                 <TableColumn fx:id="tableNomGestioadmin" prefWidth="240.0" styleClass="tablerow" text="Nom" />
                 <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="273.0" styleClass="tablerow" text="Prenom" />
                   <TableColumn fx:id="tablePositionGestioadmin" prefWidth="207.0" styleClass="tablerow" text="Position" />

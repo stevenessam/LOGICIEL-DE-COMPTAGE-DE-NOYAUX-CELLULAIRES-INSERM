@@ -445,7 +445,7 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	@FXML
-	TextField idEssai;
+	TextField idEssaiTextField;
 	@FXML
 	TextArea descriptionEssais;
 
@@ -473,7 +473,9 @@ public class PageDeConnectionController implements Initializable {
 
 			return;
 		}
-		idEssai.setText(tableIdEssai.getCellData(index).toString());
+		
+		
+		idEssaiTextField.setText(tableIdEssai.getCellData(index).toString());
 		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
 
 
@@ -494,6 +496,20 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	
+	public void addEssaiImage (){    
+		conn = mysqlconnect.ConnectDb();
+		String sql = "INSERT INTO essaicontientimage (idImage, idEssai) VALUES (?, ?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, idImageImg.getText());
+			pst.setString(2, idEssaiTextField.getText());
+			pst.execute();
+			refreshTableImageEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
 
 
 
@@ -501,7 +517,7 @@ public class PageDeConnectionController implements Initializable {
 	public void editEssai(){   
 		try {
 			conn = mysqlconnect.ConnectDb();
-			String value1 = idEssai.getText();
+			String value1 = idEssaiTextField.getText();
 			String value2 = descriptionEssais.getText();
 
 			String sql = "update essai set idEssai= '"+value1+"',description= '"+value2+"' where idEssai='"+value1+"' ";
@@ -521,7 +537,7 @@ public class PageDeConnectionController implements Initializable {
 		String sql = "delete from essai where idEssai = ?";
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, idEssai.getText());
+			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableEssai();
@@ -530,6 +546,7 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 	}
+
 
 
 
@@ -548,8 +565,31 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	
+
+
+	@FXML
+	private TableView<Image> tableImageE;
+	@FXML
+	private TableColumn<Image, Integer>tableImageEId;
 	
 	
+	@FXML
+	private TableColumn<Image, String>tableImageEssaiIMG;
+
+	ObservableList<Image> listImageEssai;
+	
+	
+	
+	public void refreshTableImageEssai(){
+		
+		tableImageEId.setCellValueFactory(new PropertyValueFactory<Image ,Integer>("idImage"));
+
+		tableImageEssaiIMG.setCellValueFactory(new PropertyValueFactory<Image ,String>("nom"));
+		
+	//	listImageEssai= mysqlconnect.getDataImagesEssai();
+
+		tableImageE.setItems(listImageEssai);
+	}
 	
 	
 	
@@ -1016,6 +1056,7 @@ public class PageDeConnectionController implements Initializable {
 
 		refreshTableCampagne();
 		refreshTableEssai();
+		refreshTableImageEssai();
 		refreshTableGestioadmin();
 		refreshTableImage();
 		// Activation des boutons,textfields,etc...

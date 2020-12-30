@@ -10,11 +10,22 @@ public class Image {
 	}
 	
 	
-	public Image(int idImage, String lienImage) {
+	public Image(String nom) {
+		super();
+		this.nom = nom;
+	}
+
+
+
+
+	public Image(int idImage, String nom) {
 		super();
 		this.idImage = idImage;
-		this.lienImage = lienImage;
+		this.nom = nom;
 	}
+
+
+
 
 
 	public Image(int idImage, String nom, String lienImage) {

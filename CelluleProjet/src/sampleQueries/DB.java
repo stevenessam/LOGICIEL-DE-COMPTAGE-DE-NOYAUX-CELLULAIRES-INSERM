@@ -103,7 +103,22 @@ public class DB {
 	        }
 	        return list;
 	    }
-	    
+	    public static ObservableList<Image> getDataImagesEssai(int idEssai ){
+	        Connection conn = ConnectDb();
+	        ObservableList<Image> listT = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM image I INNER JOIN essaicontientimage ECI ON I.idImage = ECI.idImage INNER JOIN essai E ON ECI.idEssai = E.idEssai WHERE E.idEssai = ? ");
+	            ps.setInt(1, idEssai);
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    listT.add(new Image(Integer.parseInt(rs.getString("idImage")),rs.getString("nom")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return listT;
+	    }
 	    
 	}
 	
