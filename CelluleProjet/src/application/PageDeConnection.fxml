@@ -109,7 +109,7 @@
             <Button fx:id="exporterCampagnes" layoutX="823.0" layoutY="586.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
          </children>
       </Pane>
-      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="444.0" styleClass="tablesstyle">
               <columns>
@@ -293,7 +293,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
@@ -310,7 +310,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <ComboBox fx:id="comboBoxPosition" layoutX="800.0" layoutY="130.0" prefHeight="31.0" prefWidth="262.0" promptText="Position" />
+            <ComboBox fx:id="comboBoxPosition" layoutX="800.0" layoutY="130.0" prefHeight="31.0" prefWidth="262.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Gestion Admin" textFill="WHITE">
                <font>

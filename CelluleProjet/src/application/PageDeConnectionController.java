@@ -703,11 +703,11 @@ public class PageDeConnectionController implements Initializable {
 		try {
 			conn = mysqlconnect.ConnectDb();
 			String value1 = idUtilisateur.getText();
-			//String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
+			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
 			
-			//String sql = "update utilisateur set idUtilisateur= '"+value1+" where idUtilisateur='"+value1+"' ";
-			//pst= conn.prepareStatement(sql);
-			//pst.execute();
+			String sql = "update utilisateur set idUtilisateur= '"+value1+" where idUtilisateur='"+value1+"' ";
+			pst= conn.prepareStatement(sql);
+			pst.execute();
 			//JOptionPane.showMessageDialog(null, "Update");
 			refreshTableGestioadmin();
 		} catch (Exception e) {
@@ -723,7 +723,7 @@ public class PageDeConnectionController implements Initializable {
 		tableIdGestionAdmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , Integer>("idUtilisateur"));
 		tableNomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("nom"));
 		tablePrenomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("prenom"));
-
+		tablePositionGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("position"));
 
 		listGestioadmin= mysqlconnect.getDataUtilisateur();
 
@@ -1119,7 +1119,7 @@ public class PageDeConnectionController implements Initializable {
 
 		comboBoxPosition.setItems(listcomboboxposition);
 
-
+		comboBoxPosition.getSelectionModel().selectFirst();
 
 
 
