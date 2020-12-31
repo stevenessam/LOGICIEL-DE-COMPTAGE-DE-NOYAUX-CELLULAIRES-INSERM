@@ -111,11 +111,11 @@
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="522.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="444.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="366.0" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="354.0" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="247.0" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="196.0" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -145,10 +145,10 @@
                </font>
             </Label>
             <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableImageE" layoutX="22.0" layoutY="613.0" prefHeight="54.0" prefWidth="721.0">
+            <TableView fx:id="tableImageE" layoutX="472.0" layoutY="72.0" prefHeight="610.0" prefWidth="285.0">
               <columns>
                   <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="720.0" text="Images" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="284.0" text="Images" />
               </columns>
             </TableView>
          </children>
