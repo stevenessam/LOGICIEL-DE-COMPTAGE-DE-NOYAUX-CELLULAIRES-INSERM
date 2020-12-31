@@ -564,6 +564,7 @@ public class PageDeConnectionController implements Initializable {
 			pst.execute();
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableEssai();
+			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
