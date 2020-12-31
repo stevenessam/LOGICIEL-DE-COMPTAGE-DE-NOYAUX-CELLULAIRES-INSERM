@@ -120,8 +120,8 @@ public class signController implements Initializable{
 	private void Login (ActionEvent event) throws Exception{  
 		conn = mysqlconnect.ConnectDb();
 		String sql = "Select * from utilisateur where userName = ? and nom = ? and prenom = ? and motDePasse = ? ";
-		
-		
+
+
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, userNameSignin.getText());
@@ -154,29 +154,54 @@ public class signController implements Initializable{
 
 	public void signUp(ActionEvent event){    
 		conn = mysqlconnect.ConnectDb();
+		String sqlT = "Select * from utilisateur where userName = ?";
 		String sql = "insert into utilisateur (userName,nom,prenom,motDePasse) values (?,?,?,?)";
-		
-		if (validateInput()) {
-			
-		
-		
+
+
+
 		try {
-
-
-			pst = conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sqlT);
 			pst.setString(1, userNameSignup.getText());
-			pst.setString(2, nomSignup.getText());
-			pst.setString(3, prenomSignup.getText());
-			pst.setString(4, passowrdSignup.getText());
-			pst.execute();
 
-			JOptionPane.showMessageDialog(null, "Compte créé avec succès");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}  
-	}
-	}
 
+
+			rs = pst.executeQuery();
+			boolean userAdded = false;
+
+
+			if(!rs.next()){
+
+
+				if (validateInput()) {
+
+
+					try {
+
+
+						pst = conn.prepareStatement(sql);
+						pst.setString(1, userNameSignup.getText());
+						pst.setString(2, nomSignup.getText());
+						pst.setString(3, prenomSignup.getText());
+						pst.setString(4, passowrdSignup.getText());
+						pst.execute();
+						userAdded = true;
+
+
+						JOptionPane.showMessageDialog(null, "Compte créé avec succès");
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					} 
+					if( userAdded ){
+						//  JOptionPane.showMessageDialog(null, "Record added");
+					}else{
+						JOptionPane.showMessageDialog(null, "User already exists");
+
+					}
+				}}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 
 	private boolean validateInput(){
@@ -187,18 +212,16 @@ public class signController implements Initializable{
 				passowrdSignup.getText().isEmpty()
 				) {
 
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Attention");
-		alert.setHeaderText(null); 
-		alert.setContentText("Certains champs sont vides");
-		alert.showAndWait(); 
-	
-		return false; 
-	} 
-	
-	return true; 
-}
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Attention");
+			alert.setHeaderText(null); 
+			alert.setContentText("Certains champs sont vides");
+			alert.showAndWait(); 
+			return false; 
+		} 
 
+		return true; 
+	}
 
 
 
