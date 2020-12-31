@@ -558,12 +558,36 @@ public class PageDeConnectionController implements Initializable {
 	public void deleteEssai(){
 		conn = mysqlconnect.ConnectDb();
 		String sql = "delete from essai where idEssai = ?";
+		String sqlCE = "delete from campagnecontientessai where idEssai = ?";
+		String sqlEA = "delete from essaicontientalgorithme where idEssai = ?";
+		String sqlEI = "delete from essaicontientimage where idEssai = ?";
+		String sqlEM = "delete from essaicontientmesure where idEssai = ?";
 		try {
+			
+			pst = conn.prepareStatement(sqlCE);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlEA);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlEI);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlEM);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
+			
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
+			
+			idEssai = 0;
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableEssai();
+			refreshTableImageEssai();
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
