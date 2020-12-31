@@ -705,9 +705,17 @@ public class PageDeConnectionController implements Initializable {
 			String value1 = idUtilisateur.getText();
 			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
 			
-			String sql = "update utilisateur set idUtilisateur= '"+value1+" where idUtilisateur='"+value1+"' ";
-			pst= conn.prepareStatement(sql);
+			String sqlDelete = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+			pst = conn.prepareStatement(sqlDelete);
+			pst.setString(1, value1);
 			pst.execute();
+			
+			if (value2 == "Admin") {
+				String sqlAddAdmin = "INSERT INTO utilisateurestadmin (idUtilisateur) VALUES (?)";
+				pst = conn.prepareStatement(sqlAddAdmin);
+				pst.setString(1, value1);
+				pst.execute();
+			}
 			//JOptionPane.showMessageDialog(null, "Update");
 			refreshTableGestioadmin();
 		} catch (Exception e) {
