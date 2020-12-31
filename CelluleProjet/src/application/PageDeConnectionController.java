@@ -628,8 +628,13 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
-		String sql = "delete from utilisateur where idUtilisateur = ?";
+		String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+		String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
 		try {
+			pst = conn.prepareStatement(sqlDeleteAdmin);
+			pst.setString(1, idUtilisateur.getText());
+			pst.execute();
+			
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idUtilisateur.getText());
 			pst.execute();
