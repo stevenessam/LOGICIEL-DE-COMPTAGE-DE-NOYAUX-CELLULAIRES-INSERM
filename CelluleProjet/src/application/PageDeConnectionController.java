@@ -703,11 +703,11 @@ public class PageDeConnectionController implements Initializable {
 		try {
 			conn = mysqlconnect.ConnectDb();
 			String value1 = idUtilisateur.getText();
-			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
-
-			String sql = "update utilisateur set idUtilisateur= '"+value1+"',position= '"+value2+"' where idUtilisateur='"+value1+"' ";
-			pst= conn.prepareStatement(sql);
-			pst.execute();
+			//String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
+			
+			//String sql = "update utilisateur set idUtilisateur= '"+value1+" where idUtilisateur='"+value1+"' ";
+			//pst= conn.prepareStatement(sql);
+			//pst.execute();
 			//JOptionPane.showMessageDialog(null, "Update");
 			refreshTableGestioadmin();
 		} catch (Exception e) {

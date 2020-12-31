@@ -74,11 +74,20 @@ public class DB {
 	        Connection conn = ConnectDb();
 	        ObservableList<Utilisateur> list = FXCollections.observableArrayList();
 	        try {
-	            PreparedStatement ps = conn.prepareStatement("select * from utilisateur");
+	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM utilisateur");
 	            ResultSet rs = ps.executeQuery();
 	            
 	        	while(rs.next()) {
-	        	    list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom")))   ;  
+	        	    String position = "Chercheur";
+	        	    int idUser = rs.getInt("idUtilisateur");
+		            PreparedStatement psA = conn.prepareStatement("SELECT * FROM utilisateurestadmin WHERE idUtilisateur = ?");
+		            psA.setInt(1, idUser);
+		            ResultSet rsA = psA.executeQuery();
+		            if (rsA.next() != false) { // Utilisateur n'est pas admin
+		            	position = "Admin";
+		            }
+		            
+	        		list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom"), position));  
 	        		
 	    		}
 	        } catch (Exception e) {
