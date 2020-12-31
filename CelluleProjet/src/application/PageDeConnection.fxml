@@ -298,9 +298,10 @@
             <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomGestioadmin" prefWidth="240.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="273.0" styleClass="tablerow" text="Prenom" />
-                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="207.0" styleClass="tablerow" text="Position" />
+                  <TableColumn fx:id="tableUserNameGestioadmin" prefWidth="155.0" text="UserName" />
+                <TableColumn fx:id="tableNomGestioadmin" prefWidth="194.0" styleClass="tablerow" text="Nom" />
+                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="188.0" styleClass="tablerow" text="Prenom" />
+                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="183.0" styleClass="tablerow" text="Position" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />

@@ -600,6 +600,8 @@ public class PageDeConnectionController implements Initializable {
 	@FXML
 	private TableColumn<Utilisateur, Integer> tableIdGestionAdmin;
 	@FXML
+	private TableColumn<Utilisateur, String>tableUserNameGestioadmin;
+	@FXML
 	private TableColumn<Utilisateur, String>tableNomGestioadmin;
 	@FXML
 	private TableColumn<Utilisateur, String>tablePrenomGestioadmin;
@@ -671,6 +673,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 		tableIdGestionAdmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , Integer>("idUtilisateur"));
+		tableUserNameGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("login"));
 		tableNomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("nom"));
 		tablePrenomGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("prenom"));
 		tablePositionGestioadmin.setCellValueFactory(new PropertyValueFactory<Utilisateur , String>("position"));

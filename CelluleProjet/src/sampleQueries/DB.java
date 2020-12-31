@@ -87,7 +87,7 @@ public class DB {
 		            	position = "Admin";
 		            }
 		            
-	        		list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("nom") , rs.getString("prenom"), position));  
+	        		list.add(new Utilisateur(Integer.parseInt(rs.getString("idUtilisateur")),rs.getString("userName"),rs.getString("nom") , rs.getString("prenom"), position));  
 	        		
 	    		}
 	        } catch (Exception e) {

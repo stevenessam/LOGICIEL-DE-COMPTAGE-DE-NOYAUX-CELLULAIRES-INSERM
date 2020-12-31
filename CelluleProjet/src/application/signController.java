@@ -119,15 +119,13 @@ public class signController implements Initializable{
 	@FXML  
 	private void Login (ActionEvent event) throws Exception{  
 		conn = mysqlconnect.ConnectDb();
-		String sql = "Select * from utilisateur where userName = ? and nom = ? and prenom = ? and motDePasse = ? ";
+		String sql = "Select * from utilisateur where userName = ? and motDePasse = ? ";
 
 
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, userNameSignin.getText());
-			pst.setString(2, nomSignin.getText());
-			pst.setString(3, prenomSignin.getText());
-			pst.setString(4, passowrdSignin.getText());
+			pst.setString(2, passowrdSignin.getText());
 
 			rs = pst.executeQuery();
 
