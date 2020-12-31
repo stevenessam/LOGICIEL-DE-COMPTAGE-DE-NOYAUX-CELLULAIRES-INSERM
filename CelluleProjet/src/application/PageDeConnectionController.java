@@ -282,19 +282,31 @@ public class PageDeConnectionController implements Initializable {
 
 
 	
-	
+
+	@FXML
+	public void getSelectedCampagne (MouseEvent event){
+		index = tableCampagnes.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return;
+		}
+		idCampagnes.setText(tableIdCampagnes.getCellData(index).toString());
+		nomCampagnes.setText(tableNomCampagnes.getCellData(index).toString());
+		descriptionCampagnes.setText(tableDescriptionCampagnes.getCellData(index).toString());
+
+
+	}
 	
 	public void addCampagnes (){    
 		conn = mysqlconnect.ConnectDb();
 		
-		String sqlT = "Select * from campagne where idCampagne = ? and nom = ? and description = ? ";
+		String sqlT = "Select * from campagne where nom = ? and description = ? ";
 		String sql = "insert into campagne (nom,description)values(?,?)";
 		
 		try {
 			pst = conn.prepareStatement(sqlT);
-			pst.setString(1, idCampagnes.getText());
-			pst.setString(2, nomCampagnes.getText());
-			pst.setString(3, descriptionCampagnes.getText());
+			pst.setString(1, nomCampagnes.getText());
+			pst.setString(2, descriptionCampagnes.getText());
 			
 
 			rs = pst.executeQuery();
@@ -308,7 +320,7 @@ public class PageDeConnectionController implements Initializable {
 			pst.setString(2, descriptionCampagnes.getText());
 			pst.execute();
 
-			//JOptionPane.showMessageDialog(null, "campagne Add succes");
+		
 		
 	         recordAdded = true;
 	     	refreshTableCampagne();
@@ -329,55 +341,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 	
 	
-	
 
-	
-	/*
-// methode qui verifie pas si il existe	
-	
-	public void addCampagnes (){    
-		conn = mysqlconnect.ConnectDb();
-		String sql = "insert into campagne (nom,description)values(?,?)";
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, nomCampagnes.getText());
-			pst.setString(2, descriptionCampagnes.getText());
-			pst.execute();
-
-			//JOptionPane.showMessageDialog(null, "campagne Add succes");
-			refreshTableCampagne();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
-	}
-
-
-	*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-	@FXML
-	public void getSelectedCampagne (MouseEvent event){
-		index = tableCampagnes.getSelectionModel().getSelectedIndex();
-		if (index <= -1){
-
-			return;
-		}
-		idCampagnes.setText(tableIdCampagnes.getCellData(index).toString());
-		nomCampagnes.setText(tableNomCampagnes.getCellData(index).toString());
-		descriptionCampagnes.setText(tableDescriptionCampagnes.getCellData(index).toString());
-
-
-	}
 
 
 	public void editCampagne (){   
@@ -480,28 +444,6 @@ public class PageDeConnectionController implements Initializable {
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
 	}
-	
-	
-	/*
-	public int getSelectedEssaiID (MouseEvent event){
-		index = tableEssai.getSelectionModel().getSelectedIndex();
-		if (index <= -1){
-
-			return 0;
-		}
-		
-		idEssaiTextField.setText(tableIdEssai.getCellData(index).toString());
-		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
-		
-		String text = idEssaiTextField.getText();
-		int idEssai = Integer.parseInt(text);
-		System.out.println(idEssai);
-		return idEssai;
-	}
-	
-	
-	
-	*/
 	
 
 	public void addEssai (){    
@@ -809,64 +751,6 @@ public class PageDeConnectionController implements Initializable {
 		imageNom.setText(tableNomImage.getCellData(index).toString());
 		ImageImg.setText(tableImageImg.getCellData(index).toString());
 	}
-
-/*
-	public void  getSelectedImages() {
-		
-		tableImages.setOnMouseClicked(e ->{
-			
-			Image listI = tableImages.getItems().get(tableImages.getSelectionModel().getSelectedIndex());
-			idImageImg.setText(listI.getIdImage());
-			imageNom.setText(listI.getNom());
-			
-			retrieveImage(listI.getIdImage());
-			
-			
-			
-			
-		});
-
-	}
-*/
-
-/*
-
-	public void retrieveImage(int idImageImg) {
-
-		try {
-			pst = conn.prepareStatement( "select lienImage from image where idImage = ?");
-			pst.setInt(1,idImageImg);
-			rs = pst.executeQuery();
-			if(rs.next())
-			{ 
-				InputStream is = rs.getBinaryStream("lienImage");
-				OutputStream os = new FileOutputStream(new File("photo.jpg"));
-				byte[] contents = new byte[1024];
-				int size = 0; 
-				while( (size = is.read(contents)) != -1){ 
-					os.write(contents, 0 ,size); 
-				}	
-
-				imageV=new javafx.scene.image.Image("file:photo.jpg",imageView.getFitWidth(), imageView.getFitHeight(), true, true);
-				imageView.setImage(imageV); 
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-
-	}
-
-*/
 
 
 

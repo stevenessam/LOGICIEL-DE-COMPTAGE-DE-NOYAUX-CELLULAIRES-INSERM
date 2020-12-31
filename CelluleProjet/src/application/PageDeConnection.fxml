@@ -293,7 +293,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
