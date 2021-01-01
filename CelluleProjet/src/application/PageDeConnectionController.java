@@ -102,19 +102,37 @@ public class PageDeConnectionController implements Initializable {
 	//------------------------------Fin exit et minimiz-----------------------------------------
 
 
+@FXML
+Button gestionAdminButton;
 
 
 
 
 
 
-
-
-
+public void gestionAdminButtonSetVisible() {
+	
+	conn = mysqlconnect.ConnectDb();
+	
+	String sqlCheck = "SELECT * FROM utilisateurestadmin WHERE idUtilisateur = ?";
+	
+	try {
+		pst = conn.prepareStatement(sqlCheck);
+		pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+		rs = pst.executeQuery();
+		if (!rs.next()) { //L'utilisateur n'est pas admin
+			gestionAdminButton.setVisible(false);
+		} else {
+			gestionAdminButton.setVisible(true);
+		}
+	} catch (Exception e) {
+		JOptionPane.showMessageDialog(null, "Un problème est survenu.");
+	}
+	
+}
 
 
 	// Début du déplacement entre les pages
-
 
 
 	/**
@@ -131,7 +149,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-
+		gestionAdminButtonSetVisible();
 
 	}
 
@@ -149,6 +167,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
 
 	}
 
@@ -165,6 +184,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
 
 	}
 
@@ -181,6 +201,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
 
 	}
 
@@ -197,6 +218,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(true);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
 
 
 	}
@@ -216,6 +238,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(true);
 		pageResultatEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
 
 
 	}
@@ -234,6 +257,7 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(true);
+		gestionAdminButtonSetVisible();
 
 
 		//Fin du déplacement entre les pages
@@ -344,12 +368,23 @@ public class PageDeConnectionController implements Initializable {
 	
 	public void addCampagneEssai (){    
 		conn = mysqlconnect.ConnectDb();
+		
+		String sqlCheck = "SELECT * FROM campagnecontientessai WHERE idEssai = ? AND idCampagne = ?";
+		
 		String sql = "INSERT INTO campagnecontientessai (idCampagne, idEssai) VALUES (?, ?)";
 		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, idCampagnes.getText());
-			pst.setString(2, idEssaiTextField.getText());
-			pst.execute();
+			pst = conn.prepareStatement(sqlCheck);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.setString(2, idCampagnes.getText());
+			rs = pst.executeQuery();
+			if (!rs.next()) { // Essai déjà associé à la campagne
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, idCampagnes.getText());
+				pst.setString(2, idEssaiTextField.getText());
+				pst.execute();
+			}
+			
+
 			refreshTableCampagneEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
@@ -369,7 +404,7 @@ public class PageDeConnectionController implements Initializable {
 			String value1 = idCampagnes.getText();
 			String value2 = nomCampagnes.getText();
 			String value3 = descriptionCampagnes.getText();
-			String sql = "update campagne set idCampagne= '"+value1+"',nom= '"+value2+"',description= '"+
+			String sql = "update campagne set nom= '"+value2+"',description= '"+
 					value3+"' where idCampagne='"+value1+"' ";
 			pst= conn.prepareStatement(sql);
 			pst.execute();
@@ -384,8 +419,8 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteCampagne(){
 		conn = mysqlconnect.ConnectDb();
-		String sql = "delete from campagne where idCampagne = ?";
-		String sqlCCE = "delete from campagnecontientessai where idCampagne = ?";
+		String sql = "DELETE FROM campagne WHERE idCampagne = ?";
+		String sqlCCE = "DELETE FROM campagnecontientessai WHERE idCampagne = ?";
 
 		try {
 			
@@ -502,7 +537,7 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "insert into essai (description,date)values(?,NOW())";
+		String sql = "INSERT INTO essai (description,date)values(?,NOW())";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, descriptionEssais.getText());
@@ -518,12 +553,21 @@ public class PageDeConnectionController implements Initializable {
 	
 	public void addEssaiImage (){    
 		conn = mysqlconnect.ConnectDb();
+		
+		String sqlCheck = "SELECT * FROM essaicontientimage WHERE idImage = ? AND idEssai = ?";
 		String sql = "INSERT INTO essaicontientimage (idImage, idEssai) VALUES (?, ?)";
 		try {
-			pst = conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sqlCheck);
 			pst.setString(1, idImageImg.getText());
 			pst.setString(2, idEssaiTextField.getText());
-			pst.execute();
+			rs = pst.executeQuery();
+			
+			if (!rs.next()) { // Image déjà associée à l'essai
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, idImageImg.getText());
+				pst.setString(2, idEssaiTextField.getText());
+				pst.execute();
+			}
 			refreshTableImageEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
@@ -602,7 +646,7 @@ public class PageDeConnectionController implements Initializable {
 		tableDescriptionEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
 		tableDateEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("date"));
 		listEssai= mysqlconnect.getDataEssai();
-
+		
 		tableEssai.setItems(listEssai);
 	}
 	
@@ -1028,7 +1072,7 @@ public class PageDeConnectionController implements Initializable {
 	public void logoutCompte(Event evee) {
 
 		try {		
-
+			MainCelluleInterface.setIdUserGlobal(-1);
 			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
 			Scene scene = new Scene(parent);
 			Stage stage = (Stage)((Node) evee.getSource()).getScene().getWindow();

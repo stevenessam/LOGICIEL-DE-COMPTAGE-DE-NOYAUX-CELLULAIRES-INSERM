@@ -16,9 +16,11 @@ import javafx.scene.input.MouseEvent;
  *  
  * @author ST3VOS
  */
+
+
 public class MainCelluleInterface extends Application {
 	
-
+public static int idUserGlobal = -1;
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -45,4 +47,13 @@ public class MainCelluleInterface extends Application {
 		launch(args);
 		
 	}
+	
+	public static int getIdUserGlobal() {
+		return idUserGlobal;
+	}
+	
+	public static void setIdUserGlobal(int id) {
+		idUserGlobal = id;
+	}
+	
 }

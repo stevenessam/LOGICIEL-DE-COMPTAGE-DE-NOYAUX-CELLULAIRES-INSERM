@@ -119,7 +119,7 @@ public class signController implements Initializable{
 	@FXML  
 	private void Login (ActionEvent event) throws Exception{  
 		conn = mysqlconnect.ConnectDb();
-		String sql = "Select * from utilisateur where userName = ? and motDePasse = ? ";
+		String sql = "SELECT * FROM utilisateur WHERE userName = ? AND motDePasse = ? ";
 
 
 		try {
@@ -131,7 +131,7 @@ public class signController implements Initializable{
 
 			if(rs.next()){ 
 				JOptionPane.showMessageDialog(null, "Bienvenue sur Cellule Count");
-
+				MainCelluleInterface.setIdUserGlobal(rs.getInt("idUtilisateur"));
 				Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
 				Scene scene = new Scene(parent);
 				Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -143,7 +143,7 @@ public class signController implements Initializable{
 
 
 			}else
-				JOptionPane.showMessageDialog(null, "Invalide Username Ou Password");
+				JOptionPane.showMessageDialog(null, "Combinaison Login / Mot de passe incorrecte");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Certains champs sont vides");
 		}
@@ -152,8 +152,8 @@ public class signController implements Initializable{
 
 	public void signUp(ActionEvent event){    
 		conn = mysqlconnect.ConnectDb();
-		String sqlT = "Select * from utilisateur where userName = ?";
-		String sql = "insert into utilisateur (userName,nom,prenom,motDePasse) values (?,?,?,?)";
+		String sqlT = "SELECT * FROM utilisateur WHERE userName = ?";
+		String sql = "INSERT INTO utilisateur (userName,nom,prenom,motDePasse) VALUES (?,?,?,?)";
 
 
 
