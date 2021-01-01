@@ -1111,7 +1111,7 @@ public class PageDeConnectionController implements Initializable {
 		/*-----------------------------------------------*/
 		
 		fileChooser=new FileChooser();
-		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images","*.JPG"));
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG-PNG","*.JPG","*.PNG"));
 
 
 

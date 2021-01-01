@@ -50,9 +50,9 @@
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
             <TextField fx:id="idCampagnes" layoutX="1054.0" layoutY="87.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
-            <Button fx:id="creeCampagnes" layoutX="777.0" layoutY="304.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Camagnes" textFill="WHITE" />
-            <Button fx:id="modifierCampagnes" layoutX="777.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Camapagnes" textFill="#ff8800" />
-            <Button fx:id="supprimerCampagnes" layoutX="777.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Camagnes" textFill="#ff2e2e" />
+            <Button fx:id="creeCampagnes" layoutX="777.0" layoutY="304.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Campagne" textFill="WHITE" />
+            <Button fx:id="modifierCampagnes" layoutX="777.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Campagne" textFill="#ff8800" />
+            <Button fx:id="supprimerCampagnes" layoutX="777.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Campagne" textFill="#ff2e2e" />
             <Button fx:id="resultatCampagnes" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageResultatCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
             <Label layoutX="804.0" layoutY="81.0" text="Nom" textFill="WHITE">
                <font>
@@ -316,8 +316,8 @@
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="modifierPositionGestioadmin" layoutX="776.0" layoutY="231.0" mnemonicParsing="false" onAction="#editUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Position" />
-            <Button fx:id="supprimerUtilisateurGestioadmin" layoutX="776.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Utilisateur" />
+            <Button fx:id="modifierPositionGestioadmin" layoutX="776.0" layoutY="240.0" mnemonicParsing="false" onAction="#editUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Position" />
+            <Button fx:id="supprimerUtilisateurGestioadmin" layoutX="776.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteUtilisateur" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Utilisateur" />
             <Label layoutX="800.0" layoutY="109.0" text="Position" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -330,6 +330,8 @@
                </font>
             </Label>
             <TextField fx:id="idUtilisateur" layoutX="1095.0" layoutY="655.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
+            <Line endX="212.0" layoutX="875.0" layoutY="220.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="875.0" layoutY="318.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane layoutX="1150.0" prefHeight="47.0" prefWidth="200.0">
