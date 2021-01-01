@@ -726,6 +726,12 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
+		
+		if (Integer.parseInt(idUtilisateur.getText()) == MainCelluleInterface.getIdUserGlobal()) {
+			JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer votre propre compte.");
+			return;
+		}
+		
 		String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
 		String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
 		try {
@@ -752,6 +758,11 @@ public class PageDeConnectionController implements Initializable {
 			String value1 = idUtilisateur.getText();
 			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
 
+			if (Integer.parseInt(value1) == MainCelluleInterface.getIdUserGlobal()) {
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas changer votre propre statut.");
+				return;
+			}
+			
 			String sqlDelete = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
 			pst = conn.prepareStatement(sqlDelete);
 			pst.setString(1, value1);
