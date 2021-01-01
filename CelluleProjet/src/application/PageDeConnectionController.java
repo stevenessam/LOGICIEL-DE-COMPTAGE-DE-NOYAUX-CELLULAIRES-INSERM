@@ -102,34 +102,34 @@ public class PageDeConnectionController implements Initializable {
 	//------------------------------Fin exit et minimiz-----------------------------------------
 
 
-@FXML
-Button gestionAdminButton;
+	@FXML
+	Button gestionAdminButton;
 
 
 
 
 
 
-public void gestionAdminButtonSetVisible() {
-	
-	conn = mysqlconnect.ConnectDb();
-	
-	String sqlCheck = "SELECT * FROM utilisateurestadmin WHERE idUtilisateur = ?";
-	
-	try {
-		pst = conn.prepareStatement(sqlCheck);
-		pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
-		rs = pst.executeQuery();
-		if (!rs.next()) { //L'utilisateur n'est pas admin
-			gestionAdminButton.setVisible(false);
-		} else {
-			gestionAdminButton.setVisible(true);
+	public void gestionAdminButtonSetVisible() {
+
+		conn = mysqlconnect.ConnectDb();
+
+		String sqlCheck = "SELECT * FROM utilisateurestadmin WHERE idUtilisateur = ?";
+
+		try {
+			pst = conn.prepareStatement(sqlCheck);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			rs = pst.executeQuery();
+			if (!rs.next()) { //L'utilisateur n'est pas admin
+				gestionAdminButton.setVisible(false);
+			} else {
+				gestionAdminButton.setVisible(true);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Un problème est survenu.");
 		}
-	} catch (Exception e) {
-		JOptionPane.showMessageDialog(null, "Un problème est survenu.");
+
 	}
-	
-}
 
 
 	// Début du déplacement entre les pages
@@ -305,7 +305,7 @@ public void gestionAdminButtonSetVisible() {
 	PreparedStatement pst = null;
 
 	int idCampagne = 0;
-	
+
 
 	@FXML
 	public void getSelectedCampagne (MouseEvent event){
@@ -321,56 +321,56 @@ public void gestionAdminButtonSetVisible() {
 		idCampagne = Integer.parseInt(textC);
 		refreshTableCampagneEssai();
 	}
-	
+
 	public void addCampagnes (){    
 		conn = mysqlconnect.ConnectDb();
-		
+
 		String sqlT = "Select * from campagne where nom = ? and description = ? ";
 		String sql = "insert into campagne (nom,description)values(?,?)";
-		
+
 		try {
 			pst = conn.prepareStatement(sqlT);
 			pst.setString(1, nomCampagnes.getText());
 			pst.setString(2, descriptionCampagnes.getText());
-			
+
 
 			rs = pst.executeQuery();
-			 boolean recordAdded = false;
-	
-		if(!rs.next()){
-		
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, nomCampagnes.getText());
-			pst.setString(2, descriptionCampagnes.getText());
-			pst.execute();
+			boolean recordAdded = false;
 
-		
-		
-	         recordAdded = true;
-	     	refreshTableCampagne();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
-		 if( recordAdded ){
-		    //  JOptionPane.showMessageDialog(null, "Record added");
-		    }else{
-		       JOptionPane.showMessageDialog(null, "Record already exists");
-		    }
-		}}
+			if(!rs.next()){
+
+				try {
+					pst = conn.prepareStatement(sql);
+					pst.setString(1, nomCampagnes.getText());
+					pst.setString(2, descriptionCampagnes.getText());
+					pst.execute();
+
+
+
+					recordAdded = true;
+					refreshTableCampagne();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+				if( recordAdded ){
+					//  JOptionPane.showMessageDialog(null, "Record added");
+				}else{
+					JOptionPane.showMessageDialog(null, "Record already exists");
+				}
+			}}
 		catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	public void addCampagneEssai (){    
 		conn = mysqlconnect.ConnectDb();
-		
+
 		String sqlCheck = "SELECT * FROM campagnecontientessai WHERE idEssai = ? AND idCampagne = ?";
-		
+
 		String sql = "INSERT INTO campagnecontientessai (idCampagne, idEssai) VALUES (?, ?)";
 		try {
 			pst = conn.prepareStatement(sqlCheck);
@@ -383,7 +383,7 @@ public void gestionAdminButtonSetVisible() {
 				pst.setString(2, idEssaiTextField.getText());
 				pst.execute();
 			}
-			
+
 
 			refreshTableCampagneEssai();
 		} catch (Exception e) {
@@ -391,10 +391,10 @@ public void gestionAdminButtonSetVisible() {
 		}
 	}
 
-	
-	
-	
-	
+
+
+
+
 
 
 
@@ -423,16 +423,16 @@ public void gestionAdminButtonSetVisible() {
 		String sqlCCE = "DELETE FROM campagnecontientessai WHERE idCampagne = ?";
 
 		try {
-			
-			
+
+
 			pst = conn.prepareStatement(sqlCCE);
 			pst.setString(1, idCampagnes.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idCampagnes.getText());
 			pst.execute();
-		
+
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableCampagne();
 			refreshTableCampagneEssai();
@@ -445,7 +445,7 @@ public void gestionAdminButtonSetVisible() {
 
 
 
-	
+
 
 	public void refreshTableCampagne(){
 
@@ -466,21 +466,21 @@ public void gestionAdminButtonSetVisible() {
 	private TableView<Essai> tableCampagneEssai;
 	@FXML
 	private TableColumn<Essai, Integer>tableEssaiIdC;
-	
-	
+
+
 	@FXML
 	private TableColumn<Essai, String>tableCampagneEssaiDescriptionC;
 
 	ObservableList<Essai> listCampagneEssai;
-	
-	
-	
+
+
+
 	public void refreshTableCampagneEssai(){
-		
+
 		tableEssaiIdC.setCellValueFactory(new PropertyValueFactory<Essai ,Integer>("idEssai"));
 
 		tableCampagneEssaiDescriptionC.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
-		
+
 		listCampagneEssai= mysqlconnect.getDataCampagneEssai(idCampagne);
 
 		tableCampagneEssai.setItems(listCampagneEssai);
@@ -492,11 +492,11 @@ public void gestionAdminButtonSetVisible() {
 	/*-------------------------------------------Page Essai-----------------------------------------------------------*/
 
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	@FXML
 	TextField idEssaiTextField;
 	@FXML
@@ -526,14 +526,14 @@ public void gestionAdminButtonSetVisible() {
 
 			return;
 		}
-		
+
 		idEssaiTextField.setText(tableIdEssai.getCellData(index).toString());
 		descriptionEssais.setText(tableDescriptionEssais.getCellData(index).toString());
 		String text = idEssaiTextField.getText();
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
 	}
-	
+
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
@@ -541,7 +541,7 @@ public void gestionAdminButtonSetVisible() {
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, descriptionEssais.getText());
-			
+
 			pst.execute();
 			refreshTableEssai();
 		} catch (Exception e) {
@@ -550,10 +550,10 @@ public void gestionAdminButtonSetVisible() {
 	}
 
 
-	
+
 	public void addEssaiImage (){    
 		conn = mysqlconnect.ConnectDb();
-		
+
 		String sqlCheck = "SELECT * FROM essaicontientimage WHERE idImage = ? AND idEssai = ?";
 		String sql = "INSERT INTO essaicontientimage (idImage, idEssai) VALUES (?, ?)";
 		try {
@@ -561,7 +561,7 @@ public void gestionAdminButtonSetVisible() {
 			pst.setString(1, idImageImg.getText());
 			pst.setString(2, idEssaiTextField.getText());
 			rs = pst.executeQuery();
-			
+
 			if (!rs.next()) { // Image déjà associée à l'essai
 				pst = conn.prepareStatement(sql);
 				pst.setString(1, idImageImg.getText());
@@ -603,32 +603,32 @@ public void gestionAdminButtonSetVisible() {
 		String sqlEI = "delete from essaicontientimage where idEssai = ?";
 		String sqlEM = "delete from essaicontientmesure where idEssai = ?";
 		try {
-			
+
 			pst = conn.prepareStatement(sqlCE);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sqlEA);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sqlEI);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sqlEM);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			idEssai = 0;
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableEssai();
 			refreshTableImageEssai();
-			
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
@@ -646,45 +646,45 @@ public void gestionAdminButtonSetVisible() {
 		tableDescriptionEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
 		tableDateEssais.setCellValueFactory(new PropertyValueFactory<Essai ,String>("date"));
 		listEssai= mysqlconnect.getDataEssai();
-		
+
 		tableEssai.setItems(listEssai);
 	}
-	
-	
-	
-	
+
+
+
+
 
 
 	@FXML
 	private TableView<Image> tableImageE;
 	@FXML
 	private TableColumn<Image, Integer>tableImageEId;
-	
-	
+
+
 	@FXML
 	private TableColumn<Image, String>tableImageEssaiIMG;
 
 	ObservableList<Image> listImageEssai;
-	
-	
-	
+
+
+
 	public void refreshTableImageEssai(){
-		
+
 		tableImageEId.setCellValueFactory(new PropertyValueFactory<Image ,Integer>("idImage"));
 
 		tableImageEssaiIMG.setCellValueFactory(new PropertyValueFactory<Image ,String>("nom"));
-		
+
 		listImageEssai= mysqlconnect.getDataImagesEssai(idEssai);
 
 		tableImageE.setItems(listImageEssai);
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/*---------------------------------Fin-----Page Essai-----------------------------------------------------------*/
-	
+
 	/*------------------------------------Page Gestion Admin-----------------------------------------------------------*/
 
 
@@ -732,7 +732,7 @@ public void gestionAdminButtonSetVisible() {
 			pst = conn.prepareStatement(sqlDeleteAdmin);
 			pst.setString(1, idUtilisateur.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idUtilisateur.getText());
 			pst.execute();
@@ -751,12 +751,12 @@ public void gestionAdminButtonSetVisible() {
 			conn = mysqlconnect.ConnectDb();
 			String value1 = idUtilisateur.getText();
 			String value2 = comboBoxPosition.getSelectionModel().getSelectedItem().toString();
-			
+
 			String sqlDelete = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
 			pst = conn.prepareStatement(sqlDelete);
 			pst.setString(1, value1);
 			pst.execute();
-			
+
 			if (value2 == "Admin") {
 				String sqlAddAdmin = "INSERT INTO utilisateurestadmin (idUtilisateur) VALUES (?)";
 				pst = conn.prepareStatement(sqlAddAdmin);
@@ -818,8 +818,8 @@ public void gestionAdminButtonSetVisible() {
 	private javafx.scene.image.Image imageV;
 
 
-//	@FXML
-//	private ImageView imageView;
+	//	@FXML
+	//	private ImageView imageView;
 
 	ObservableList<Image> listImages;
 
@@ -873,11 +873,11 @@ public void gestionAdminButtonSetVisible() {
 				String s = currentRelativePath.toAbsolutePath().toString();
 				String path = s + "\\Images\\"+originalFile.getName();
 				File copiedFile = new File(path);
-				
+
 				try {
 					Files.copy(originalFile.toPath(), copiedFile.toPath());
 				} catch (Exception e) {
-					
+
 				}
 				//Requête SQL
 				pst = conn.prepareStatement(sql);
@@ -911,12 +911,12 @@ public void gestionAdminButtonSetVisible() {
 		}*/
 
 
-//		if (file != null) {
-//			//	System.out.println(""+file.getAbsolutePath());
-//			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
-//			imageView.setImage(imageV);
-//			imageView.setPreserveRatio(true);
-//		}
+		//		if (file != null) {
+		//			//	System.out.println(""+file.getAbsolutePath());
+		//			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
+		//			imageView.setImage(imageV);
+		//			imageView.setPreserveRatio(true);
+		//		}
 
 	}
 
@@ -939,36 +939,36 @@ public void gestionAdminButtonSetVisible() {
 
 
 	/*---------------------------------Fin-----Page Ajouter Image-----------------------------------------------------------*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/*-----------------------------------Page Compte-----------------------------------------------------------*/
 
@@ -978,57 +978,57 @@ public void gestionAdminButtonSetVisible() {
 	TextField modifierNomCompte;
 	@FXML
 	TextField modifierPasswordCompte;
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*---------------------------------Fin-----Page Compte-----------------------------------------------------------*/
 	/* ---------------------------logout button-------------------------------*/
 
@@ -1106,9 +1106,10 @@ public void gestionAdminButtonSetVisible() {
 		refreshTableImageEssai();
 		refreshTableGestioadmin();
 		refreshTableImage();
-		// Activation des boutons,textfields,etc...
-
-
+		gestionAdminButtonSetVisible();
+		
+		/*-----------------------------------------------*/
+		
 		fileChooser=new FileChooser();
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images","*.JPG"));
 

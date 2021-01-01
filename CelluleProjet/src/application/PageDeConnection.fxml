@@ -25,7 +25,8 @@
             <Button fx:id="essaisPageButton" layoutY="130.0" mnemonicParsing="false" onAction="#pageEssais" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Essais" />
             <Button fx:id="ajouterImagePageButton" layoutY="261.0" mnemonicParsing="false" onAction="#pageAjouterImage" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Ajouter Image" />
             <Button fx:id="monComptePageButton" layoutY="391.0" mnemonicParsing="false" onAction="#pageMonCompte" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Mon Compte" />
-            <Button fx:id="gestionAdminButton" layoutY="521.0" mnemonicParsing="false" onAction="#pageGestionAdmin" prefHeight="130.0" prefWidth="230.0" styleClass="mainbutton" text="Gestion Admin" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="123.0" layoutX="-1.0" layoutY="530.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgb(0,100,170);" width="230.0" />
+            <Button fx:id="gestionAdminButton" layoutY="521.0" mnemonicParsing="false" onAction="#pageGestionAdmin" prefHeight="132.0" prefWidth="230.0" styleClass="mainbutton" text="Gestion Admin" />
          </children>
       </Pane>
       <Pane layoutX="-13.0" layoutY="-3.0" prefHeight="47.0" prefWidth="1350.0" style="-fx-background-color: rgb(0,100,170);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
