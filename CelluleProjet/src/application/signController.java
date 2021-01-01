@@ -130,7 +130,7 @@ public class signController implements Initializable{
 			rs = pst.executeQuery();
 
 			if(rs.next()){ 
-				JOptionPane.showMessageDialog(null, "Username And Password is Corect");
+				JOptionPane.showMessageDialog(null, "Bienvenue sur Cellule Count");
 
 				Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
 				Scene scene = new Scene(parent);

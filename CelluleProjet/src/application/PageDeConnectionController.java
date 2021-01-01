@@ -352,7 +352,7 @@ public class PageDeConnectionController implements Initializable {
 			pst.execute();
 			refreshTableCampagneEssai();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
+			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
 		}
 	}
 
@@ -526,7 +526,7 @@ public class PageDeConnectionController implements Initializable {
 			pst.execute();
 			refreshTableImageEssai();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
+			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
 		}
 	}
 
