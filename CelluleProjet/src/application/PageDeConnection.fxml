@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -46,22 +47,22 @@
                 <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="227.0" styleClass="tablerow" text="Description" />
               </columns>
             </TableView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
             <TextField fx:id="idCampagnes" layoutX="1054.0" layoutY="87.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
-            <Button fx:id="creeCampagnes" layoutX="777.0" layoutY="404.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Camagnes" textFill="WHITE" />
-            <Button fx:id="modifierCampagnes" layoutX="777.0" layoutY="466.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Camapagnes" textFill="#ff8800" />
-            <Button fx:id="supprimerCampagnes" layoutX="777.0" layoutY="527.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Camagnes" textFill="#ff2e2e" />
-            <Button fx:id="resultatCampagnes" layoutX="777.0" layoutY="628.0" mnemonicParsing="false" onAction="#pageResultatCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
-            <Label layoutX="804.0" layoutY="118.0" text="Nom" textFill="WHITE">
+            <Button fx:id="creeCampagnes" layoutX="777.0" layoutY="304.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Camagnes" textFill="WHITE" />
+            <Button fx:id="modifierCampagnes" layoutX="777.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Camapagnes" textFill="#ff8800" />
+            <Button fx:id="supprimerCampagnes" layoutX="777.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Camagnes" textFill="#ff2e2e" />
+            <Button fx:id="resultatCampagnes" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageResultatCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
+            <Label layoutX="804.0" layoutY="81.0" text="Nom" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextField fx:id="nomCampagnes" layoutX="801.0" layoutY="139.0" />
-            <Label layoutX="801.0" layoutY="183.0" text="Description" textFill="WHITE">
+            <TextField fx:id="nomCampagnes" layoutX="801.0" layoutY="102.0" prefHeight="31.0" prefWidth="262.0" />
+            <Label layoutX="801.0" layoutY="146.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="204.0" prefHeight="139.0" prefWidth="262.0" />
+            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="167.0" prefHeight="107.0" prefWidth="262.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Campagnes" textFill="WHITE">
                <font>
@@ -74,7 +75,10 @@
                 <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="249.0" text="Essai - Description" />
               </columns>
             </TableView>
-            <Button fx:id="addEssaiCampagne" layoutX="869.0" layoutY="360.0" mnemonicParsing="false" onAction="#addCampagneEssai" prefHeight="31.0" prefWidth="135.0" text="Ajouter Essai" />
+            <Button fx:id="addEssaiCampagne" layoutX="777.0" layoutY="527.0" mnemonicParsing="false" onAction="#addCampagneEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Ajouter Essai" />
+            <Line endX="212.0" layoutX="876.0" layoutY="513.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="292.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatCampagnes" layoutX="230.0" layoutY="9.0" prefHeight="691.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -125,26 +129,22 @@
                   <TableColumn fx:id="tableDateEssais" prefWidth="196.0" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="creeEssais" layoutX="777.0" layoutY="399.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
-            <Button fx:id="modifierEssais" layoutX="777.0" layoutY="460.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
-            <Button fx:id="supprimerEssais" layoutX="777.0" layoutY="520.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
-            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="628.0" mnemonicParsing="false" onAction="#pageResultatEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
-            <Label layoutX="799.0" layoutY="116.0" text="Algorithme Correspondante" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Button fx:id="creeEssais" layoutX="777.0" layoutY="310.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
+            <Button fx:id="modifierEssais" layoutX="777.0" layoutY="379.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
+            <Button fx:id="supprimerEssais" layoutX="777.0" layoutY="447.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
+            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageResultatEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Label layoutX="799.0" layoutY="85.0" text="Algorithme Correspondante" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <ComboBox fx:id="algoEssais" layoutX="799.0" layoutY="137.0" prefHeight="31.0" prefWidth="262.0" />
-            <Label layoutX="803.0" layoutY="179.0" text="Attacher Nouvelle Image" textFill="WHITE">
+            <ComboBox fx:id="algoEssais" layoutX="799.0" layoutY="106.0" prefHeight="31.0" prefWidth="262.0" />
+            <Button fx:id="importImageEssais" layoutX="777.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Ajouter Image" />
+            <Label layoutX="801.0" layoutY="148.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <Button fx:id="importImageEssais" layoutX="803.0" layoutY="200.0" mnemonicParsing="false" onAction="#addEssaiImage" text="Import Image" />
-            <Label layoutX="803.0" layoutY="241.0" text="Description" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Label>
-            <TextArea fx:id="descriptionEssais" layoutX="803.0" layoutY="262.0" prefHeight="71.0" prefWidth="262.0" />
+            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="169.0" prefHeight="107.0" prefWidth="262.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Essais" textFill="WHITE">
                <font>
@@ -158,6 +158,9 @@
                 <TableColumn fx:id="tableImageEssaiIMG" prefWidth="284.0" text="Images" />
               </columns>
             </TableView>
+            <Line endX="212.0" layoutX="874.0" layoutY="295.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
