@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +24,12 @@ import javax.swing.JOptionPane;
 import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 import com.sun.javafx.logging.Logger;
 
+import crud.Algorithme;
 import crud.Campagne;
 import crud.Essai;
 import crud.Image;
 import crud.Utilisateur;
+import ij.plugin.Options;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,6 +68,8 @@ import sampleQueries.DB.mysqlconnect;
  * 
  * @author ST3VOS
  */
+
+
 public class PageDeConnectionController implements Initializable {
 
 
@@ -680,6 +685,56 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	
+	
+	@FXML
+	private TextField idAlgoTF;
+	@FXML
+	private TableView<Algorithme> tableAlgo;
+	@FXML
+	private TableColumn<Algorithme, Integer>tableIdAlgo;
+	@FXML
+	private TableColumn<Algorithme, String>tableNomAlgo;
+
+	ObservableList<Algorithme> listAlgo;
+
+	
+	
+	@FXML
+	public void getSelectedAlgo(MouseEvent event){
+		index = tableAlgo.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
+
+			return;
+		}
+		idAlgoTF.setText(tableIdAlgo.getCellData(index).toString());
+
+	}
+	
+	
+	public void refreshTableAlgo(){
+
+		tableIdAlgo.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
+
+		tableNomAlgo.setCellValueFactory(new PropertyValueFactory<Algorithme ,String>("nom"));
+
+		listAlgo= mysqlconnect.getDataAlgo();
+
+		tableAlgo.setItems(listAlgo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 
 
 
@@ -1105,7 +1160,7 @@ public class PageDeConnectionController implements Initializable {
 
 	/*------------------------------------Fin logout button----------------------------------------------*/	
 
-
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -1114,6 +1169,7 @@ public class PageDeConnectionController implements Initializable {
 		refreshTableCampagne();
 		refreshTableCampagneEssai();
 		refreshTableEssai();
+		refreshTableAlgo();
 		refreshTableImageEssai();
 		refreshTableGestioadmin();
 		refreshTableImage();
@@ -1137,13 +1193,8 @@ public class PageDeConnectionController implements Initializable {
 
 		// Fin de l'activation des boutons,les textfields,etc...
 
-
-
-
-
-
-
-
+		
+	
 	}
 
 }

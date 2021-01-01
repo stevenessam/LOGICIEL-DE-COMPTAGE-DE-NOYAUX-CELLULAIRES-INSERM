@@ -19,13 +19,22 @@
 }
 
 
-.tablerow{
+*/
+
+
+
+.tablerow .cell{
 	
-	    -fx-background-color: rgb(0,100,170);
-	        -fx-text-background-color: white;
+-fx-wrap-text: true;
 	    
 
-}*/
+}
+
+
+
+
+
+
 
 	.rectangleshape{
 		-fx-arc-width:30;

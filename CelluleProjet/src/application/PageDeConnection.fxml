@@ -63,7 +63,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="167.0" prefHeight="107.0" prefWidth="262.0" />
+            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="167.0" prefHeight="107.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Campagnes" textFill="WHITE">
                <font>
@@ -139,13 +139,12 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <ComboBox fx:id="algoEssais" layoutX="799.0" layoutY="106.0" prefHeight="31.0" prefWidth="262.0" />
             <Button fx:id="importImageEssais" layoutX="777.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Ajouter Image" />
-            <Label layoutX="801.0" layoutY="148.0" text="Description" textFill="WHITE">
+            <Label layoutX="801.0" layoutY="182.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="169.0" prefHeight="107.0" prefWidth="262.0" />
+            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="206.0" prefHeight="80.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Essais" textFill="WHITE">
                <font>
@@ -162,6 +161,13 @@
             <Line endX="212.0" layoutX="874.0" layoutY="295.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <TableView fx:id="tableAlgo" layoutX="797.0" layoutY="106.0" onMouseClicked="#getSelectedAlgo" prefHeight="74.0" prefWidth="262.0">
+              <columns>
+                <TableColumn fx:id="tableIdAlgo" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="tableNomAlgo" prefWidth="261.0" resizable="false" text="Algorithme" />
+              </columns>
+            </TableView>
+            <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">

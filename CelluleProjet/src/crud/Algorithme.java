@@ -16,6 +16,19 @@ public class Algorithme {
 	}
 	
 	
+	public Algorithme(String nom) {
+		super();
+		this.nom = nom;
+	}
+
+
+	public Algorithme(int idAlgorithme, String nom) {
+		super();
+		this.idAlgorithme = idAlgorithme;
+		this.nom = nom;
+	}
+
+
 	public int getIdAlgorithme() {
 		return idAlgorithme;
 	}

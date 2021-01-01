@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
+
+import crud.Algorithme;
 import crud.Campagne;
 import crud.Essai;
 import crud.Image;
@@ -66,7 +68,21 @@ public class DB {
 	        return list;
 	    }
 
-	    
+	    public static ObservableList<Algorithme> getDataAlgo(){
+	        Connection conn = ConnectDb();
+	        ObservableList<Algorithme> list = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("select * from algorithme");
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    list.add(new Algorithme(Integer.parseInt(rs.getString("idAlgorithme")) , rs.getString("nom")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return list;
+	    }
 	    
 	    
 	    
@@ -147,6 +163,11 @@ public class DB {
 	        }
 	        return listC;
 	    }
+	    
+	    
+	    
+
+	    
 	    
 	}
 	

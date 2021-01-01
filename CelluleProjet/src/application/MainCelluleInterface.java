@@ -7,6 +7,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -25,11 +26,10 @@ public static int idUserGlobal = -1;
 	public void start(Stage stage) {
 		try {
 			
-			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
+			Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
 			
 			Scene scene = new Scene(parent);
 			stage.setTitle("Cellule Count");
-	
 			stage.setScene(scene);
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
@@ -42,7 +42,7 @@ public static int idUserGlobal = -1;
 	}
 	
 	
-	// Test commit beta 3
+	
 	public static void main(String[] args) {
 		launch(args);
 		
