@@ -280,7 +280,7 @@ public class PageDeConnectionController implements Initializable {
 	ResultSet rs = null;
 	PreparedStatement pst = null;
 
-
+	int idCampagne = 0;
 	
 
 	@FXML
@@ -293,8 +293,9 @@ public class PageDeConnectionController implements Initializable {
 		idCampagnes.setText(tableIdCampagnes.getCellData(index).toString());
 		nomCampagnes.setText(tableNomCampagnes.getCellData(index).toString());
 		descriptionCampagnes.setText(tableDescriptionCampagnes.getCellData(index).toString());
-
-
+		String textC = idCampagnes.getText();
+		idCampagne = Integer.parseInt(textC);
+		refreshTableCampagneEssai();
 	}
 	
 	public void addCampagnes (){    
@@ -341,6 +342,24 @@ public class PageDeConnectionController implements Initializable {
 	}
 	
 	
+	public void addCampagneEssai (){    
+		conn = mysqlconnect.ConnectDb();
+		String sql = "INSERT INTO campagnecontientessai (idCampagne, idEssai) VALUES (?, ?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, idCampagnes.getText());
+			pst.setString(2, idEssaiTextField.getText());
+			pst.execute();
+			refreshTableCampagneEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+	
+	
+	
+	
 
 
 
@@ -366,12 +385,22 @@ public class PageDeConnectionController implements Initializable {
 	public void deleteCampagne(){
 		conn = mysqlconnect.ConnectDb();
 		String sql = "delete from campagne where idCampagne = ?";
+		String sqlCCE = "delete from campagnecontientessai where idCampagne = ?";
+
 		try {
+			
+			
+			pst = conn.prepareStatement(sqlCCE);
+			pst.setString(1, idCampagnes.getText());
+			pst.execute();
+			
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idCampagnes.getText());
 			pst.execute();
+		
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableCampagne();
+			refreshTableCampagneEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
@@ -380,6 +409,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 
+
+	
 
 	public void refreshTableCampagne(){
 
@@ -396,6 +427,29 @@ public class PageDeConnectionController implements Initializable {
 
 
 
+	@FXML
+	private TableView<Essai> tableCampagneEssai;
+	@FXML
+	private TableColumn<Essai, Integer>tableEssaiIdC;
+	
+	
+	@FXML
+	private TableColumn<Essai, String>tableCampagneEssaiDescriptionC;
+
+	ObservableList<Essai> listCampagneEssai;
+	
+	
+	
+	public void refreshTableCampagneEssai(){
+		
+		tableEssaiIdC.setCellValueFactory(new PropertyValueFactory<Essai ,Integer>("idEssai"));
+
+		tableCampagneEssaiDescriptionC.setCellValueFactory(new PropertyValueFactory<Essai ,String>("description"));
+		
+		listCampagneEssai= mysqlconnect.getDataCampagneEssai(idCampagne);
+
+		tableCampagneEssai.setItems(listCampagneEssai);
+	}
 
 
 	/*--------------------------------Fin------Page Campagnes-----------------------------------------------------------*/
@@ -1003,6 +1057,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 		refreshTableCampagne();
+		refreshTableCampagneEssai();
 		refreshTableEssai();
 		refreshTableImageEssai();
 		refreshTableGestioadmin();

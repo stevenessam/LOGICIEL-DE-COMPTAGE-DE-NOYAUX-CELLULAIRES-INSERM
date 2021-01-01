@@ -10,6 +10,17 @@ public class Essai {
 	}
 	
 	
+	
+	
+	public Essai(int idEssai, String description) {
+		super();
+		this.idEssai = idEssai;
+		this.description = description;
+	}
+
+
+
+
 	public Essai(int idEssai, String date, String description) {
 		super();
 		this.idEssai = idEssai;

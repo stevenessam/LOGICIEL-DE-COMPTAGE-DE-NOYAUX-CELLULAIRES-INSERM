@@ -112,6 +112,8 @@ public class DB {
 	        }
 	        return list;
 	    }
+	    
+	    
 	    public static ObservableList<Image> getDataImagesEssai(int idEssai ){
 	        Connection conn = ConnectDb();
 	        ObservableList<Image> listT = FXCollections.observableArrayList();
@@ -127,6 +129,23 @@ public class DB {
 	        } catch (Exception e) {
 	        }
 	        return listT;
+	    }
+		
+	    public static ObservableList<Essai> getDataCampagneEssai(int idCampagne ){
+	        Connection conn = ConnectDb();
+	        ObservableList<Essai> listC = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM essai E INNER JOIN campagnecontientessai CCI ON E.idEssai = CCI.idEssai INNER JOIN campagne C ON CCI.idCampagne = C.idCampagne WHERE C.idCampagne = ? ");
+	            ps.setInt(1, idCampagne);
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    listC.add(new Essai(Integer.parseInt(rs.getString("idEssai")),rs.getString("description")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return listC;
 	    }
 	    
 	}

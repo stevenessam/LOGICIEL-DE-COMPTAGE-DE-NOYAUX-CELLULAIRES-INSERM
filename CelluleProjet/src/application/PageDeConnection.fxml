@@ -39,11 +39,11 @@
       </Pane>
       <Pane fx:id="pageCampagnes" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
+            <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="472.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomCampagnes" prefWidth="349.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="371.0" styleClass="tablerow" text="Description" />
+                <TableColumn fx:id="tableNomCampagnes" prefWidth="241.0" styleClass="tablerow" text="Nom" />
+                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="227.0" styleClass="tablerow" text="Description" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="522.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -68,6 +68,13 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <TableView fx:id="tableCampagneEssai" layoutX="502.0" layoutY="72.0" prefHeight="610.0" prefWidth="250.0">
+              <columns>
+                <TableColumn fx:id="tableEssaiIdC" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+                <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="249.0" text="Essai - Description" />
+              </columns>
+            </TableView>
+            <Button fx:id="addEssaiCampagne" layoutX="869.0" layoutY="360.0" mnemonicParsing="false" onAction="#addCampagneEssai" prefHeight="31.0" prefWidth="135.0" text="Ajouter Essai" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatCampagnes" layoutX="230.0" layoutY="9.0" prefHeight="691.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
