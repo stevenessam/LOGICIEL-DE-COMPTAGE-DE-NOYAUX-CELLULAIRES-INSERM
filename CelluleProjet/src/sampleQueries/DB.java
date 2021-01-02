@@ -85,6 +85,23 @@ public class DB {
 	    }
 	    
 	    
+	    public static ObservableList<Algorithme> getDataAlgoEssai(int idAlgorithme ){
+	        Connection conn = ConnectDb();
+	        ObservableList<Algorithme> listT = FXCollections.observableArrayList();
+	        try {
+	            PreparedStatement ps = conn.prepareStatement("select * from algorithme A INNER JOIN essaicontientalgorithme ECA ON A.idAlgorithme = ECA.idAlgorithme INNER JOIN essai E ON ECA.idEssai = E.idEssai WHERE E.idEssai = ?");
+	            ps.setInt(1, idAlgorithme);
+	            ResultSet rs = ps.executeQuery();
+	            
+	        	while(rs.next()) {
+	        	    listT.add(new Algorithme(Integer.parseInt(rs.getString("idAlgorithme")),rs.getString("nom")))   ;  
+	        		
+	    		}
+	        } catch (Exception e) {
+	        }
+	        return listT;
+	    }
+	    
 	    
 	    public static ObservableList<Utilisateur> getDataUtilisateur(){
 	        Connection conn = ConnectDb();

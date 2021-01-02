@@ -522,7 +522,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	int idEssai = 0;
-
+	int idAlgorithme = 0;
+	
 
 	@FXML
 	public void getSelectedEssai (MouseEvent event){
@@ -537,6 +538,12 @@ public class PageDeConnectionController implements Initializable {
 		String text = idEssaiTextField.getText();
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
+		
+		
+		
+		String textA = idEssaiTextField.getText();
+		idAlgorithme = Integer.parseInt(textA);
+		refreshTableAlgoEssai();
 	}
 
 
@@ -579,6 +586,29 @@ public class PageDeConnectionController implements Initializable {
 		}
 	}
 
+	public void addEssaiAlgo (){    
+		conn = mysqlconnect.ConnectDb();
+
+		String sqlCheck = "SELECT * FROM essaicontientalgorithme WHERE idAlgorithme = ? AND idEssai = ?";
+		String sql = "INSERT INTO essaicontientalgorithme (idAlgorithme, idEssai) VALUES (?, ?)";
+		try {
+			pst = conn.prepareStatement(sqlCheck);
+			pst.setString(1, idAlgoTF.getText());
+			pst.setString(2, idEssaiTextField.getText());
+			rs = pst.executeQuery();
+
+			if (!rs.next()) { // Image déjà associée à l'essai
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, idAlgoTF.getText());
+				pst.setString(2, idEssaiTextField.getText());
+				pst.execute();
+			}
+			refreshTableImageEssai();
+			refreshTableAlgoEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
+		}
+	}
 
 
 
@@ -726,13 +756,33 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	
+
+	@FXML
+	private TableView<Algorithme> tableAlgoEssai;
+	@FXML
+	private TableColumn<Algorithme, Integer>tableIdAlgoEssai;
+	@FXML
+	private TableColumn<Algorithme, String>tableNomAlgoEssai;
+
+	ObservableList<Algorithme> listAlgoEssai;
+
 	
 	
 	
 	
 	
-	
-	
+	public void refreshTableAlgoEssai(){
+
+		tableIdAlgoEssai.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
+
+		tableNomAlgoEssai.setCellValueFactory(new PropertyValueFactory<Algorithme ,String>("nom"));
+
+		listAlgoEssai= mysqlconnect.getDataAlgoEssai(idAlgorithme);
+
+		tableAlgoEssai.setItems(listAlgoEssai);
+	}
+
+
 
 	
 
@@ -1170,6 +1220,7 @@ public class PageDeConnectionController implements Initializable {
 		refreshTableCampagneEssai();
 		refreshTableEssai();
 		refreshTableAlgo();
+		refreshTableAlgoEssai();
 		refreshTableImageEssai();
 		refreshTableGestioadmin();
 		refreshTableImage();

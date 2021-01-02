@@ -123,7 +123,7 @@
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="444.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="430.0" prefWidth="444.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
                   <TableColumn fx:id="tableDescriptionEssais" prefWidth="247.0" styleClass="tablerow" text="Description" />
@@ -131,20 +131,16 @@
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="creeEssais" layoutX="777.0" layoutY="310.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
-            <Button fx:id="modifierEssais" layoutX="777.0" layoutY="379.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
-            <Button fx:id="supprimerEssais" layoutX="777.0" layoutY="447.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
+            <Button fx:id="creeEssais" layoutX="777.0" layoutY="320.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
+            <Button fx:id="modifierEssais" layoutX="777.0" layoutY="385.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
+            <Button fx:id="supprimerEssais" layoutX="777.0" layoutY="450.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
             <Button fx:id="resultatEssais" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageResultatEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
-            <Label layoutX="799.0" layoutY="85.0" text="Algorithme Correspondante" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Label>
-            <Button fx:id="importImageEssais" layoutX="777.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Ajouter Image" />
+            <Button fx:id="importImageEssais" layoutX="779.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
             <Label layoutX="801.0" layoutY="182.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="206.0" prefHeight="80.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
+            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="206.0" prefHeight="93.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Essais" textFill="WHITE">
                <font>
@@ -158,16 +154,23 @@
                 <TableColumn fx:id="tableImageEssaiIMG" prefWidth="284.0" text="Images" />
               </columns>
             </TableView>
-            <Line endX="212.0" layoutX="874.0" layoutY="295.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="874.0" layoutY="309.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <TableView fx:id="tableAlgo" layoutX="797.0" layoutY="106.0" onMouseClicked="#getSelectedAlgo" prefHeight="74.0" prefWidth="262.0">
+            <TableView fx:id="tableAlgo" layoutX="22.0" layoutY="510.0" onMouseClicked="#getSelectedAlgo" prefHeight="172.0" prefWidth="444.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgo" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgo" prefWidth="261.0" resizable="false" text="Algorithme" />
+                <TableColumn fx:id="tableNomAlgo" prefWidth="443.0" resizable="false" text="Algorithme" />
               </columns>
             </TableView>
             <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
+            <TableView fx:id="tableAlgoEssai" layoutX="801.0" layoutY="86.0" prefHeight="93.0" prefWidth="262.0">
+              <columns>
+                <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="261.0" text="Algorithme Correspondante" />
+              </columns>
+            </TableView>
+            <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
