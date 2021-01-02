@@ -22,6 +22,12 @@ public class Utilisateur {
 
 
 
+	public Utilisateur(String nom) {
+		super();
+		this.nom = nom;
+	}
+
+
 	public Utilisateur(int idUtilisateur, String nom, String prenom, String login, String position) {
 		super();
 		this.idUtilisateur = idUtilisateur;

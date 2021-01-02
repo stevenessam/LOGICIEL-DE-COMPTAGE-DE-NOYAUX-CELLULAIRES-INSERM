@@ -254,15 +254,20 @@
             <TextField fx:id="ImageImg" layoutX="46.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
          </children>
       </Pane>
-      <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="53.0" layoutY="177.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
-            <Label layoutX="85.0" layoutY="209.0" text="Prenom :" textFill="WHITE">
+            <Label layoutX="85.0" layoutY="200.0" text="Username :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="248.0" text="Nom :" textFill="WHITE">
+            <Label layoutX="85.0" layoutY="240.0" text="Prenom :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="287.0" text="Nom :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -285,12 +290,12 @@
             <TextField fx:id="modifierPrenomCompte" layoutX="321.0" layoutY="409.0" prefHeight="31.0" prefWidth="250.0" />
             <TextField fx:id="modifierNomCompte" layoutX="321.0" layoutY="447.0" prefHeight="31.0" prefWidth="250.0" />
             <PasswordField fx:id="modifierPasswordCompte" layoutX="321.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" />
-            <Button fx:id="validerCompte" layoutX="911.0" layoutY="607.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="159.0" styleClass="buttons" text="Valider">
+            <Button fx:id="validerCompte" layoutX="911.0" layoutY="607.0" mnemonicParsing="false" onAction="#editCompte" prefHeight="54.0" prefWidth="159.0" styleClass="buttons" text="Valider">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="supprimerCompte" layoutX="639.0" layoutY="607.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="250.0" styleClass="buttons" text="Supprimer Mon Compte">
+            <Button fx:id="supprimerCompte" layoutX="639.0" layoutY="607.0" mnemonicParsing="false" onAction="#deleteCompte" prefHeight="54.0" prefWidth="250.0" styleClass="buttons" text="Supprimer Mon Compte">
                <font>
                   <Font size="20.0" />
                </font>
@@ -311,6 +316,9 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <TextField fx:id="showPrenom" editable="false" layoutX="196.0" layoutY="245.0" prefHeight="31.0" prefWidth="250.0" />
+            <TextField fx:id="showNom" editable="false" layoutX="196.0" layoutY="287.0" prefHeight="31.0" prefWidth="250.0" />
+            <TextField fx:id="showUsername" editable="false" layoutX="196.0" layoutY="200.0" prefHeight="31.0" prefWidth="250.0" />
          </children>
       </Pane>
       <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

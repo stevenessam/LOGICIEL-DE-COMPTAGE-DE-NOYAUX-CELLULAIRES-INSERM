@@ -16,6 +16,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -44,6 +45,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -1107,19 +1109,61 @@ public class PageDeConnectionController implements Initializable {
 	/*-----------------------------------Page Compte-----------------------------------------------------------*/
 
 	@FXML
+	TextField showUsername;
+	@FXML
+	TextField showPrenom;
+	@FXML
+	TextField showNom;
+	
+	
+	@FXML
 	TextField modifierPrenomCompte;
 	@FXML
 	TextField modifierNomCompte;
 	@FXML
-	TextField modifierPasswordCompte;
+	PasswordField modifierPasswordCompte;
+	
 
 
 
 
+	public void editCompte(){   
+		try {
+			conn = mysqlconnect.ConnectDb();
+			String value1 = modifierPrenomCompte.getText();
+			String value2 = modifierNomCompte.getText();
+			String value3 = modifierPasswordCompte.getText();
+			
+			String sql = "update utilisateur set prenom= '"+value1+"',nom= '"+value2+"',motDePasse= '"+
+                    value3+"' where idUtilisateur='"+value1+"' ";
+			pst= conn.prepareStatement(sql);
+			pst.execute();
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
 
 
-
-
+	
+	
+    public void deleteCompte(){
+    conn = mysqlconnect.ConnectDb();
+    String sql = "...........";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, idUtilisateur.getText());
+            pst.execute();
+            
+         
+    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    
+    }
+	
 
 
 
@@ -1262,6 +1306,35 @@ public class PageDeConnectionController implements Initializable {
 
 		// Fin de l'activation des boutons,les textfields,etc...
 
+		
+		
+		 try {
+		        // Connection to the database
+		        Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost/projetl2","root","");
+
+		        // Statement
+		        Statement myStmt = myConn.createStatement();
+		        // SQL query
+		        ResultSet myRs = myStmt.executeQuery("SELECT * FROM utilisateur");
+		        // Result processing
+		        while (myRs.next()) {
+		 
+		        	showUsername.setText(myRs.getString("userName"));
+		        	showPrenom.setText(myRs.getString("prenom"));
+		        	showNom.setText(myRs.getString("nom"));
+		        	
+		        	
+		            modifierPrenomCompte.setText(myRs.getString("prenom"));
+		            modifierNomCompte.setText(myRs.getString("nom"));
+		            modifierPasswordCompte.setText(myRs.getString("motDePasse"));
+		        } 
+
+
+
+		    } catch (Exception exc) {
+		        exc.printStackTrace();
+		    } 
+		
 		
 	
 	}
