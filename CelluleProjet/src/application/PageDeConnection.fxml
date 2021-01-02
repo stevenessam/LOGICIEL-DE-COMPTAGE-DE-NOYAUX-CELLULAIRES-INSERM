@@ -41,7 +41,7 @@
       </Pane>
       <Pane fx:id="pageCampagnes" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableCampagnes" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="472.0" styleClass="tablesstyle">
+            <TableView fx:id="tableCampagnes" layoutX="14.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="472.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                 <TableColumn fx:id="tableNomCampagnes" prefWidth="241.0" styleClass="tablerow" text="Nom" />
@@ -73,13 +73,14 @@
             <TableView fx:id="tableCampagneEssai" layoutX="502.0" layoutY="72.0" prefHeight="610.0" prefWidth="250.0">
               <columns>
                 <TableColumn fx:id="tableEssaiIdC" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="249.0" text="Essai - Description" />
+                <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="247.0" text="Essai - Description" />
               </columns>
             </TableView>
             <Button fx:id="addEssaiCampagne" layoutX="777.0" layoutY="527.0" mnemonicParsing="false" onAction="#addCampagneEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Ajouter Essai" />
-            <Line endX="212.0" layoutX="876.0" layoutY="513.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="292.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="513.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="292.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="280.0" endY="-207.4267120361328" layoutX="214.0" layoutY="484.0" startX="280.0" startY="-7.81433629989624" stroke="#0064aa" strokeWidth="3.0" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatCampagnes" layoutX="230.0" layoutY="9.0" prefHeight="691.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -123,11 +124,11 @@
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssai" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="430.0" prefWidth="444.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="393.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
                   <TableColumn fx:id="tableDescriptionEssais" prefWidth="247.0" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="196.0" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="203.0" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -148,29 +149,31 @@
                </font>
             </Label>
             <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableImageE" layoutX="472.0" layoutY="72.0" prefHeight="610.0" prefWidth="285.0">
+            <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="610.0" prefWidth="277.0">
               <columns>
                   <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="284.0" text="Images" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="274.0" text="Images" />
               </columns>
             </TableView>
-            <Line endX="212.0" layoutX="874.0" layoutY="309.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <TableView fx:id="tableAlgo" layoutX="22.0" layoutY="510.0" onMouseClicked="#getSelectedAlgo" prefHeight="172.0" prefWidth="444.0">
+            <Line endX="212.0" layoutX="874.0" layoutY="309.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <TableView fx:id="tableAlgo" layoutX="12.0" layoutY="486.0" onMouseClicked="#getSelectedAlgo" prefHeight="196.0" prefWidth="453.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgo" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgo" prefWidth="443.0" resizable="false" text="Algorithme" />
+                <TableColumn fx:id="tableNomAlgo" prefWidth="450.0" resizable="false" text="Algorithme" />
               </columns>
             </TableView>
             <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
             <TableView fx:id="tableAlgoEssai" layoutX="801.0" layoutY="86.0" prefHeight="93.0" prefWidth="262.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="261.0" text="Algorithme Correspondante" />
+                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="259.0" text="Algorithme Correspondante" />
               </columns>
             </TableView>
             <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
+            <Line endX="278.0" layoutX="185.0" layoutY="476.0" startX="-169.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="280.0" endY="-207.4267120361328" layoutX="193.0" layoutY="486.0" startX="280.0" startY="-7.81433629989624" stroke="#0064aa" strokeWidth="3.0" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
@@ -254,7 +257,7 @@
             <TextField fx:id="ImageImg" layoutX="46.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
          </children>
       </Pane>
-      <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="53.0" layoutY="177.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
             <Label layoutX="85.0" layoutY="200.0" text="Username :" textFill="WHITE">
@@ -295,7 +298,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="supprimerCompte" layoutX="639.0" layoutY="607.0" mnemonicParsing="false" onAction="#deleteCompte" prefHeight="54.0" prefWidth="250.0" styleClass="buttons" text="Supprimer Mon Compte">
+            <Button fx:id="supprimerCompte" layoutX="639.0" layoutY="607.0" mnemonicParsing="false" onAction="#deleteCompte" onMouseClicked="#logoutCompte" prefHeight="54.0" prefWidth="250.0" styleClass="buttons" text="Supprimer Mon Compte">
                <font>
                   <Font size="20.0" />
                </font>
@@ -347,8 +350,8 @@
                </font>
             </Label>
             <TextField fx:id="idUtilisateur" layoutX="1095.0" layoutY="655.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
-            <Line endX="212.0" layoutX="875.0" layoutY="220.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="875.0" layoutY="318.0" startX="-101.0" stroke="WHITE" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="875.0" layoutY="220.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="875.0" layoutY="318.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
       <Pane layoutX="1150.0" prefHeight="47.0" prefWidth="200.0">
