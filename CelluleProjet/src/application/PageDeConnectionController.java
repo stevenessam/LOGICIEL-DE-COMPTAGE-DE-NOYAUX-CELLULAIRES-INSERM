@@ -1216,40 +1216,44 @@ public class PageDeConnectionController implements Initializable {
         	pst = conn.prepareStatement(sqlUserEssai);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             rs = pst.executeQuery();
-            
+            JOptionPane.showMessageDialog(null, "1");
             
             while (rs.next()) {
             	PreparedStatement pst2;
             	pst2 = conn.prepareStatement(sqlDeleteAlgo);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
-
+                JOptionPane.showMessageDialog(null, "2");
                 
             	pst2 = conn.prepareStatement(sqlDeleteCampagne);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                JOptionPane.showMessageDialog(null, "3");
 
                 
             	pst2 = conn.prepareStatement(sqlDeleteImage);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                JOptionPane.showMessageDialog(null, "4");
 
                 
             	pst2 = conn.prepareStatement(sqlFetchMesures);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 ResultSet rsListMesures = pst2.executeQuery();
-
+                JOptionPane.showMessageDialog(null, "5");
                 
                 while (rsListMesures.next()) {
                 	PreparedStatement pst3;
                 	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+                    JOptionPane.showMessageDialog(null, "6");
 
                     
                     pst3 = conn.prepareStatement(sqlFetchMesureAmas);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     ResultSet rsListAmas = pst3.executeQuery();
+                    JOptionPane.showMessageDialog(null, "7");
 
                     
                     while (rsListAmas.next()) {
@@ -1257,36 +1261,44 @@ public class PageDeConnectionController implements Initializable {
                     	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
                         pst4.setInt(1, rsListAmas.getInt("idAmas"));
                         pst4.execute();
+                        JOptionPane.showMessageDialog(null, "8");
                         
                     	pst4 = conn.prepareStatement(sqlDeleteAmas);
                         pst4.setInt(1, rsListAmas.getInt("idAmas"));
                         pst4.execute();
+                        JOptionPane.showMessageDialog(null, "9");
                     }
                     
                     pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+                    JOptionPane.showMessageDialog(null, "10");
                     
                     pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+                    JOptionPane.showMessageDialog(null, "11");
 
                     pst3 = conn.prepareStatement(sqlDeleteMesure);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+                    JOptionPane.showMessageDialog(null, "12");
                 }
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                JOptionPane.showMessageDialog(null, "13");
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                JOptionPane.showMessageDialog(null, "14");
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssai);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                JOptionPane.showMessageDialog(null, "15");
                 
             }
             
@@ -1295,14 +1307,17 @@ public class PageDeConnectionController implements Initializable {
         	pst = conn.prepareStatement(sqlDeleteAdmin);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
-        	
+            JOptionPane.showMessageDialog(null, "16");
+            
         	pst = conn.prepareStatement(sqlDeleteUserEssai);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
+            JOptionPane.showMessageDialog(null, "17");
         	
         	pst = conn.prepareStatement(sql);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
+            JOptionPane.showMessageDialog(null, "18");
     
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
