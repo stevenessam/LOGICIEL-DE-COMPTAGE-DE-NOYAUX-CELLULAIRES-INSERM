@@ -549,12 +549,26 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "INSERT INTO essai (description,date)values(?,NOW())";
+		String sql = "INSERT INTO essai (description,date) VALUES (?,NOW())";
+		String sqlFetch = "SELECT idEssai FROM essai ORDER BY idEssai DESC LIMIT 1";
+		String sqlLink = "INSERT INTO utilisateureffectueessai (idUtilisateur, idEssai) VALUES (?, ?)";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, descriptionEssais.getText());
-
 			pst.execute();
+			
+			pst = conn.prepareStatement(sqlFetch);
+			rs = pst.executeQuery();
+			int idEss = 0;
+			while (rs.next()) {
+				idEss = rs.getInt("idEssai");
+			}
+			
+			pst = conn.prepareStatement(sqlLink);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			pst.setInt(2, idEss);
+			pst.execute();
+			
 			refreshTableEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -589,24 +603,23 @@ public class PageDeConnectionController implements Initializable {
 	public void addEssaiAlgo (){    
 		conn = mysqlconnect.ConnectDb();
 
-		String sqlCheck = "SELECT * FROM essaicontientalgorithme WHERE idAlgorithme = ? AND idEssai = ?";
+		String sqlDelete = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
 		String sql = "INSERT INTO essaicontientalgorithme (idAlgorithme, idEssai) VALUES (?, ?)";
 		try {
-			pst = conn.prepareStatement(sqlCheck);
+			pst = conn.prepareStatement(sqlDelete);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
+			
+			pst = conn.prepareStatement(sql);
 			pst.setString(1, idAlgoTF.getText());
 			pst.setString(2, idEssaiTextField.getText());
-			rs = pst.executeQuery();
-
-			if (!rs.next()) { // Image déjà associée à l'essai
-				pst = conn.prepareStatement(sql);
-				pst.setString(1, idAlgoTF.getText());
-				pst.setString(2, idEssaiTextField.getText());
-				pst.execute();
-			}
+			pst.execute();
+			
 			refreshTableImageEssai();
 			refreshTableAlgoEssai();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
+			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné.");
+			//e.printStackTrace();
 		}
 	}
 
@@ -618,7 +631,7 @@ public class PageDeConnectionController implements Initializable {
 			String value1 = idEssaiTextField.getText();
 			String value2 = descriptionEssais.getText();
 
-			String sql = "update essai set idEssai= '"+value1+"',description= '"+value2+"' where idEssai='"+value1+"' ";
+			String sql = "UPDATE essai SET description= '"+value2+"' WHERE idEssai='"+value1+"' ";
 			pst= conn.prepareStatement(sql);
 			pst.execute();
 			//JOptionPane.showMessageDialog(null, "Update");
@@ -632,11 +645,12 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteEssai(){
 		conn = mysqlconnect.ConnectDb();
-		String sql = "delete from essai where idEssai = ?";
-		String sqlCE = "delete from campagnecontientessai where idEssai = ?";
-		String sqlEA = "delete from essaicontientalgorithme where idEssai = ?";
-		String sqlEI = "delete from essaicontientimage where idEssai = ?";
-		String sqlEM = "delete from essaicontientmesure where idEssai = ?";
+		String sql = "DELETE FROM essai WHERE idEssai = ?";
+		String sqlCE = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
+		String sqlEA = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
+		String sqlEI = "DELETE FROM essaicontientimage WHERE idEssai = ?";
+		String sqlEM = "DELETE FROM essaicontientmesure WHERE idEssai = ?";
+		String sqlUE = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
 		try {
 
 			pst = conn.prepareStatement(sqlCE);
@@ -654,11 +668,15 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sqlEM);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
+			
+			pst = conn.prepareStatement(sqlUE);
+			pst.setString(1, idEssaiTextField.getText());
+			pst.execute();
 
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-
+			
 			idEssai = 0;
 			//	JOptionPane.showMessageDialog(null, "Delete");
 			refreshTableEssai();

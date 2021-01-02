@@ -26,7 +26,7 @@ public static int idUserGlobal = -1;
 	public void start(Stage stage) {
 		try {
 			
-			Parent parent =FXMLLoader.load(getClass().getResource("PageDeConnection.fxml"));
+			Parent parent =FXMLLoader.load(getClass().getResource("Sign.fxml"));
 			
 			Scene scene = new Scene(parent);
 			stage.setTitle("Cellule Count");
