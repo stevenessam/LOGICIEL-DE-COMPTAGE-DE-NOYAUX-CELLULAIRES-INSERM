@@ -1130,15 +1130,54 @@ public class PageDeConnectionController implements Initializable {
 	public void editCompte(){   
 		try {
 			conn = mysqlconnect.ConnectDb();
+			
+			String sqlIni = "UPDATE utilisateur SET ";
+			
 			String value1 = modifierPrenomCompte.getText();
 			String value2 = modifierNomCompte.getText();
 			String value3 = modifierPasswordCompte.getText();
 			
-			String sql = "update utilisateur set prenom= '"+value1+"',nom= '"+value2+"',motDePasse= '"+
-                    value3+"' where idUtilisateur='"+value1+"' ";
-			pst= conn.prepareStatement(sql);
+			if (value1.equals("") && value2.equals("") && value3.equals("")) {
+				JOptionPane.showMessageDialog(null, "Aucune information n'a été renseignée.");
+				return;
+			}
+			
+			if (!value1.equals("")) {
+				sqlIni += "prenom = '"+value1+"'";
+			}
+			
+			if (!value2.equals("")) {
+				if (!value1.equals("")) {
+					sqlIni += ", ";
+				}
+				sqlIni += "nom = '" + value2 + "'";
+			}
+			
+			if (!value3.equals("")) {
+				if (!value1.equals("") || !value2.equals("")) {
+					sqlIni += ", ";
+				}
+				sqlIni += "motDePasse = '"+value3+"' ";
+			}
+			
+			
+			String sqlComplete = sqlIni + "WHERE idUtilisateur = ?";
+			pst= conn.prepareStatement(sqlComplete);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
 			pst.execute();
 			
+			String sqlUpdateShow = "SELECT * FROM utilisateur WHERE idUtilisateur = ?";
+			pst= conn.prepareStatement(sqlUpdateShow);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+	        	showUsername.setText(rs.getString("userName"));
+	        	showPrenom.setText(rs.getString("prenom"));
+	        	showNom.setText(rs.getString("nom"));
+			}
+			
+			JOptionPane.showMessageDialog(null, "Compte modifié avec succès !");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
@@ -1150,13 +1189,120 @@ public class PageDeConnectionController implements Initializable {
 	
     public void deleteCompte(){
     conn = mysqlconnect.ConnectDb();
-    String sql = "...........";
+    String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
+    String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+    String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
+    String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
+    
+    String sqlUserEssai = "SELECT idEssai FROM essai INNER JOIN utilisateureffectueessai UEE ON UEE.idUtilisateur = ?";
+    String sqlFetchMesures = "SELECT * FROM mesure INNER JOIN essaicontientmesure ECM ON ECM.idEssai = ?";
+    String sqlFetchMesureAmas = "SELECT * FROM amas INNER JOIN amasappartientmesure AAM ON AAM.idMesure = ?";
+    
+    String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
+    String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
+    String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
+    String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
+    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure AAM WHERE AAM.idAmas = ?";
+    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure ECM WHERE ECM.idmesure = ?";
+    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure ECM WHERE ECM.idEssai = ?";
+    
+    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
+    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
+    String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
+    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure AAM WHERE AAM.idMesure = ?";
+    
         try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, idUtilisateur.getText());
-            pst.execute();
             
-         
+        	pst = conn.prepareStatement(sqlUserEssai);
+            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+            rs = pst.executeQuery();
+            
+            
+            while (rs.next()) {
+            	PreparedStatement pst2;
+            	pst2 = conn.prepareStatement(sqlDeleteAlgo);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+
+                
+            	pst2 = conn.prepareStatement(sqlDeleteCampagne);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+
+                
+            	pst2 = conn.prepareStatement(sqlDeleteImage);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+
+                
+            	pst2 = conn.prepareStatement(sqlFetchMesures);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                ResultSet rsListMesures = pst2.executeQuery();
+
+                
+                while (rsListMesures.next()) {
+                	PreparedStatement pst3;
+                	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
+                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                    pst3.execute();
+
+                    
+                    pst3 = conn.prepareStatement(sqlFetchMesureAmas);
+                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                    ResultSet rsListAmas = pst3.executeQuery();
+
+                    
+                    while (rsListAmas.next()) {
+                    	PreparedStatement pst4;
+                    	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
+                        pst4.setInt(1, rsListAmas.getInt("idAmas"));
+                        pst4.execute();
+                        
+                    	pst4 = conn.prepareStatement(sqlDeleteAmas);
+                        pst4.setInt(1, rsListAmas.getInt("idAmas"));
+                        pst4.execute();
+                    }
+                    
+                    pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
+                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                    pst3.execute();
+                    
+                    pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
+                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                    pst3.execute();
+
+                    pst3 = conn.prepareStatement(sqlDeleteMesure);
+                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                    pst3.execute();
+                }
+                
+            	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+                
+            	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+                
+            	pst2 = conn.prepareStatement(sqlDeleteEssai);
+                pst2.setInt(1, rs.getInt("idEssai"));
+                pst2.execute();
+                
+            }
+            
+            
+            
+        	pst = conn.prepareStatement(sqlDeleteAdmin);
+            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+            pst.execute();
+        	
+        	pst = conn.prepareStatement(sqlDeleteUserEssai);
+            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+            pst.execute();
+        	
+        	pst = conn.prepareStatement(sql);
+            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+            pst.execute();
     
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -1267,6 +1413,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	}
+	
+	
 
 
 
@@ -1310,12 +1458,12 @@ public class PageDeConnectionController implements Initializable {
 		
 		 try {
 		        // Connection to the database
-		        Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost/projetl2","root","");
+			 	conn = mysqlconnect.ConnectDb();
 
 		        // Statement
-		        Statement myStmt = myConn.createStatement();
+		        Statement myStmt = conn.createStatement();
 		        // SQL query
-		        ResultSet myRs = myStmt.executeQuery("SELECT * FROM utilisateur");
+		        ResultSet myRs = myStmt.executeQuery("SELECT * FROM utilisateur WHERE idUtilisateur = "+MainCelluleInterface.getIdUserGlobal());
 		        // Result processing
 		        while (myRs.next()) {
 		 
@@ -1323,10 +1471,11 @@ public class PageDeConnectionController implements Initializable {
 		        	showPrenom.setText(myRs.getString("prenom"));
 		        	showNom.setText(myRs.getString("nom"));
 		        	
-		        	
+		        	/*
 		            modifierPrenomCompte.setText(myRs.getString("prenom"));
 		            modifierNomCompte.setText(myRs.getString("nom"));
 		            modifierPasswordCompte.setText(myRs.getString("motDePasse"));
+		            */
 		        } 
 
 

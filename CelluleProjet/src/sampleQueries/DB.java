@@ -22,7 +22,7 @@ public class DB {
 	    Connection conn = null;
 	    public static Connection ConnectDb(){
 	        try {
-	            Class.forName("com.mysql.jdbc.Driver");
+	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/projetl2","root","");
 	           //JOptionPane.showMessageDialog(null, "Connection Established");
 	            return conn;
