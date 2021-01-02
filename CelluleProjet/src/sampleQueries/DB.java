@@ -68,14 +68,13 @@ public class DB {
 	        return list;
 	    }
 
-	    public static ObservableList<Algorithme> getDataAlgo(int idAlgorithme){
+	    public static ObservableList<Algorithme> getDataAlgo(){
 	        Connection conn = ConnectDb();
 	        ObservableList<Algorithme> list = FXCollections.observableArrayList();
 	        try {
-	        	
-	            PreparedStatement ps = conn.prepareStatement("select * from algorithme A INNER JOIN essaicontientalgorithme ECA ON A.idAlgorithme = ECA.idAlgorithme INNER JOIN essai E ON ECA.idEssai = E.idEssai WHERE E.idEssai = ?");
+	            PreparedStatement ps = conn.prepareStatement("select * from algorithme");
 	            ResultSet rs = ps.executeQuery();
-	            ps.setInt(1, idAlgorithme);
+	            
 	        	while(rs.next()) {
 	        	    list.add(new Algorithme(Integer.parseInt(rs.getString("idAlgorithme")) , rs.getString("nom")))   ;  
 	        		

@@ -522,7 +522,6 @@ public class PageDeConnectionController implements Initializable {
 
 
 	int idEssai = 0;
-	int idAlgorithme = 0;
 
 
 	@FXML
@@ -538,11 +537,6 @@ public class PageDeConnectionController implements Initializable {
 		String text = idEssaiTextField.getText();
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
-		
-		String textA = idAlgoTF.getText();
-		idAlgorithme = Integer.parseInt(textA);
-		refreshTableAlgo();
-
 	}
 
 
@@ -724,7 +718,7 @@ public class PageDeConnectionController implements Initializable {
 
 		tableNomAlgo.setCellValueFactory(new PropertyValueFactory<Algorithme ,String>("nom"));
 
-		listAlgo= mysqlconnect.getDataAlgo(idAlgorithme);
+		listAlgo= mysqlconnect.getDataAlgo();
 
 		tableAlgo.setItems(listAlgo);
 	}
