@@ -1194,9 +1194,9 @@ public class PageDeConnectionController implements Initializable {
     String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
     String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
     
-    String sqlUserEssai = "SELECT idEssai FROM essai INNER JOIN utilisateureffectueessai UEE ON UEE.idUtilisateur = ?";
-    String sqlFetchMesures = "SELECT * FROM mesure INNER JOIN essaicontientmesure ECM ON ECM.idEssai = ?";
-    String sqlFetchMesureAmas = "SELECT * FROM amas INNER JOIN amasappartientmesure AAM ON AAM.idMesure = ?";
+    String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
+    String sqlFetchMesures = "SELECT * FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
+    String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
     
     String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
     String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
@@ -1212,7 +1212,7 @@ public class PageDeConnectionController implements Initializable {
     String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure AAM WHERE AAM.idMesure = ?";
     
         try {
-            
+        	JOptionPane.showMessageDialog(null, "0");
         	pst = conn.prepareStatement(sqlUserEssai);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             rs = pst.executeQuery();
