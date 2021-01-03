@@ -22,6 +22,10 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 import com.sun.javafx.logging.Logger;
 
@@ -42,6 +46,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -1506,6 +1512,10 @@ public class PageDeConnectionController implements Initializable {
 	/*------------------------------------Fin logout button----------------------------------------------*/	
 
 	
+	@FXML
+	Button exporterEssais;
+	
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -1569,6 +1579,122 @@ public class PageDeConnectionController implements Initializable {
 		        exc.printStackTrace();
 		    } 
 		
+		 
+		 
+		 
+		 
+		 //--------------------------------------------------
+		 
+		 /*
+		
+		 exporterEssais.setOnAction( e->{
+
+	            try {
+
+	                String query = "Select * from amas";
+
+	                pst = conn.prepareStatement(query);
+
+	                rs = pst.executeQuery();
+
+	               
+
+	                //Apache POI Jar Link-
+
+	                //http://a.mbbsindia.com/poi/release/bin/poi-bin-3.13-20150929.zip
+
+	                XSSFWorkbook wb = new XSSFWorkbook();//for earlier version use HSSF
+
+	                XSSFSheet sheet = wb.createSheet("Amas Details");
+
+	                XSSFRow header = sheet.createRow(0);
+
+	                header.createCell(0).setCellValue("idamas");
+
+	                header.createCell(1).setCellValue("coordonnéeX");
+
+	                header.createCell(2).setCellValue("coordonnéeY");
+
+	              
+
+	               
+
+	                sheet.autoSizeColumn(1);
+
+	                sheet.autoSizeColumn(2);
+
+	                sheet.setColumnWidth(2, 256*25);//256-character width
+
+	               
+
+	                sheet.setZoom(150);//scale-150%
+
+	               
+
+	               
+
+	                int index = 1;
+
+	                while(rs.next()){
+
+	                    XSSFRow row = sheet.createRow(index);
+
+	                    row.createCell(0).setCellValue(rs.getString("ID"));
+
+	                    row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
+
+	                    row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+
+
+	                    index++;                  
+
+	                }
+
+	               
+
+	                FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");// before 2007 version xls
+
+	                wb.write(fileOut);
+
+	                fileOut.close();
+
+	               
+
+	                Alert alert = new Alert(AlertType.INFORMATION);
+
+	                alert.setTitle("Information Dialog");
+
+	                alert.setHeaderText(null);
+
+	                alert.setContentText("User Details Exported in Excel Sheet.");
+
+	                alert.showAndWait();
+
+	               
+
+	                pst.close();
+
+	                rs.close();
+
+	               
+
+	            } catch (SQLException | FileNotFoundException ex) {
+
+	                
+
+	            } catch (IOException ex) {
+
+
+	            }
+
+	           
+
+	        });
+		 
+		 
+		 */
+		 
+		 
 		
 	
 	}

@@ -10,5 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="lib" path="lib/ij.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/POI"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
