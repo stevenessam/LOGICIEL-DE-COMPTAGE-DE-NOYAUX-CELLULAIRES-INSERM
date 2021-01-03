@@ -1098,14 +1098,81 @@ public class PageDeConnectionController implements Initializable {
 	 public void deleteImage(){
 		 
 		    conn = mysqlconnect.ConnectDb();
-		    String sql = "delete from image where idImage = ?";
-		        try {
-		            pst = conn.prepareStatement(sql);
-		            pst.setString(1, idImageImg.getText());
-		            pst.execute();
-					refreshTableImage();
-		        } catch (Exception e) {
-		            JOptionPane.showMessageDialog(null, e);
+		    String sqlFetchImage = "SELECT * FROM image WHERE idImage = ?";
+		    String sqlDeleteLienEssai = "DELETE FROM essaicontientimage WHERE idImage = ?";
+		    String sqlFetchAllMesures = "SELECT * FROM mesure M INNER JOIN mesureappartientimage MAI ON MAI.idMesure = M.idMesure WHERE MAI.idImage = ?";
+		    String sqlFetchAllAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
+		    String sqlDeleteAmasLien = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
+		    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";  
+		    String sqlDeleteLienMesure = "DELETE FROM mesureappartientimage WHERE idImage = ?";
+		    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
+		    String sqlDelete = "DELETE FROM image WHERE idImage = ?";
+		    
+		    String selectedImage = idImageImg.getText();
+		    
+		    if (selectedImage.equals("")) {
+		    	JOptionPane.showMessageDialog(null, "Veuillez d'abord sélectionner une image.");
+		    	return;
+		    }
+		    
+		    try {
+		    	
+		        pst = conn.prepareStatement(sqlDeleteLienEssai);
+		        pst.setString(1, selectedImage);
+		        pst.execute();
+		        
+		        pst = conn.prepareStatement(sqlFetchAllMesures);
+		        pst.setString(1, selectedImage);
+		        rs = pst.executeQuery();
+		        
+		        while (rs.next()) {
+			        pst = conn.prepareStatement(sqlFetchAllAmas);
+			        pst.setString(1, rs.getString("idMesure"));
+			        ResultSet rsA;
+			        rsA = pst.executeQuery();
+			        
+			        while (rsA.next()) {
+				        pst = conn.prepareStatement(sqlDeleteAmasLien);
+				        pst.setString(1, rsA.getString("idAmas"));
+				        pst.execute();
+				        
+				        pst = conn.prepareStatement(sqlDeleteAmas);
+				        pst.setString(1, rsA.getString("idAmas"));
+				        pst.execute();
+			        }
+			        
+			        
+			        pst = conn.prepareStatement(sqlDeleteLienMesure);
+			        pst.setString(1, selectedImage);
+			        pst.execute();
+			        
+			        pst = conn.prepareStatement(sqlDeleteMesure);
+			        pst.setString(1, rs.getString("idMesure"));
+			        pst.execute();
+			        
+		        }
+		        
+		        pst = conn.prepareStatement(sqlFetchImage);
+		        pst.setString(1, selectedImage);
+		        rs = pst.executeQuery();
+		        
+		        while (rs.next()) {
+		        	File file = new File(rs.getString("lienImage"));
+		        	if (file.delete()) {
+		        		
+		        	} else {
+		        		JOptionPane.showMessageDialog(null, "Erreur lors de la suppression.");
+		        	}
+		        }
+		        
+		        pst = conn.prepareStatement(sqlDelete);
+		        pst.setString(1, selectedImage);
+		        pst.execute();
+		        
+				refreshTableImage();
+				refreshTableImageEssai();
+		    } catch (Exception e) {
+		    	JOptionPane.showMessageDialog(null, e);
 		        }
 		    
 		    }
