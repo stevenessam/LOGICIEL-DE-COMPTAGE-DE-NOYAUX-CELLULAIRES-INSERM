@@ -1195,21 +1195,32 @@ public class PageDeConnectionController implements Initializable {
     String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
     
     String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
-    String sqlFetchMesures = "SELECT * FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
+    
+    String sqlFetchMesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
+    
     String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
     
     String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
     String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
     String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
     String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
-    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure AAM WHERE AAM.idAmas = ?";
-    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure ECM WHERE ECM.idmesure = ?";
-    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure ECM WHERE ECM.idEssai = ?";
+    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
+    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure WHERE idmesure = ?";
+    
+    
+    
+    
+    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure WHERE idEssai = ?"; //Bug ? ---------------------------------------------------------
+    
+    
+    
+    
+    
     
     String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
     String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
     String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
-    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure AAM WHERE AAM.idMesure = ?";
+    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure WHERE idMesure = ?";
     
         try {
         	pst = conn.prepareStatement(sqlUserEssai);
@@ -1221,10 +1232,12 @@ public class PageDeConnectionController implements Initializable {
             	pst2 = conn.prepareStatement(sqlDeleteAlgo);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+
                 
             	pst2 = conn.prepareStatement(sqlDeleteCampagne);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+                
 
                 
             	pst2 = conn.prepareStatement(sqlDeleteImage);
@@ -1235,12 +1248,14 @@ public class PageDeConnectionController implements Initializable {
             	pst2 = conn.prepareStatement(sqlFetchMesures);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 ResultSet rsListMesures = pst2.executeQuery();
+
                 
                 while (rsListMesures.next()) {
                 	PreparedStatement pst3;
                 	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+
 
                     
                     pst3 = conn.prepareStatement(sqlFetchMesureAmas);
@@ -1253,36 +1268,44 @@ public class PageDeConnectionController implements Initializable {
                     	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
                         pst4.setInt(1, rsListAmas.getInt("idAmas"));
                         pst4.execute();
+
                         
                     	pst4 = conn.prepareStatement(sqlDeleteAmas);
                         pst4.setInt(1, rsListAmas.getInt("idAmas"));
                         pst4.execute();
+
                     }
                     
                     pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+
                     
                     pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
 
+
                     pst3 = conn.prepareStatement(sqlDeleteMesure);
                     pst3.setInt(1, rsListMesures.getInt("idMesure"));
                     pst3.execute();
+
                 }
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+
                 
             	pst2 = conn.prepareStatement(sqlDeleteEssai);
                 pst2.setInt(1, rs.getInt("idEssai"));
                 pst2.execute();
+
                 
             }
             
@@ -1291,14 +1314,17 @@ public class PageDeConnectionController implements Initializable {
         	pst = conn.prepareStatement(sqlDeleteAdmin);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
+
             
         	pst = conn.prepareStatement(sqlDeleteUserEssai);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
+
         	
         	pst = conn.prepareStatement(sql);
             pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
             pst.execute();
+
     
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
