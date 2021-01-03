@@ -195,7 +195,12 @@ public class signController implements Initializable{
 						JOptionPane.showMessageDialog(null, "User already exists");
 
 					}
-				}}
+				}
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Un compte avec cet identifiant existe déjà.");
+			}
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}

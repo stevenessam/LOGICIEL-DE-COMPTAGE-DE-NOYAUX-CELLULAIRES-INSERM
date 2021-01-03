@@ -332,8 +332,8 @@ public class PageDeConnectionController implements Initializable {
 	public void addCampagnes (){    
 		conn = mysqlconnect.ConnectDb();
 
-		String sqlT = "Select * from campagne where nom = ? and description = ? ";
-		String sql = "insert into campagne (nom,description)values(?,?)";
+		String sqlT = "SELECT * FROM campagne WHERE nom = ? AND description = ? ";
+		String sql = "INSERT INTO campagne (nom,description)values(?,?)";
 
 		try {
 			pst = conn.prepareStatement(sqlT);
@@ -359,13 +359,15 @@ public class PageDeConnectionController implements Initializable {
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
+				
 				if( recordAdded ){
 					//  JOptionPane.showMessageDialog(null, "Record added");
-				}else{
-					JOptionPane.showMessageDialog(null, "Record already exists");
+				} else{
+					JOptionPane.showMessageDialog(null, "Cette campagne existe déjà.");
 				}
-			}}
-		catch (Exception e) {
+			}
+	
+		}catch (Exception e) {
 			// TODO: handle exception
 		}
 
@@ -411,8 +413,8 @@ public class PageDeConnectionController implements Initializable {
 			String value1 = idCampagnes.getText();
 			String value2 = nomCampagnes.getText();
 			String value3 = descriptionCampagnes.getText();
-			String sql = "update campagne set nom= '"+value2+"',description= '"+
-					value3+"' where idCampagne='"+value1+"' ";
+			String sql = "UPDATE campagne SET nom= '"+value2+"',description= '"+
+					value3+"' WHERE idCampagne='"+value1+"' ";
 			pst= conn.prepareStatement(sql);
 			pst.execute();
 			//JOptionPane.showMessageDialog(null, "Update");
@@ -647,47 +649,26 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteEssai(){
 		conn = mysqlconnect.ConnectDb();
-		String sql = "DELETE FROM essai WHERE idEssai = ?";
-		String sqlCE = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
-		String sqlEA = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
-		String sqlEI = "DELETE FROM essaicontientimage WHERE idEssai = ?";
-		String sqlEM = "DELETE FROM essaicontientmesure WHERE idEssai = ?";
-		String sqlUE = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
+		int currIdEssai = Integer.parseInt(idEssaiTextField.getText());
+		String sqlCheck = "SELECT * FROM utilisateureffectueessai WHERE idUtilisateur = ?";
 		try {
-
-			pst = conn.prepareStatement(sqlCE);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
-
-			pst = conn.prepareStatement(sqlEA);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
-
-			pst = conn.prepareStatement(sqlEI);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
-
-			pst = conn.prepareStatement(sqlEM);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
+			pst = conn.prepareStatement(sqlCheck);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			rs = pst.executeQuery();
 			
-			pst = conn.prepareStatement(sqlUE);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
-
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, idEssaiTextField.getText());
-			pst.execute();
-			
-			idEssai = 0;
-			//	JOptionPane.showMessageDialog(null, "Delete");
-			refreshTableEssai();
-			refreshTableImageEssai();
-
+			if (rs.next()) {
+				deleteEssaiComplet(currIdEssai);
+				idEssai = 0;
+				//	JOptionPane.showMessageDialog(null, "Delete");
+				refreshTableEssai();
+				refreshTableImageEssai();
+			} else {
+				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer un essai que vous n'avez pas créé.");
+			}
+		
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème.");
 		}
-
 	}
 
 
@@ -852,27 +833,50 @@ public class PageDeConnectionController implements Initializable {
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
 		
-		if (Integer.parseInt(idUtilisateur.getText()) == MainCelluleInterface.getIdUserGlobal()) {
+		int currIdUser = Integer.parseInt(idUtilisateur.getText());
+		
+		if (currIdUser == MainCelluleInterface.getIdUserGlobal()) {
 			JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer votre propre compte.");
 			return;
 		}
 		
-		String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
-		String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
-		try {
-			pst = conn.prepareStatement(sqlDeleteAdmin);
-			pst.setString(1, idUtilisateur.getText());
-			pst.execute();
+	    String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
+	    String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+	    String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
+	    String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
 
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, idUtilisateur.getText());
-			pst.execute();
-			//	JOptionPane.showMessageDialog(null, "Delete");
-			refreshTableGestioadmin();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
+	    try {
+	        pst = conn.prepareStatement(sqlUserEssai);
+	        pst.setInt(1, currIdUser);
+	        rs = pst.executeQuery();
+	            
+	        while (rs.next()) {
+	            deleteEssaiComplet(rs.getInt("idEssai"));
+	        }
+	            
+	            
+	            
+	        pst = conn.prepareStatement(sqlDeleteAdmin);
+	        pst.setInt(1, currIdUser);
+	        pst.execute();
 
+	            
+	        pst = conn.prepareStatement(sqlDeleteUserEssai);
+	        pst.setInt(1, currIdUser);
+	        pst.execute();
+
+	        	
+	        pst = conn.prepareStatement(sql);
+	        pst.setInt(1, currIdUser);
+	        pst.execute();
+
+	    
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(null, e);
+	        }
+	    
+	    refreshTableGestioadmin();
+	    JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès !");
 	}
 
 
@@ -904,7 +908,7 @@ public class PageDeConnectionController implements Initializable {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
-
+		
 	}
 
 
@@ -1022,7 +1026,7 @@ public class PageDeConnectionController implements Initializable {
 				pst.execute();
 				//JOptionPane.showMessageDialog(null, "campagne Add succes");
 			} else {
-				System.out.println("File not selected");
+				System.out.println("Aucun fichier sélectionné.");
 			}
 			refreshTableImage();
 		} catch (Exception e) {
@@ -1185,42 +1189,116 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
-	
+	public void deleteEssaiComplet(int idEss) {
+		conn = mysqlconnect.ConnectDb();
+		String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
+		String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
+	    String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
+	    String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
+	    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
+	    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure WHERE idmesure = ?";
+	    String sqlFetchMesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
+	    String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
+	    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
+	    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
+	    String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
+	    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure WHERE idMesure = ?";
+	    String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
+	    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure WHERE idEssai = ?";
+	    
+	    
+		try {
+        	PreparedStatement pst2;
+        	pst2 = conn.prepareStatement(sqlDeleteAlgo);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+
+            
+        	pst2 = conn.prepareStatement(sqlDeleteCampagne);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+            
+
+            
+        	pst2 = conn.prepareStatement(sqlDeleteImage);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+
+            
+        	pst2 = conn.prepareStatement(sqlFetchMesures);
+            pst2.setInt(1, idEss);
+            ResultSet rsListMesures = pst2.executeQuery();
+
+            
+            while (rsListMesures.next()) {
+            	PreparedStatement pst3;
+            	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
+                pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                pst3.execute();
+
+
+                
+                pst3 = conn.prepareStatement(sqlFetchMesureAmas);
+                pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                ResultSet rsListAmas = pst3.executeQuery();
+
+                
+                while (rsListAmas.next()) {
+                	PreparedStatement pst4;
+                	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
+                    pst4.setInt(1, rsListAmas.getInt("idAmas"));
+                    pst4.execute();
+
+                    
+                	pst4 = conn.prepareStatement(sqlDeleteAmas);
+                    pst4.setInt(1, rsListAmas.getInt("idAmas"));
+                    pst4.execute();
+
+                }
+                
+                pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
+                pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                pst3.execute();
+
+                
+                pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
+                pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                pst3.execute();
+
+
+                pst3 = conn.prepareStatement(sqlDeleteMesure);
+                pst3.setInt(1, rsListMesures.getInt("idMesure"));
+                pst3.execute();
+
+            }
+            
+        	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+
+            
+        	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+
+            
+        	pst2 = conn.prepareStatement(sqlDeleteEssai);
+            pst2.setInt(1, idEss);
+            pst2.execute();
+		} catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+	}
 	
     public void deleteCompte(){
     conn = mysqlconnect.ConnectDb();
     String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
     String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
     String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
-    String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
-    
     String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
-    
-    String sqlFetchMesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
-    
-    String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
-    
-    String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
-    String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
-    String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
-    String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
-    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
-    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure WHERE idmesure = ?";
+
     
     
-    
-    
-    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure WHERE idEssai = ?"; //Bug ? ---------------------------------------------------------
-    
-    
-    
-    
-    
-    
-    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
-    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
-    String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
-    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure WHERE idMesure = ?";
     
         try {
         	pst = conn.prepareStatement(sqlUserEssai);
@@ -1228,85 +1306,7 @@ public class PageDeConnectionController implements Initializable {
             rs = pst.executeQuery();
             
             while (rs.next()) {
-            	PreparedStatement pst2;
-            	pst2 = conn.prepareStatement(sqlDeleteAlgo);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-
-                
-            	pst2 = conn.prepareStatement(sqlDeleteCampagne);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-                
-
-                
-            	pst2 = conn.prepareStatement(sqlDeleteImage);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-
-                
-            	pst2 = conn.prepareStatement(sqlFetchMesures);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                ResultSet rsListMesures = pst2.executeQuery();
-
-                
-                while (rsListMesures.next()) {
-                	PreparedStatement pst3;
-                	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
-                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                    pst3.execute();
-
-
-                    
-                    pst3 = conn.prepareStatement(sqlFetchMesureAmas);
-                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                    ResultSet rsListAmas = pst3.executeQuery();
-
-                    
-                    while (rsListAmas.next()) {
-                    	PreparedStatement pst4;
-                    	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
-                        pst4.setInt(1, rsListAmas.getInt("idAmas"));
-                        pst4.execute();
-
-                        
-                    	pst4 = conn.prepareStatement(sqlDeleteAmas);
-                        pst4.setInt(1, rsListAmas.getInt("idAmas"));
-                        pst4.execute();
-
-                    }
-                    
-                    pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
-                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                    pst3.execute();
-
-                    
-                    pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
-                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                    pst3.execute();
-
-
-                    pst3 = conn.prepareStatement(sqlDeleteMesure);
-                    pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                    pst3.execute();
-
-                }
-                
-            	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-
-                
-            	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-
-                
-            	pst2 = conn.prepareStatement(sqlDeleteEssai);
-                pst2.setInt(1, rs.getInt("idEssai"));
-                pst2.execute();
-
-                
+            	deleteEssaiComplet(rs.getInt("idEssai"));
             }
             
             
