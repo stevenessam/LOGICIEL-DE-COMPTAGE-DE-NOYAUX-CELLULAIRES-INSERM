@@ -97,8 +97,10 @@ public class PageDeConnectionController implements Initializable {
 	Pane pageResultatCampagnes;
 	@FXML
 	Pane pageResultatEssai;
-
-
+	@FXML
+	Pane pageLoadingCampagne;
+	@FXML
+	Pane pageLoadingEssai;
 
 	//------------------------------exit et minimize-----------------------------------------
 
@@ -156,6 +158,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -174,6 +178,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -191,6 +197,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -208,6 +216,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -225,10 +235,47 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(true);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 
 	}
+	
+	
+	
+	public void pageLoadingC() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(true);
+		pageLoadingEssai.setVisible(false);
+		gestionAdminButtonSetVisible();
+
+	}
+	
+	
+	
+	public void pageLoadingE() {
+		pageCampagnes.setVisible(false);
+		pageEssais.setVisible(false);
+		pageAjouterImage.setVisible(false);
+		pageMonCompte.setVisible(false);
+		pageGestionAdmin.setVisible(false);
+		pageResultatCampagnes.setVisible(false);
+		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(true);
+		gestionAdminButtonSetVisible();
+
+	}
+	
+
+	
 
 
 	/**
@@ -245,6 +292,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(true);
 		pageResultatEssai.setVisible(false);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 
@@ -256,6 +305,8 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 
+	
+	
 	public void pageResultatEssai() {
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
@@ -264,6 +315,8 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(true);
+		pageLoadingCampagne.setVisible(false);
+		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 
@@ -937,6 +990,8 @@ public class PageDeConnectionController implements Initializable {
 
 	@FXML
 	Button ajouteImageImg;
+	@FXML
+	Button supprimerImage;
 
 	@FXML
 	private TableView<Image> tableImages;
@@ -1034,7 +1089,22 @@ public class PageDeConnectionController implements Initializable {
 		}
 	}
 
-
+	 public void deleteImage(){
+		 
+		    conn = mysqlconnect.ConnectDb();
+		    String sql = "delete from image where idImage = ?";
+		        try {
+		            pst = conn.prepareStatement(sql);
+		            pst.setString(1, idImageImg.getText());
+		            pst.execute();
+					refreshTableImage();
+		        } catch (Exception e) {
+		            JOptionPane.showMessageDialog(null, e);
+		        }
+		    
+		    }
+	
+	
 
 
 
@@ -1043,20 +1113,13 @@ public class PageDeConnectionController implements Initializable {
 	private void importImages (ActionEvent event) {
 		stage= (Stage)pageAjouterImage.getScene().getWindow();
 		file = fileChooser.showOpenDialog(stage);
-		/*	try {
-			desktop.open(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
 
-		//		if (file != null) {
-		//			//	System.out.println(""+file.getAbsolutePath());
-		//			imageV =new javafx.scene.image.Image(file.getAbsoluteFile().toURI().toString(),imageView.getFitWidth(),imageView.getFitHeight(),true,true);
-		//			imageView.setImage(imageV);
-		//			imageView.setPreserveRatio(true);
-		//		}
+				if (file != null) {
+
+					imageNom.setText(file.getName());
+	
+			}
 
 	}
 
