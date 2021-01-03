@@ -1652,7 +1652,7 @@ public class PageDeConnectionController implements Initializable {
 		 
 		 //--------------------------------------------------
 		 
-		 /*
+		 
 		
 		 exporterEssais.setOnAction( e->{
 
@@ -1663,14 +1663,9 @@ public class PageDeConnectionController implements Initializable {
 	                pst = conn.prepareStatement(query);
 
 	                rs = pst.executeQuery();
+	                
 
-	               
-
-	                //Apache POI Jar Link-
-
-	                //http://a.mbbsindia.com/poi/release/bin/poi-bin-3.13-20150929.zip
-
-	                XSSFWorkbook wb = new XSSFWorkbook();//for earlier version use HSSF
+	                XSSFWorkbook wb = new XSSFWorkbook();
 
 	                XSSFSheet sheet = wb.createSheet("Amas Details");
 
@@ -1682,23 +1677,14 @@ public class PageDeConnectionController implements Initializable {
 
 	                header.createCell(2).setCellValue("coordonnéeY");
 
-	              
-
-	               
 
 	                sheet.autoSizeColumn(1);
 
 	                sheet.autoSizeColumn(2);
 
-	                sheet.setColumnWidth(2, 256*25);//256-character width
+	                sheet.setColumnWidth(2, 256*25);//character width
+	                sheet.setZoom(150);//scale
 
-	               
-
-	                sheet.setZoom(150);//scale-150%
-
-	               
-
-	               
 
 	                int index = 1;
 
@@ -1706,7 +1692,7 @@ public class PageDeConnectionController implements Initializable {
 
 	                    XSSFRow row = sheet.createRow(index);
 
-	                    row.createCell(0).setCellValue(rs.getString("ID"));
+	                    row.createCell(0).setCellValue(rs.getString("idamas"));
 
 	                    row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
 
@@ -1719,7 +1705,7 @@ public class PageDeConnectionController implements Initializable {
 
 	               
 
-	                FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");// before 2007 version xls
+	                FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");
 
 	                wb.write(fileOut);
 
@@ -1729,7 +1715,7 @@ public class PageDeConnectionController implements Initializable {
 
 	                Alert alert = new Alert(AlertType.INFORMATION);
 
-	                alert.setTitle("Information Dialog");
+	                alert.setTitle("Information");
 
 	                alert.setHeaderText(null);
 
@@ -1759,7 +1745,7 @@ public class PageDeConnectionController implements Initializable {
 	        });
 		 
 		 
-		 */
+		
 		 
 		 
 		

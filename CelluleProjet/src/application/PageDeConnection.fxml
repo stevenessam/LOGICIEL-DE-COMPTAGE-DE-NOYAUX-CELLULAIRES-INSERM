@@ -177,7 +177,7 @@
             <Line endX="280.0" endY="-207.4267120361328" layoutX="193.0" layoutY="486.0" startX="280.0" startY="-7.81433629989624" stroke="#0064aa" strokeWidth="3.0" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
-      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="77.0" layoutY="118.0" text="Nombre Totale d'Image" textFill="WHITE">
                <font>
