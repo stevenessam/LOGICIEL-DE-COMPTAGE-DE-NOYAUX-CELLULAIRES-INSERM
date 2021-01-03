@@ -23,7 +23,7 @@
          <children>
             <Button fx:id="campagnesPageButton" layoutY="1.0" mnemonicParsing="false" onAction="#pageCampagnes" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Campagnes" />
             <Button fx:id="essaisPageButton" layoutY="130.0" mnemonicParsing="false" onAction="#pageEssais" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Essais" />
-            <Button fx:id="ajouterImagePageButton" layoutY="261.0" mnemonicParsing="false" onAction="#pageAjouterImage" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Ajouter Image" />
+            <Button fx:id="ajouterImagePageButton" layoutY="261.0" mnemonicParsing="false" onAction="#pageAjouterImage" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Liste Image" />
             <Button fx:id="monComptePageButton" layoutY="391.0" mnemonicParsing="false" onAction="#pageMonCompte" prefHeight="139.0" prefWidth="230.0" styleClass="mainbutton" text="Mon Compte" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="123.0" layoutX="-1.0" layoutY="530.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgb(0,100,170);" width="230.0" />
             <Button fx:id="gestionAdminButton" layoutY="521.0" mnemonicParsing="false" onAction="#pageGestionAdmin" prefHeight="132.0" prefWidth="230.0" styleClass="mainbutton" text="Gestion Admin" />
@@ -58,12 +58,12 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextField fx:id="nomCampagnes" layoutX="801.0" layoutY="102.0" prefHeight="31.0" prefWidth="262.0" />
+            <TextField fx:id="nomCampagnes" layoutX="801.0" layoutY="102.0" prefHeight="31.0" prefWidth="262.0" promptText="Nom" />
             <Label layoutX="801.0" layoutY="146.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="167.0" prefHeight="107.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
+            <TextArea fx:id="descriptionCampagnes" layoutX="801.0" layoutY="167.0" prefHeight="107.0" prefWidth="262.0" promptText="Description" style="-fx-wrap-text: true;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Campagnes" textFill="WHITE">
                <font>
@@ -124,7 +124,7 @@
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="393.0" prefWidth="453.0" styleClass="tablesstyle">
+            <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
                   <TableColumn fx:id="tableDescriptionEssais" prefWidth="247.0" styleClass="tablerow" text="Description" />
@@ -132,16 +132,16 @@
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="creeEssais" layoutX="777.0" layoutY="320.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
-            <Button fx:id="modifierEssais" layoutX="777.0" layoutY="385.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
-            <Button fx:id="supprimerEssais" layoutX="777.0" layoutY="450.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
-            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageResultatEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
-            <Button fx:id="importImageEssais" layoutX="779.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
-            <Label layoutX="801.0" layoutY="182.0" text="Description" textFill="WHITE">
+            <Button fx:id="creeEssais" layoutX="776.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
+            <Button fx:id="modifierEssais" layoutX="776.0" layoutY="279.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
+            <Button fx:id="supprimerEssais" layoutX="776.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
+            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#pageResultatEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Button fx:id="importImageEssais" layoutX="777.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
+            <Label layoutX="799.0" layoutY="77.0" text="Description" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <TextArea fx:id="descriptionEssais" layoutX="801.0" layoutY="206.0" prefHeight="93.0" prefWidth="262.0" style="-fx-wrap-text: true;" />
+            <TextArea fx:id="descriptionEssais" layoutX="799.0" layoutY="101.0" prefHeight="93.0" prefWidth="262.0" promptText="Description" style="-fx-wrap-text: true;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Essais" textFill="WHITE">
                <font>
@@ -149,30 +149,30 @@
                </font>
             </Label>
             <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="610.0" prefWidth="277.0">
+            <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="466.0" prefWidth="277.0">
               <columns>
                   <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                 <TableColumn fx:id="tableImageEssaiIMG" prefWidth="274.0" text="Images" />
               </columns>
             </TableView>
-            <Line endX="212.0" layoutX="874.0" layoutY="309.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="516.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
-            <Line endX="212.0" layoutX="876.0" layoutY="596.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
-            <TableView fx:id="tableAlgo" layoutX="12.0" layoutY="486.0" onMouseClicked="#getSelectedAlgo" prefHeight="196.0" prefWidth="453.0">
+            <Line endX="212.0" layoutX="873.0" layoutY="206.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="875.0" layoutY="406.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Line endX="212.0" layoutX="876.0" layoutY="601.0" startX="-101.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <TableView fx:id="tableAlgo" layoutX="794.0" layoutY="416.0" onMouseClicked="#getSelectedAlgo" prefHeight="107.0" prefWidth="277.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgo" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgo" prefWidth="450.0" resizable="false" text="Algorithme" />
+                <TableColumn fx:id="tableNomAlgo" prefWidth="274.0" resizable="false" text="Algorithme" />
               </columns>
             </TableView>
             <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableAlgoEssai" layoutX="801.0" layoutY="86.0" prefHeight="93.0" prefWidth="262.0">
+            <TableView fx:id="tableAlgoEssai" layoutX="480.0" layoutY="550.0" prefHeight="132.0" prefWidth="277.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="259.0" text="Algorithme Correspondante" />
+                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="274.0" text="Algorithme Correspondante" />
               </columns>
             </TableView>
-            <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="528.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
-            <Line endX="278.0" layoutX="185.0" layoutY="476.0" startX="-169.0" stroke="#0064aa" style="-fx-scale-y: 3;" />
+            <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
+            <Line endX="294.0" endY="-0.012328783981502056" layoutX="455.0" layoutY="544.0" startX="32.0" startY="-0.01985589601099491" stroke="#0064aa" style="-fx-scale-y: 3;" />
             <Line endX="280.0" endY="-207.4267120361328" layoutX="193.0" layoutY="486.0" startX="280.0" startY="-7.81433629989624" stroke="#0064aa" strokeWidth="3.0" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
@@ -290,9 +290,9 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="modifierPrenomCompte" layoutX="321.0" layoutY="409.0" prefHeight="31.0" prefWidth="250.0" />
-            <TextField fx:id="modifierNomCompte" layoutX="321.0" layoutY="447.0" prefHeight="31.0" prefWidth="250.0" />
-            <PasswordField fx:id="modifierPasswordCompte" layoutX="321.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" />
+            <TextField fx:id="modifierPrenomCompte" layoutX="321.0" layoutY="409.0" prefHeight="31.0" prefWidth="250.0" promptText="Prenom" />
+            <TextField fx:id="modifierNomCompte" layoutX="321.0" layoutY="447.0" prefHeight="31.0" prefWidth="250.0" promptText="Nom" />
+            <PasswordField fx:id="modifierPasswordCompte" layoutX="321.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" promptText="Mot de passe" />
             <Button fx:id="validerCompte" layoutX="911.0" layoutY="607.0" mnemonicParsing="false" onAction="#editCompte" prefHeight="54.0" prefWidth="159.0" styleClass="buttons" text="Valider">
                <font>
                   <Font size="20.0" />

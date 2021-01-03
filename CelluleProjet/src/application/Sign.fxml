@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,58 +25,64 @@
             <Image url="@Images/cellule2.png" />
          </image>
       </ImageView>
-      <Label layoutX="167.0" layoutY="44.0" text="Signup" textFill="#0073ff">
+      <Label layoutX="150.0" layoutY="67.0" text="Signup" textFill="#0073ff">
          <font>
-            <Font name="System Bold" size="40.0" />
+            <Font name="System Bold" size="50.0" />
          </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
       </Label>
-      <Label layoutX="185.0" layoutY="117.0" text="Username" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="userNameSignup" layoutX="108.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
-      <Label layoutX="209.0" layoutY="189.0" text="Nom" textFill="WHITE">
+      <Label layoutX="185.0" layoutY="174.0" text="Username" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="nomSignup" layoutX="108.0" layoutY="219.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
-      <Label layoutX="196.0" layoutY="264.0" text="Prenom" textFill="WHITE">
+      <TextField fx:id="userNameSignup" layoutX="108.0" layoutY="207.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="196.0" layoutY="246.0" text="Prenom" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="prenomSignup" layoutX="108.0" layoutY="294.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
-      <Label layoutX="188.0" layoutY="340.0" text="Password" textFill="WHITE">
+      <TextField fx:id="prenomSignup" layoutX="108.0" layoutY="276.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-radius: 30;" />
+      <Label layoutX="209.0" layoutY="319.0" text="Nom" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passowrdSignup" layoutX="108.0" layoutY="370.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button fx:id="signupButton" layoutX="158.0" layoutY="425.0" mnemonicParsing="false" onAction="#signUp" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignUp">
+      <TextField fx:id="nomSignup" layoutX="108.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="188.0" layoutY="397.0" text="Password" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passowrdSignup" layoutX="108.0" layoutY="427.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
+      <Button fx:id="signupButton" layoutX="158.0" layoutY="482.0" mnemonicParsing="false" onAction="#signUp" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignUp">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="615.0" layoutY="43.0" text="Signin" textFill="#0073ff">
+      <Label layoutX="601.0" layoutY="67.0" text="Signin" textFill="#0073ff">
          <font>
-            <Font name="System Bold" size="40.0" />
+            <Font name="System Bold" size="50.0" />
          </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
       </Label>
-      <Label layoutX="634.0" layoutY="117.0" text="Username" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="userNameSignin" layoutX="557.0" layoutY="150.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
-      <Label layoutX="637.0" layoutY="189.0" text="Password" textFill="WHITE">
+      <Label layoutX="627.0" layoutY="174.0" text="Username" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passowrdSignin" layoutX="557.0" layoutY="219.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
-      <Button fx:id="signinButton" layoutX="607.0" layoutY="277.0" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignIn">
+      <TextField fx:id="userNameSignin" layoutX="550.0" layoutY="207.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-radius: 30;" />
+      <Label layoutX="630.0" layoutY="246.0" text="Password" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passowrdSignin" layoutX="550.0" layoutY="276.0" prefHeight="31.0" prefWidth="250.0" promptText="Password" style="-fx-background-radius: 30;" />
+      <Button fx:id="signinButton" layoutX="600.0" layoutY="334.0" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="150.0" styleClass="signsbuttons" stylesheets="@style.css" text="SignIn">
          <font>
             <Font size="20.0" />
          </font>
@@ -94,5 +101,14 @@
             </ImageView>
          </children>
       </Pane>
+      <Line endX="156.0" layoutX="204.0" layoutY="154.0" startX="-100.0" stroke="#ffc900" strokeWidth="5.0">
+         <effect>
+            <Glow level="1.0" />
+         </effect></Line>
+      <Line endX="156.0" layoutX="646.0" layoutY="152.0" startX="-100.0" stroke="#ffc900" strokeWidth="5.0">
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Line>
    </children>
 </AnchorPane>
