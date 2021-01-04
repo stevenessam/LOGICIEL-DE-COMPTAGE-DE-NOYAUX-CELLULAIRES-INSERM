@@ -261,7 +261,6 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(true);
 		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
-
 	}
 	
 	
@@ -277,12 +276,13 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(false);
 		pageLoadingEssai.setVisible(true);
 		gestionAdminButtonSetVisible();
-
+		pageResultatEssai();
 	}
 	
 
-	
-
+	public void TraitementEssai() {
+		//Code
+	}
 
 	/**
 	 * Méthode qui permet de rendre visible la page pageresultatcampagnes
@@ -324,8 +324,6 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(false);
 		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
-
-
 		//Fin du déplacement entre les pages
 
 
