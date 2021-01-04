@@ -277,13 +277,15 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(false);
 		pageLoadingEssai.setVisible(true);
 		gestionAdminButtonSetVisible();
-		pageResultatEssai();
 	}
 	
 
 	
 	public void TraitementEssai() {
-		//Code
+		for (int i = 0; i < 100000; i++) {
+			System.out.println(i);
+		}
+		pageResultatEssai();
 	}
 
 	/**
