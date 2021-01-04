@@ -257,10 +257,10 @@ public class PageDeConnectionController implements Initializable {
 
 
 	}
-	
-	
-	 
-	
+
+
+
+
 	public void pageLoadingC() {
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
@@ -273,9 +273,9 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 	}
-	
-	
-	
+
+
+
 	public void pageLoadingE() {
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
@@ -287,11 +287,11 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(false);
 		pageLoadingEssai.setVisible(true);
 		gestionAdminButtonSetVisible();
-		
-	}
-	
 
-	
+	}
+
+
+
 	public void TraitementEssai() {
 		if (idEssai <= 0) {
 			JOptionPane.showMessageDialog(null, "Veuillez sélectionner un essai.");
@@ -303,43 +303,43 @@ public class PageDeConnectionController implements Initializable {
 		//Essai déjà effectué ?
 		String sqlCheckForResults = "SELECT * FROM essaicontientmesure WHERE idEssai = ?";
 		try {
-			
+
 			pst = conn.prepareStatement(sqlCheckForResults);
 			pst.setInt(1, idEssai);
 			rs = pst.executeQuery();
-			
+
 			if (rs.next()) {
 				pageResultatEssai(idEssai);
 				return;
 			}	
-		
+
 			String sqlCheckForAlgos = "SELECT * FROM essaicontientalgorithme WHERE idEssai = ?";
 			pst = conn.prepareStatement(sqlCheckForAlgos);
 			pst.setInt(1, idEssai);
 			rs = pst.executeQuery();		
-			
+
 			if (!rs.next()) {
 				JOptionPane.showMessageDialog(null, "Aucun algorithme n'est associée à cet essai");
 				return;
 			}
 			algoID = rs.getInt("idAlgorithme");
-			
-			
+
+
 			String sqlCheckForImages = "SELECT * FROM essaicontientimage WHERE idEssai = ?";
 			pst = conn.prepareStatement(sqlCheckForImages);
 			pst.setInt(1, idEssai);
 			rs = pst.executeQuery();
-			
+
 			if (!rs.next()) {
 				JOptionPane.showMessageDialog(null, "Aucune image n'est associée à cet essai");
 				return;
 			}
-			
+
 			String sqlFetchImages = "SELECT * FROM image I INNER JOIN essaicontientimage ECI ON I.idImage = ECI.idImage WHERE ECI.idEssai = ?";
 			pst = conn.prepareStatement(sqlFetchImages);
 			pst.setInt(1, idEssai);
 			rs = pst.executeQuery();
-			
+
 			while (rs.next()) {
 				imageList.add(new Image(rs.getInt("idImage"), rs.getString("nom"), rs.getString("lienImage")));
 			}		
@@ -348,92 +348,92 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 
-	JOptionPane.showMessageDialog(null, "Le traitement peut prendre du temps selon le nombre d'image qui vont être analysées. Vous ne pourrez plus utiliser le logiciel pendant ce temps.");
-	
-	// Analyse des images
-	
-	Opener opener = new Opener();
-	Algorithme algo = new Algorithme();
-	ArrayList<ArrayList<Amas>> listeAmas = new ArrayList<>();
-	for (int i = 0; i < imageList.size(); i++) {
-		ImagePlus imp = opener.openImage(imageList.get(i).getLienImage());
-		algo.ExecuteAlgorithm(algoID, imp);
-		ResultsTable RT1 = ResultsTable.getResultsTable();
-		int rowNbr = RT1.getCounter();
-		ArrayList<Amas> liste = new ArrayList<>();
-		
-		for (int j = 0; j < rowNbr; j++) {
-			int poids = 1;
-			if (RT1.columnExists("poids")) {
-				poids = (int)RT1.getValue("poids", j);
-			}
-			liste.add(new Amas(poids, (float)RT1.getValue("X", j), (float)RT1.getValue("Y", j)));
-		}
-		listeAmas.add(liste);
-	}
-	
-	//Insertion dans la BD
-	
-	try {
-		String sqlAddmesure = "INSERT INTO mesure VALUES ()";
-		String sqlGetMesureId = "SELECT MAX(idMesure) FROM mesure";
-		String sqlLienImage = "INSERT INTO mesureappartientimage (idImage, idMesure) VALUES (? ,?)";
-		String sqlLienEssai = "INSERT INTO essaicontientmesure (idEssai, idMesure) VALUES (? ,?)";
-		String sqlAddAmas = "INSERT INTO amas (coordonnéeX, coordonnéeY, poids) VALUES (?, ?, ?)";
-		String sqlGetAmasId = "SELECT MAX(idAmas) FROM amas";
-		String sqlLienAmas = "INSERT INTO amasappartientmesure (idAmas, idMesure) VALUES (?, ?)";
-		
-		for (int k = 0; k < imageList.size(); k++) {
-			int IDimage = imageList.get(k).getIdImage();
-			
-			pst = conn.prepareStatement(sqlAddmesure);
-			pst.execute();
-			
-			pst = conn.prepareStatement(sqlGetMesureId);
-			rs = pst.executeQuery();
-			int mesureID = 0;
-			while (rs.next()) {
-				mesureID = rs.getInt("MAX(idMesure)");
-			}
-			
-			pst = conn.prepareStatement(sqlLienImage);
-			pst.setInt(1, IDimage);
-			pst.setInt(2, mesureID);
-			pst.execute();
-			
-			pst = conn.prepareStatement(sqlLienEssai);
-			pst.setInt(1, idEssai);
-			pst.setInt(2, mesureID);
-			pst.execute();
-			
-			for (int j = 0; j < listeAmas.get(k).size(); j++) {
-				pst = conn.prepareStatement(sqlAddAmas);
-				pst.setFloat(1, listeAmas.get(k).get(j).getCoordonneesX());
-				pst.setFloat(2, listeAmas.get(k).get(j).getCoordonneesY());
-				pst.setFloat(3, listeAmas.get(k).get(j).getPoids());
-				pst.execute();
-				
-				pst = conn.prepareStatement(sqlGetAmasId);
-				rs = pst.executeQuery();
-				int amasID = 0;
-				while (rs.next()) {
-					amasID = rs.getInt("MAX(idAmas)");
+		JOptionPane.showMessageDialog(null, "Le traitement peut prendre du temps selon le nombre d'image qui vont être analysées. Vous ne pourrez plus utiliser le logiciel pendant ce temps.");
+
+		// Analyse des images
+
+		Opener opener = new Opener();
+		Algorithme algo = new Algorithme();
+		ArrayList<ArrayList<Amas>> listeAmas = new ArrayList<>();
+		for (int i = 0; i < imageList.size(); i++) {
+			ImagePlus imp = opener.openImage(imageList.get(i).getLienImage());
+			algo.ExecuteAlgorithm(algoID, imp);
+			ResultsTable RT1 = ResultsTable.getResultsTable();
+			int rowNbr = RT1.getCounter();
+			ArrayList<Amas> liste = new ArrayList<>();
+
+			for (int j = 0; j < rowNbr; j++) {
+				int poids = 1;
+				if (RT1.columnExists("poids")) {
+					poids = (int)RT1.getValue("poids", j);
 				}
-				
-				pst = conn.prepareStatement(sqlLienAmas);
-				pst.setInt(1, amasID);
+				liste.add(new Amas(poids, (float)RT1.getValue("X", j), (float)RT1.getValue("Y", j)));
+			}
+			listeAmas.add(liste);
+		}
+
+		//Insertion dans la BD
+
+		try {
+			String sqlAddmesure = "INSERT INTO mesure VALUES ()";
+			String sqlGetMesureId = "SELECT MAX(idMesure) FROM mesure";
+			String sqlLienImage = "INSERT INTO mesureappartientimage (idImage, idMesure) VALUES (? ,?)";
+			String sqlLienEssai = "INSERT INTO essaicontientmesure (idEssai, idMesure) VALUES (? ,?)";
+			String sqlAddAmas = "INSERT INTO amas (coordonnéeX, coordonnéeY, poids) VALUES (?, ?, ?)";
+			String sqlGetAmasId = "SELECT MAX(idAmas) FROM amas";
+			String sqlLienAmas = "INSERT INTO amasappartientmesure (idAmas, idMesure) VALUES (?, ?)";
+
+			for (int k = 0; k < imageList.size(); k++) {
+				int IDimage = imageList.get(k).getIdImage();
+
+				pst = conn.prepareStatement(sqlAddmesure);
+				pst.execute();
+
+				pst = conn.prepareStatement(sqlGetMesureId);
+				rs = pst.executeQuery();
+				int mesureID = 0;
+				while (rs.next()) {
+					mesureID = rs.getInt("MAX(idMesure)");
+				}
+
+				pst = conn.prepareStatement(sqlLienImage);
+				pst.setInt(1, IDimage);
 				pst.setInt(2, mesureID);
 				pst.execute();
-				
+
+				pst = conn.prepareStatement(sqlLienEssai);
+				pst.setInt(1, idEssai);
+				pst.setInt(2, mesureID);
+				pst.execute();
+
+				for (int j = 0; j < listeAmas.get(k).size(); j++) {
+					pst = conn.prepareStatement(sqlAddAmas);
+					pst.setFloat(1, listeAmas.get(k).get(j).getCoordonneesX());
+					pst.setFloat(2, listeAmas.get(k).get(j).getCoordonneesY());
+					pst.setFloat(3, listeAmas.get(k).get(j).getPoids());
+					pst.execute();
+
+					pst = conn.prepareStatement(sqlGetAmasId);
+					rs = pst.executeQuery();
+					int amasID = 0;
+					while (rs.next()) {
+						amasID = rs.getInt("MAX(idAmas)");
+					}
+
+					pst = conn.prepareStatement(sqlLienAmas);
+					pst.setInt(1, amasID);
+					pst.setInt(2, mesureID);
+					pst.execute();
+
+				}
+
 			}
-			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'insertion dans la base de données.");
+			return;
 		}
-	} catch (Exception e) {
-		JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'insertion dans la base de données.");
-		return;
-	}
-		
-	pageResultatEssai(idEssai);
+
+		pageResultatEssai(idEssai);
 	}
 
 	/**
@@ -463,23 +463,23 @@ public class PageDeConnectionController implements Initializable {
 	 * @author ST3VOS
 	 */
 
-	
-	
+
+
 	public void pageResultatEssai(int id) {
 		conn = mysqlconnect.ConnectDb();
-		
+
 		String sqlNbrImages = "SELECT COUNT(*) FROM essaicontientimage WHERE idEssai = ?";
 		String sqlNbrCells = "SELECT COUNT(*) FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure"
 				+ "WHERE ECM.idEssai = ?";
-		
+
 		String sqlFetchmesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure WHERE ECM.idEssai = ?";
 		String sqlMoyenneCells = "SELECT COUNT(A.idAmas) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "WHERE ECM.idEssai = ? AND M.idMesure = ?";
-		
+
 		try {
 			pst = conn.prepareStatement(sqlNbrImages);
 			pst.setInt(1, id);
@@ -487,14 +487,14 @@ public class PageDeConnectionController implements Initializable {
 			while (rs.next()) {
 				nbrTotatleImagesEssais.setText(rs.getString("COUNT(*)"));
 			}
-			
+
 			pst = conn.prepareStatement(sqlNbrCells);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				nbrTotaleCelluleEssais.setText(rs.getString("COUNT(*)"));
 			}
-			
+
 			pst = conn.prepareStatement(sqlFetchmesures);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
@@ -512,19 +512,19 @@ public class PageDeConnectionController implements Initializable {
 				}
 				i++;
 			}
-			
+
 			if (i != 0) {
 				moyenneCelluleImageEssais.setText(String.valueOf(total/i));
 			} else {
 				moyenneCelluleImageEssais.setText(String.valueOf(0));
 			}
-			
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'obtention des données.");
 		}
-		
-		
-		
+
+
+
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
 		pageAjouterImage.setVisible(false);
@@ -537,7 +537,7 @@ public class PageDeConnectionController implements Initializable {
 		gestionAdminButtonSetVisible();
 		//Fin du déplacement entre les pages
 
-		
+
 	}
 
 
@@ -627,16 +627,14 @@ public class PageDeConnectionController implements Initializable {
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
-				
+
 				if( recordAdded ){
-					//  JOptionPane.showMessageDialog(null, "Record added");
 				} else{
 					JOptionPane.showMessageDialog(null, "Cette campagne existe déjà.");
 				}
 			}
-	
+
 		}catch (Exception e) {
-			// TODO: handle exception
 		}
 
 
@@ -770,10 +768,6 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
-
-
-
 	@FXML
 	TextField idEssaiTextField;
 	@FXML
@@ -795,7 +789,7 @@ public class PageDeConnectionController implements Initializable {
 
 	int idEssai = 0;
 	int idAlgorithme = 0;
-	
+
 
 	@FXML
 	public void getSelectedEssai (MouseEvent event){
@@ -811,8 +805,8 @@ public class PageDeConnectionController implements Initializable {
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
 		refreshTableImageEssaiResultat();
-		
-		
+
+
 		String textA = idEssaiTextField.getText();
 		idAlgorithme = Integer.parseInt(textA);
 		refreshTableAlgoEssai();
@@ -828,19 +822,19 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, descriptionEssais.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sqlFetch);
 			rs = pst.executeQuery();
 			int idEss = 0;
 			while (rs.next()) {
 				idEss = rs.getInt("idEssai");
 			}
-			
+
 			pst = conn.prepareStatement(sqlLink);
 			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
 			pst.setInt(2, idEss);
 			pst.execute();
-			
+
 			refreshTableEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -881,17 +875,16 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sqlDelete);
 			pst.setString(1, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, idAlgoTF.getText());
 			pst.setString(2, idEssaiTextField.getText());
 			pst.execute();
-			
+
 			refreshTableImageEssai();
 			refreshTableAlgoEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné.");
-			//e.printStackTrace();
 		}
 	}
 
@@ -906,7 +899,6 @@ public class PageDeConnectionController implements Initializable {
 			String sql = "UPDATE essai SET description= '"+value2+"' WHERE idEssai='"+value1+"' ";
 			pst= conn.prepareStatement(sql);
 			pst.execute();
-			//JOptionPane.showMessageDialog(null, "Update");
 			refreshTableEssai();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -923,18 +915,17 @@ public class PageDeConnectionController implements Initializable {
 			pst = conn.prepareStatement(sqlCheck);
 			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
 			rs = pst.executeQuery();
-			
+
 			if (rs.next()) {
 				deleteEssaiComplet(currIdEssai);
 				idEssai = 0;
-				//	JOptionPane.showMessageDialog(null, "Delete");
 				refreshTableEssai();
 				refreshTableImageEssai();
 				refreshTableImageEssaiResultat();
 			} else {
 				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer un essai que vous n'avez pas créé.");
 			}
-		
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Il y a eu un problème.");
 		}
@@ -984,9 +975,9 @@ public class PageDeConnectionController implements Initializable {
 		tableImageE.setItems(listImageEssai);
 	}
 
-	
-	
-	
+
+
+
 
 	@FXML
 	private TableView<Image> tableImageEssaiResultat;
@@ -998,9 +989,9 @@ public class PageDeConnectionController implements Initializable {
 	private TableColumn<Image, String>nomImageEssaiResultat;
 
 	ObservableList<Image> listImageEssaiResultat;
-	
-	
-	
+
+
+
 	public void refreshTableImageEssaiResultat(){
 
 		idImageEssaiResultat.setCellValueFactory(new PropertyValueFactory<Image ,Integer>("idImage"));
@@ -1011,11 +1002,11 @@ public class PageDeConnectionController implements Initializable {
 
 		tableImageEssaiResultat.setItems(listImageEssaiResultat);
 	}
-	
-	
 
-	
-	
+
+
+
+
 	@FXML
 	private TextField idAlgoTF;
 	@FXML
@@ -1027,8 +1018,8 @@ public class PageDeConnectionController implements Initializable {
 
 	ObservableList<Algorithme> listAlgo;
 
-	
-	
+
+
 	@FXML
 	public void getSelectedAlgo(MouseEvent event){
 		index = tableAlgo.getSelectionModel().getSelectedIndex();
@@ -1039,8 +1030,8 @@ public class PageDeConnectionController implements Initializable {
 		idAlgoTF.setText(tableIdAlgo.getCellData(index).toString());
 
 	}
-	
-	
+
+
 	public void refreshTableAlgo(){
 
 		tableIdAlgo.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
@@ -1051,10 +1042,10 @@ public class PageDeConnectionController implements Initializable {
 
 		tableAlgo.setItems(listAlgo);
 	}
-	
-	
-	
-	
+
+
+
+
 
 	@FXML
 	private TableView<Algorithme> tableAlgoEssai;
@@ -1065,11 +1056,7 @@ public class PageDeConnectionController implements Initializable {
 
 	ObservableList<Algorithme> listAlgoEssai;
 
-	
-	
-	
-	
-	
+
 	public void refreshTableAlgoEssai(){
 
 		tableIdAlgoEssai.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
@@ -1080,10 +1067,6 @@ public class PageDeConnectionController implements Initializable {
 
 		tableAlgoEssai.setItems(listAlgoEssai);
 	}
-
-
-
-	
 
 
 
@@ -1130,51 +1113,51 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
-		
+
 		int currIdUser = Integer.parseInt(idUtilisateur.getText());
-		
+
 		if (currIdUser == MainCelluleInterface.getIdUserGlobal()) {
 			JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer votre propre compte.");
 			return;
 		}
-		
-	    String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
-	    String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
-	    String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
-	    String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
 
-	    try {
-	        pst = conn.prepareStatement(sqlUserEssai);
-	        pst.setInt(1, currIdUser);
-	        rs = pst.executeQuery();
-	            
-	        while (rs.next()) {
-	            deleteEssaiComplet(rs.getInt("idEssai"));
-	        }
-	            
-	            
-	            
-	        pst = conn.prepareStatement(sqlDeleteAdmin);
-	        pst.setInt(1, currIdUser);
-	        pst.execute();
+		String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
+		String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+		String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
+		String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
 
-	            
-	        pst = conn.prepareStatement(sqlDeleteUserEssai);
-	        pst.setInt(1, currIdUser);
-	        pst.execute();
+		try {
+			pst = conn.prepareStatement(sqlUserEssai);
+			pst.setInt(1, currIdUser);
+			rs = pst.executeQuery();
 
-	        	
-	        pst = conn.prepareStatement(sql);
-	        pst.setInt(1, currIdUser);
-	        pst.execute();
+			while (rs.next()) {
+				deleteEssaiComplet(rs.getInt("idEssai"));
+			}
 
-	    
-	        } catch (Exception e) {
-	            JOptionPane.showMessageDialog(null, e);
-	        }
-	    
-	    refreshTableGestioadmin();
-	    JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès !");
+
+
+			pst = conn.prepareStatement(sqlDeleteAdmin);
+			pst.setInt(1, currIdUser);
+			pst.execute();
+
+
+			pst = conn.prepareStatement(sqlDeleteUserEssai);
+			pst.setInt(1, currIdUser);
+			pst.execute();
+
+
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, currIdUser);
+			pst.execute();
+
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+		refreshTableGestioadmin();
+		JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès !");
 	}
 
 
@@ -1189,7 +1172,7 @@ public class PageDeConnectionController implements Initializable {
 				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas changer votre propre statut.");
 				return;
 			}
-			
+
 			String sqlDelete = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
 			pst = conn.prepareStatement(sqlDelete);
 			pst.setString(1, value1);
@@ -1201,12 +1184,11 @@ public class PageDeConnectionController implements Initializable {
 				pst.setString(1, value1);
 				pst.execute();
 			}
-			//JOptionPane.showMessageDialog(null, "Update");
 			refreshTableGestioadmin();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
-		
+
 	}
 
 
@@ -1258,8 +1240,8 @@ public class PageDeConnectionController implements Initializable {
 	private javafx.scene.image.Image imageV;
 
 
-	//	@FXML
-	//	private ImageView imageView;
+	@FXML
+	private ImageView imageView;
 
 	ObservableList<Image> listImages;
 
@@ -1334,89 +1316,89 @@ public class PageDeConnectionController implements Initializable {
 		}
 	}
 
-	 public void deleteImage(){
-		 
-		    conn = mysqlconnect.ConnectDb();
-		    String sqlFetchImage = "SELECT * FROM image WHERE idImage = ?";
-		    String sqlDeleteLienEssai = "DELETE FROM essaicontientimage WHERE idImage = ?";
-		    String sqlFetchAllMesures = "SELECT * FROM mesure M INNER JOIN mesureappartientimage MAI ON MAI.idMesure = M.idMesure WHERE MAI.idImage = ?";
-		    String sqlFetchAllAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
-		    String sqlDeleteAmasLien = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
-		    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";  
-		    String sqlDeleteLienMesure = "DELETE FROM mesureappartientimage WHERE idImage = ?";
-		    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
-		    String sqlDelete = "DELETE FROM image WHERE idImage = ?";
-		    
-		    String selectedImage = idImageImg.getText();
-		    
-		    if (selectedImage.equals("")) {
-		    	JOptionPane.showMessageDialog(null, "Veuillez d'abord sélectionner une image.");
-		    	return;
-		    }
-		    
-		    try {
-		    	
-		        pst = conn.prepareStatement(sqlDeleteLienEssai);
-		        pst.setString(1, selectedImage);
-		        pst.execute();
-		        
-		        pst = conn.prepareStatement(sqlFetchAllMesures);
-		        pst.setString(1, selectedImage);
-		        rs = pst.executeQuery();
-		        
-		        while (rs.next()) {
-			        pst = conn.prepareStatement(sqlFetchAllAmas);
-			        pst.setString(1, rs.getString("idMesure"));
-			        ResultSet rsA;
-			        rsA = pst.executeQuery();
-			        
-			        while (rsA.next()) {
-				        pst = conn.prepareStatement(sqlDeleteAmasLien);
-				        pst.setString(1, rsA.getString("idAmas"));
-				        pst.execute();
-				        
-				        pst = conn.prepareStatement(sqlDeleteAmas);
-				        pst.setString(1, rsA.getString("idAmas"));
-				        pst.execute();
-			        }
-			        
-			        
-			        pst = conn.prepareStatement(sqlDeleteLienMesure);
-			        pst.setString(1, selectedImage);
-			        pst.execute();
-			        
-			        pst = conn.prepareStatement(sqlDeleteMesure);
-			        pst.setString(1, rs.getString("idMesure"));
-			        pst.execute();
-			        
-		        }
-		        
-		        pst = conn.prepareStatement(sqlFetchImage);
-		        pst.setString(1, selectedImage);
-		        rs = pst.executeQuery();
-		        
-		        while (rs.next()) {
-		        	File file = new File(rs.getString("lienImage"));
-		        	if (file.delete()) {
-		        		
-		        	} else {
-		        		JOptionPane.showMessageDialog(null, "Erreur lors de la suppression.");
-		        	}
-		        }
-		        
-		        pst = conn.prepareStatement(sqlDelete);
-		        pst.setString(1, selectedImage);
-		        pst.execute();
-		        
-				refreshTableImage();
-				refreshTableImageEssai();
-		    } catch (Exception e) {
-		    	JOptionPane.showMessageDialog(null, e);
-		        }
-		    
-		    }
-	
-	
+	public void deleteImage(){
+
+		conn = mysqlconnect.ConnectDb();
+		String sqlFetchImage = "SELECT * FROM image WHERE idImage = ?";
+		String sqlDeleteLienEssai = "DELETE FROM essaicontientimage WHERE idImage = ?";
+		String sqlFetchAllMesures = "SELECT * FROM mesure M INNER JOIN mesureappartientimage MAI ON MAI.idMesure = M.idMesure WHERE MAI.idImage = ?";
+		String sqlFetchAllAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
+		String sqlDeleteAmasLien = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
+		String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";  
+		String sqlDeleteLienMesure = "DELETE FROM mesureappartientimage WHERE idImage = ?";
+		String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
+		String sqlDelete = "DELETE FROM image WHERE idImage = ?";
+
+		String selectedImage = idImageImg.getText();
+
+		if (selectedImage.equals("")) {
+			JOptionPane.showMessageDialog(null, "Veuillez d'abord sélectionner une image.");
+			return;
+		}
+
+		try {
+
+			pst = conn.prepareStatement(sqlDeleteLienEssai);
+			pst.setString(1, selectedImage);
+			pst.execute();
+
+			pst = conn.prepareStatement(sqlFetchAllMesures);
+			pst.setString(1, selectedImage);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				pst = conn.prepareStatement(sqlFetchAllAmas);
+				pst.setString(1, rs.getString("idMesure"));
+				ResultSet rsA;
+				rsA = pst.executeQuery();
+
+				while (rsA.next()) {
+					pst = conn.prepareStatement(sqlDeleteAmasLien);
+					pst.setString(1, rsA.getString("idAmas"));
+					pst.execute();
+
+					pst = conn.prepareStatement(sqlDeleteAmas);
+					pst.setString(1, rsA.getString("idAmas"));
+					pst.execute();
+				}
+
+
+				pst = conn.prepareStatement(sqlDeleteLienMesure);
+				pst.setString(1, selectedImage);
+				pst.execute();
+
+				pst = conn.prepareStatement(sqlDeleteMesure);
+				pst.setString(1, rs.getString("idMesure"));
+				pst.execute();
+
+			}
+
+			pst = conn.prepareStatement(sqlFetchImage);
+			pst.setString(1, selectedImage);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				File file = new File(rs.getString("lienImage"));
+				if (file.delete()) {
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Erreur lors de la suppression.");
+				}
+			}
+
+			pst = conn.prepareStatement(sqlDelete);
+			pst.setString(1, selectedImage);
+			pst.execute();
+
+			refreshTableImage();
+			refreshTableImageEssai();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+
+
 
 
 
@@ -1427,11 +1409,11 @@ public class PageDeConnectionController implements Initializable {
 		file = fileChooser.showOpenDialog(stage);
 
 
-				if (file != null) {
+		if (file != null) {
 
-					imageNom.setText(file.getName());
-	
-			}
+			imageNom.setText(file.getName());
+
+		}
 
 	}
 
@@ -1456,35 +1438,6 @@ public class PageDeConnectionController implements Initializable {
 	/*---------------------------------Fin-----Page Ajouter Image-----------------------------------------------------------*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/*-----------------------------------Page Compte-----------------------------------------------------------*/
 
 	@FXML
@@ -1493,15 +1446,15 @@ public class PageDeConnectionController implements Initializable {
 	TextField showPrenom;
 	@FXML
 	TextField showNom;
-	
-	
+
+
 	@FXML
 	TextField modifierPrenomCompte;
 	@FXML
 	TextField modifierNomCompte;
 	@FXML
 	PasswordField modifierPasswordCompte;
-	
+
 
 
 
@@ -1509,53 +1462,53 @@ public class PageDeConnectionController implements Initializable {
 	public void editCompte(){   
 		try {
 			conn = mysqlconnect.ConnectDb();
-			
+
 			String sqlIni = "UPDATE utilisateur SET ";
-			
+
 			String value1 = modifierPrenomCompte.getText();
 			String value2 = modifierNomCompte.getText();
 			String value3 = modifierPasswordCompte.getText();
-			
+
 			if (value1.equals("") && value2.equals("") && value3.equals("")) {
 				JOptionPane.showMessageDialog(null, "Aucune information n'a été renseignée.");
 				return;
 			}
-			
+
 			if (!value1.equals("")) {
 				sqlIni += "prenom = '"+value1+"'";
 			}
-			
+
 			if (!value2.equals("")) {
 				if (!value1.equals("")) {
 					sqlIni += ", ";
 				}
 				sqlIni += "nom = '" + value2 + "'";
 			}
-			
+
 			if (!value3.equals("")) {
 				if (!value1.equals("") || !value2.equals("")) {
 					sqlIni += ", ";
 				}
 				sqlIni += "motDePasse = '"+value3+"' ";
 			}
-			
-			
+
+
 			String sqlComplete = sqlIni + "WHERE idUtilisateur = ?";
 			pst= conn.prepareStatement(sqlComplete);
 			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
 			pst.execute();
-			
+
 			String sqlUpdateShow = "SELECT * FROM utilisateur WHERE idUtilisateur = ?";
 			pst= conn.prepareStatement(sqlUpdateShow);
 			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
 			rs = pst.executeQuery();
-			
+
 			while (rs.next()) {
-	        	showUsername.setText(rs.getString("userName"));
-	        	showPrenom.setText(rs.getString("prenom"));
-	        	showNom.setText(rs.getString("nom"));
+				showUsername.setText(rs.getString("userName"));
+				showPrenom.setText(rs.getString("prenom"));
+				showNom.setText(rs.getString("nom"));
 			}
-			
+
 			JOptionPane.showMessageDialog(null, "Compte modifié avec succès !");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -1568,189 +1521,150 @@ public class PageDeConnectionController implements Initializable {
 		conn = mysqlconnect.ConnectDb();
 		String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
 		String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
-	    String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
-	    String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
-	    String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
-	    String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure WHERE idmesure = ?";
-	    String sqlFetchMesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
-	    String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
-	    String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
-	    String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
-	    String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
-	    String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure WHERE idMesure = ?";
-	    String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
-	    String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure WHERE idEssai = ?";
-	    
-	    
+		String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
+		String sqlDeleteMesureImage = "DELETE FROM mesureappartientimage WHERE idMesure = ?";
+		String sqlDeleteAmasMesure = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
+		String sqlDeleteMesureEssai = "DELETE FROM essaicontientmesure WHERE idmesure = ?";
+		String sqlFetchMesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure WHERE ECM.idEssai = ?";
+		String sqlFetchMesureAmas = "SELECT * FROM amas A INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas WHERE AAM.idMesure = ?";
+		String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";
+		String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
+		String sqlDeleteEssai = "DELETE FROM essai WHERE idEssai = ?";
+		String sqlDeleteMesureAmas = "DELETE FROM amasappartientmesure WHERE idMesure = ?";
+		String sqlDeleteEssaiUser = "DELETE FROM utilisateureffectueessai WHERE idEssai = ?";
+		String sqlDeleteEssaiMesure = "DELETE FROM essaicontientmesure WHERE idEssai = ?";
+
+
 		try {
-        	PreparedStatement pst2;
-        	pst2 = conn.prepareStatement(sqlDeleteAlgo);
-            pst2.setInt(1, idEss);
-            pst2.execute();
-
-            
-        	pst2 = conn.prepareStatement(sqlDeleteCampagne);
-            pst2.setInt(1, idEss);
-            pst2.execute();
-            
-
-            
-        	pst2 = conn.prepareStatement(sqlDeleteImage);
-            pst2.setInt(1, idEss);
-            pst2.execute();
-
-            
-        	pst2 = conn.prepareStatement(sqlFetchMesures);
-            pst2.setInt(1, idEss);
-            ResultSet rsListMesures = pst2.executeQuery();
-
-            
-            while (rsListMesures.next()) {
-            	PreparedStatement pst3;
-            	pst3 = conn.prepareStatement(sqlDeleteMesureImage);
-                pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                pst3.execute();
+			PreparedStatement pst2;
+			pst2 = conn.prepareStatement(sqlDeleteAlgo);
+			pst2.setInt(1, idEss);
+			pst2.execute();
 
 
-                
-                pst3 = conn.prepareStatement(sqlFetchMesureAmas);
-                pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                ResultSet rsListAmas = pst3.executeQuery();
-
-                
-                while (rsListAmas.next()) {
-                	PreparedStatement pst4;
-                	pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
-                    pst4.setInt(1, rsListAmas.getInt("idAmas"));
-                    pst4.execute();
-
-                    
-                	pst4 = conn.prepareStatement(sqlDeleteAmas);
-                    pst4.setInt(1, rsListAmas.getInt("idAmas"));
-                    pst4.execute();
-
-                }
-                
-                pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
-                pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                pst3.execute();
-
-                
-                pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
-                pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                pst3.execute();
+			pst2 = conn.prepareStatement(sqlDeleteCampagne);
+			pst2.setInt(1, idEss);
+			pst2.execute();
 
 
-                pst3 = conn.prepareStatement(sqlDeleteMesure);
-                pst3.setInt(1, rsListMesures.getInt("idMesure"));
-                pst3.execute();
 
-            }
-            
-        	pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
-            pst2.setInt(1, idEss);
-            pst2.execute();
+			pst2 = conn.prepareStatement(sqlDeleteImage);
+			pst2.setInt(1, idEss);
+			pst2.execute();
 
-            
-        	pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
-            pst2.setInt(1, idEss);
-            pst2.execute();
 
-            
-        	pst2 = conn.prepareStatement(sqlDeleteEssai);
-            pst2.setInt(1, idEss);
-            pst2.execute();
+			pst2 = conn.prepareStatement(sqlFetchMesures);
+			pst2.setInt(1, idEss);
+			ResultSet rsListMesures = pst2.executeQuery();
+
+
+			while (rsListMesures.next()) {
+				PreparedStatement pst3;
+				pst3 = conn.prepareStatement(sqlDeleteMesureImage);
+				pst3.setInt(1, rsListMesures.getInt("idMesure"));
+				pst3.execute();
+
+
+
+				pst3 = conn.prepareStatement(sqlFetchMesureAmas);
+				pst3.setInt(1, rsListMesures.getInt("idMesure"));
+				ResultSet rsListAmas = pst3.executeQuery();
+
+
+				while (rsListAmas.next()) {
+					PreparedStatement pst4;
+					pst4 = conn.prepareStatement(sqlDeleteAmasMesure);
+					pst4.setInt(1, rsListAmas.getInt("idAmas"));
+					pst4.execute();
+
+
+					pst4 = conn.prepareStatement(sqlDeleteAmas);
+					pst4.setInt(1, rsListAmas.getInt("idAmas"));
+					pst4.execute();
+
+				}
+
+				pst3 = conn.prepareStatement(sqlDeleteMesureAmas);
+				pst3.setInt(1, rsListMesures.getInt("idMesure"));
+				pst3.execute();
+
+
+				pst3 = conn.prepareStatement(sqlDeleteMesureEssai);
+				pst3.setInt(1, rsListMesures.getInt("idMesure"));
+				pst3.execute();
+
+
+				pst3 = conn.prepareStatement(sqlDeleteMesure);
+				pst3.setInt(1, rsListMesures.getInt("idMesure"));
+				pst3.execute();
+
+			}
+
+			pst2 = conn.prepareStatement(sqlDeleteEssaiMesure);
+			pst2.setInt(1, idEss);
+			pst2.execute();
+
+
+			pst2 = conn.prepareStatement(sqlDeleteEssaiUser);
+			pst2.setInt(1, idEss);
+			pst2.execute();
+
+
+			pst2 = conn.prepareStatement(sqlDeleteEssai);
+			pst2.setInt(1, idEss);
+			pst2.execute();
 		} catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+			JOptionPane.showMessageDialog(null, e);
+		}
 	}
-	
-    public void deleteCompte(){
-    conn = mysqlconnect.ConnectDb();
-    String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
-    String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
-    String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
-    String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
 
-    
-    
-    
-        try {
-        	pst = conn.prepareStatement(sqlUserEssai);
-            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
-            rs = pst.executeQuery();
-            
-            while (rs.next()) {
-            	deleteEssaiComplet(rs.getInt("idEssai"));
-            }
-            
-            
-            
-        	pst = conn.prepareStatement(sqlDeleteAdmin);
-            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
-            pst.execute();
-
-            
-        	pst = conn.prepareStatement(sqlDeleteUserEssai);
-            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
-            pst.execute();
-
-        	
-        	pst = conn.prepareStatement(sql);
-            pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
-            pst.execute();
-
-    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    
-    }
-	
+	public void deleteCompte(){
+		conn = mysqlconnect.ConnectDb();
+		String sql = "DELETE FROM utilisateur WHERE idUtilisateur = ?";
+		String sqlDeleteAdmin = "DELETE FROM utilisateurestadmin WHERE idUtilisateur = ?";
+		String sqlDeleteUserEssai = "DELETE FROM utilisateureffectueessai WHERE idUtilisateur = ?";
+		String sqlUserEssai = "SELECT E.idEssai FROM essai E INNER JOIN utilisateureffectueessai UEE ON UEE.idEssai = e.idEssai WHERE UEE.idUtilisateur = ?";
 
 
 
 
+		try {
+			pst = conn.prepareStatement(sqlUserEssai);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				deleteEssaiComplet(rs.getInt("idEssai"));
+			}
 
 
 
+			pst = conn.prepareStatement(sqlDeleteAdmin);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			pst.execute();
 
 
+			pst = conn.prepareStatement(sqlDeleteUserEssai);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			pst.execute();
 
 
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, MainCelluleInterface.getIdUserGlobal());
+			pst.execute();
 
 
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	}
 
 
 
 
 	/*---------------------------------Fin-----Page Compte-----------------------------------------------------------*/
+
 	/* ---------------------------logout button-------------------------------*/
 
 
@@ -1804,24 +1718,25 @@ public class PageDeConnectionController implements Initializable {
 			stage.setY((rd.getHeight()-stage.getHeight())/2);
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 
 
 	}
-	
-	
+
+
 
 
 
 	/*------------------------------------Fin logout button----------------------------------------------*/	
 
-	
+
 	@FXML
 	Button exporterEssais;
-	
-	
+
+
+	@FXML
+	Button exporterCampagnes;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -1836,9 +1751,9 @@ public class PageDeConnectionController implements Initializable {
 		refreshTableGestioadmin();
 		refreshTableImage();
 		gestionAdminButtonSetVisible();
-		
+
 		/*-----------------------------------------------*/
-		
+
 		fileChooser=new FileChooser();
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG-PNG","*.JPG","*.PNG"));
 
@@ -1853,142 +1768,233 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-		// Fin de l'activation des boutons,les textfields,etc...
 
-		
-		
-		 try {
-		        // Connection to the database
-			 	conn = mysqlconnect.ConnectDb();
+		try {
+			// Connection to the database
+			conn = mysqlconnect.ConnectDb();
 
-		        // Statement
-		        Statement myStmt = conn.createStatement();
-		        // SQL query
-		        ResultSet myRs = myStmt.executeQuery("SELECT * FROM utilisateur WHERE idUtilisateur = "+MainCelluleInterface.getIdUserGlobal());
-		        // Result processing
-		        while (myRs.next()) {
-		 
-		        	showUsername.setText(myRs.getString("userName"));
-		        	showPrenom.setText(myRs.getString("prenom"));
-		        	showNom.setText(myRs.getString("nom"));
-		        	
-		        	/*
-		            modifierPrenomCompte.setText(myRs.getString("prenom"));
-		            modifierNomCompte.setText(myRs.getString("nom"));
-		            modifierPasswordCompte.setText(myRs.getString("motDePasse"));
-		            */
-		        } 
+			// Statement
+			Statement myStmt = conn.createStatement();
+			// SQL query
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM utilisateur WHERE idUtilisateur = "+MainCelluleInterface.getIdUserGlobal());
+			// Result processing
+			while (myRs.next()) {
+
+				showUsername.setText(myRs.getString("userName"));
+				showPrenom.setText(myRs.getString("prenom"));
+				showNom.setText(myRs.getString("nom"));
+
+
+			} 
 
 
 
-		    } catch (Exception exc) {
-		        exc.printStackTrace();
-		    } 
-		
-		 
-		 
-		 
-		 
-		 //--------------------------------------------------
-		 
-		 
-		
-		 exporterEssais.setOnAction( e->{
-
-	            try {
-
-	                String query = "Select * from amas";
-
-	                pst = conn.prepareStatement(query);
-
-	                rs = pst.executeQuery();
-	                
-
-	                XSSFWorkbook wb = new XSSFWorkbook();
-
-	                XSSFSheet sheet = wb.createSheet("Amas Details");
-
-	                XSSFRow header = sheet.createRow(0);
-
-	                header.createCell(0).setCellValue("idamas");
-
-	                header.createCell(1).setCellValue("coordonnéeX");
-
-	                header.createCell(2).setCellValue("coordonnéeY");
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		} 
 
 
-	                sheet.autoSizeColumn(1);
-
-	                sheet.autoSizeColumn(2);
-
-	                sheet.setColumnWidth(2, 256*25);//character width
-	                sheet.setZoom(150);//scale
 
 
-	                int index = 1;
 
-	                while(rs.next()){
-
-	                    XSSFRow row = sheet.createRow(index);
-
-	                    row.createCell(0).setCellValue(rs.getString("idamas"));
-
-	                    row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
-
-	                    row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+		//--------------------------------------------------
 
 
-	                    index++;                  
+		/**
+		 * Methode pourr exporter les resultat d'un essai
+		 */
+		exporterEssais.setOnAction( e->{
 
-	                }
+			try {
 
-	               
+				String query = "Select * from amas";
 
-	                FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");
+				pst = conn.prepareStatement(query);
 
-	                wb.write(fileOut);
-
-	                fileOut.close();
-
-	               
-
-	                Alert alert = new Alert(AlertType.INFORMATION);
-
-	                alert.setTitle("Information");
-
-	                alert.setHeaderText(null);
-
-	                alert.setContentText("User Details Exported in Excel Sheet.");
-
-	                alert.showAndWait();
-
-	               
-
-	                pst.close();
-
-	                rs.close();
-
-	               
-
-	            } catch (SQLException | FileNotFoundException ex) {
-
-	                
-
-	            } catch (IOException ex) {
+				rs = pst.executeQuery();
 
 
-	            }
+				XSSFWorkbook wb = new XSSFWorkbook();
 
-	           
+				XSSFSheet sheet = wb.createSheet("Amas Details");
 
-	        });
-		 
-		 
-		
-		 
-		 
-		
-	
+				XSSFRow header = sheet.createRow(0);
+
+				header.createCell(0).setCellValue("idamas");
+
+				header.createCell(1).setCellValue("coordonnéeX");
+
+				header.createCell(2).setCellValue("coordonnéeY");
+
+
+				sheet.autoSizeColumn(1);
+
+				sheet.autoSizeColumn(2);
+
+				sheet.setColumnWidth(2, 256*25);
+				sheet.setZoom(150);
+
+
+				int index = 1;
+
+				while(rs.next()){
+
+					XSSFRow row = sheet.createRow(index);
+
+					row.createCell(0).setCellValue(rs.getString("idamas"));
+
+					row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
+
+					row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+
+
+					index++;                  
+
+				}
+
+
+
+				FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");
+
+				wb.write(fileOut);
+
+				fileOut.close();
+
+
+
+				Alert alert = new Alert(AlertType.INFORMATION);
+
+				alert.setTitle("Information");
+
+				alert.setHeaderText(null);
+
+				alert.setContentText("Les résultats ont été exportés sous forme de fichier Excel.");
+
+				alert.showAndWait();
+
+
+
+				pst.close();
+
+				rs.close();
+
+
+
+			} catch (SQLException | FileNotFoundException ex) {
+
+
+
+			} catch (IOException ex) {
+
+
+			}
+
+
+
+		});
+
+		/*---------------------------------------------------------------------*/
+
+
+		/**
+		 * Methode pourr exporter les resultat d'un Campagne
+		 * 
+		 */
+
+		exporterCampagnes.setOnAction( e->{
+
+			try {
+
+				String query = "Select * from amas";
+
+				pst = conn.prepareStatement(query);
+
+				rs = pst.executeQuery();
+
+
+				XSSFWorkbook wb = new XSSFWorkbook();
+
+				XSSFSheet sheet = wb.createSheet("Amas Details");
+
+				XSSFRow header = sheet.createRow(0);
+
+				header.createCell(0).setCellValue("idamas");
+
+				header.createCell(1).setCellValue("coordonnéeX");
+
+				header.createCell(2).setCellValue("coordonnéeY");
+
+
+				sheet.autoSizeColumn(1);
+
+				sheet.autoSizeColumn(2);
+
+				sheet.setColumnWidth(2, 256*25);
+				sheet.setZoom(150);
+
+
+				int index = 1;
+
+				while(rs.next()){
+
+					XSSFRow row = sheet.createRow(index);
+
+					row.createCell(0).setCellValue(rs.getString("idamas"));
+
+					row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
+
+					row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+
+
+					index++;                  
+
+				}
+
+
+
+				FileOutputStream fileOut = new FileOutputStream("CampagneDetails.xlsx");
+
+				wb.write(fileOut);
+
+				fileOut.close();
+
+
+
+				Alert alert = new Alert(AlertType.INFORMATION);
+
+				alert.setTitle("Information");
+
+				alert.setHeaderText(null);
+
+				alert.setContentText("Les résultats ont été exportés sous forme de fichier Excel.");
+
+				alert.showAndWait();
+
+
+
+				pst.close();
+
+				rs.close();
+
+
+
+			} catch (SQLException | FileNotFoundException ex) {
+
+
+
+			} catch (IOException ex) {
+
+
+			}
+
+
+
+		});
+
+
+
+
+
 	}
 
 }
