@@ -607,7 +607,7 @@ public class PageDeConnectionController implements Initializable {
 		String text = idEssaiTextField.getText();
 		idEssai = Integer.parseInt(text);
 		refreshTableImageEssai();
-		
+		refreshTableImageEssaiResultat();
 		
 		
 		String textA = idEssaiTextField.getText();
@@ -727,6 +727,7 @@ public class PageDeConnectionController implements Initializable {
 				//	JOptionPane.showMessageDialog(null, "Delete");
 				refreshTableEssai();
 				refreshTableImageEssai();
+				refreshTableImageEssaiResultat();
 			} else {
 				JOptionPane.showMessageDialog(null, "Vous ne pouvez pas supprimer un essai que vous n'avez pas créé.");
 			}
@@ -780,6 +781,35 @@ public class PageDeConnectionController implements Initializable {
 		tableImageE.setItems(listImageEssai);
 	}
 
+	
+	
+	
+
+	@FXML
+	private TableView<Image> tableImageEssaiResultat;
+	@FXML
+	private TableColumn<Image, Integer>idImageEssaiResultat;
+
+
+	@FXML
+	private TableColumn<Image, String>nomImageEssaiResultat;
+
+	ObservableList<Image> listImageEssaiResultat;
+	
+	
+	
+	public void refreshTableImageEssaiResultat(){
+
+		idImageEssaiResultat.setCellValueFactory(new PropertyValueFactory<Image ,Integer>("idImage"));
+
+		nomImageEssaiResultat.setCellValueFactory(new PropertyValueFactory<Image ,String>("nom"));
+
+		listImageEssaiResultat= mysqlconnect.getDataImagesEssai(idEssai);
+
+		tableImageEssaiResultat.setItems(listImageEssaiResultat);
+	}
+	
+	
 
 	
 	

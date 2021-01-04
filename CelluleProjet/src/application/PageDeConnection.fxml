@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -123,7 +122,7 @@
             <Button fx:id="exporterCampagnes" layoutX="823.0" layoutY="586.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
          </children>
       </Pane>
-      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
@@ -213,13 +212,18 @@
             <TextField fx:id="nbrTotatleImagesEssais" editable="false" layoutX="432.0" layoutY="118.0" prefHeight="31.0" prefWidth="91.0" />
             <TextField fx:id="nbrTotaleCelluleEssais" editable="false" layoutX="432.0" layoutY="189.0" prefHeight="31.0" prefWidth="91.0" />
             <TextField fx:id="moyenneCelluleImageEssais" editable="false" layoutX="432.0" layoutY="264.0" prefHeight="31.0" prefWidth="91.0" />
-            <ListView fx:id="listImageResultatEssais" layoutX="70.0" layoutY="372.0" prefHeight="225.0" prefWidth="585.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Resultat" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <TableView fx:id="tableImageEssaiResultat" layoutX="70.0" layoutY="367.0" prefHeight="289.0" prefWidth="596.0">
+              <columns>
+                <TableColumn fx:id="idImageEssaiResultat" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+                <TableColumn fx:id="nomImageEssaiResultat" prefWidth="593.0" text="Images" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
