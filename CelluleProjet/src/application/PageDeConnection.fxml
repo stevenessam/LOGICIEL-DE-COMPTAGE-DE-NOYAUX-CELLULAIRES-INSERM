@@ -123,7 +123,7 @@
             <Button fx:id="exporterCampagnes" layoutX="823.0" layoutY="586.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
          </children>
       </Pane>
-      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
@@ -136,7 +136,7 @@
             <Button fx:id="creeEssais" layoutX="776.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
             <Button fx:id="modifierEssais" layoutX="776.0" layoutY="279.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
             <Button fx:id="supprimerEssais" layoutX="776.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
-            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#pageLoadingE" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#pageLoadingE" onMouseClicked="#TraitementEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
             <Button fx:id="importImageEssais" layoutX="777.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
             <Label layoutX="799.0" layoutY="77.0" text="Description" textFill="WHITE">
                <font>
@@ -177,7 +177,7 @@
             <Line endX="280.0" endY="-207.4267120361328" layoutX="193.0" layoutY="486.0" startX="280.0" startY="-7.81433629989624" stroke="#0064aa" strokeWidth="3.0" style="-fx-scale-y: 3;" />
          </children>
       </Pane>
-      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="77.0" layoutY="118.0" text="Nombre Totale d'Image" textFill="WHITE">
                <font>
