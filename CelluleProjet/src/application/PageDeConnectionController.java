@@ -1807,10 +1807,16 @@ public class PageDeConnectionController implements Initializable {
 
 			try {
 
-				String query = "Select * from amas";
+				String query = "SELECT A.idAmas, A.coordonnéeX, A.coordonnéeY, A.poids, I.nom FROM amas A "
+						+ "INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas "
+						+ "INNER JOIN mesure M ON AAM.idMesure = M.idMesure "
+						+ "INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure "
+						+ "INNER JOIN mesureappartientimage MAI ON M.idMesure = MAI.idMesure "
+						+ "INNER JOIN image I ON MAI.idImage = I.idImage "
+						+ "WHERE ECM.idEssai = ?";
 
 				pst = conn.prepareStatement(query);
-
+				pst.setInt(1, idEssai);
 				rs = pst.executeQuery();
 
 
@@ -1820,16 +1826,17 @@ public class PageDeConnectionController implements Initializable {
 
 				XSSFRow header = sheet.createRow(0);
 
-				header.createCell(0).setCellValue("idamas");
+				header.createCell(0).setCellValue("Image");
 
-				header.createCell(1).setCellValue("coordonnéeX");
+				header.createCell(1).setCellValue("X");
 
-				header.createCell(2).setCellValue("coordonnéeY");
+				header.createCell(2).setCellValue("Y");
+				
+				header.createCell(3).setCellValue("Poids");
 
 
-				sheet.autoSizeColumn(1);
-
-				sheet.autoSizeColumn(2);
+				sheet.setColumnWidth(0, 256*20);
+				sheet.setColumnWidth(1, 256*25);
 
 				sheet.setColumnWidth(2, 256*25);
 				sheet.setZoom(150);
@@ -1841,11 +1848,13 @@ public class PageDeConnectionController implements Initializable {
 
 					XSSFRow row = sheet.createRow(index);
 
-					row.createCell(0).setCellValue(rs.getString("idamas"));
+					row.createCell(0).setCellValue(rs.getString("nom"));
 
 					row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
 
 					row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+					
+					row.createCell(3).setCellValue(rs.getString("poids"));
 
 
 					index++;                  
