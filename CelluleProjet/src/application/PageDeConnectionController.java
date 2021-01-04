@@ -297,7 +297,9 @@ public class PageDeConnectionController implements Initializable {
 			JOptionPane.showMessageDialog(null, "Veuillez sélectionner un essai.");
 			return;
 		}
+		
 		conn = mysqlconnect.ConnectDb();
+		
 		int algoID = 0;
 		ArrayList<Image> imageList = new ArrayList<Image>();
 		//Essai déjà effectué ?
@@ -469,9 +471,11 @@ public class PageDeConnectionController implements Initializable {
 		conn = mysqlconnect.ConnectDb();
 
 		String sqlNbrImages = "SELECT COUNT(*) FROM essaicontientimage WHERE idEssai = ?";
-		String sqlNbrCells = "SELECT COUNT(*) FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+		
+		
+		String sqlNbrCells = "SELECT COUNT(A.idAmas) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
-				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure"
+				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "WHERE ECM.idEssai = ?";
 
 		String sqlFetchmesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure WHERE ECM.idEssai = ?";
@@ -492,7 +496,7 @@ public class PageDeConnectionController implements Initializable {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				nbrTotaleCelluleEssais.setText(rs.getString("COUNT(*)"));
+				nbrTotaleCelluleEssais.setText(rs.getString("Nombre"));
 			}
 
 			pst = conn.prepareStatement(sqlFetchmesures);
