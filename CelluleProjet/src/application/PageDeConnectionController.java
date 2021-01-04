@@ -249,6 +249,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 	
 	
+	 
 	
 	public void pageLoadingC() {
 		pageCampagnes.setVisible(false);
