@@ -136,7 +136,7 @@
             <Button fx:id="creeEssais" layoutX="776.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
             <Button fx:id="modifierEssais" layoutX="776.0" layoutY="279.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
             <Button fx:id="supprimerEssais" layoutX="776.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
-            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#pageLoadingE" onMouseClicked="#TraitementEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#TraitementEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
             <Button fx:id="importImageEssais" layoutX="777.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
             <Label layoutX="799.0" layoutY="77.0" text="Description" textFill="WHITE">
                <font>

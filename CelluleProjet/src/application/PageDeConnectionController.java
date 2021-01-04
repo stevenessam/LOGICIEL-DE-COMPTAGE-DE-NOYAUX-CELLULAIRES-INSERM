@@ -277,14 +277,18 @@ public class PageDeConnectionController implements Initializable {
 		pageLoadingCampagne.setVisible(false);
 		pageLoadingEssai.setVisible(true);
 		gestionAdminButtonSetVisible();
+		
 	}
 	
 
 	
 	public void TraitementEssai() {
+		
+		pageLoadingE();
 		for (int i = 0; i < 100000; i++) {
 			System.out.println(i);
 		}
+		
 		pageResultatEssai();
 	}
 
@@ -330,7 +334,7 @@ public class PageDeConnectionController implements Initializable {
 		gestionAdminButtonSetVisible();
 		//Fin du déplacement entre les pages
 
-
+		
 	}
 
 
