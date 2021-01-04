@@ -30,10 +30,14 @@ import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 import com.sun.javafx.logging.Logger;
 
 import crud.Algorithme;
+import crud.Amas;
 import crud.Campagne;
 import crud.Essai;
 import crud.Image;
 import crud.Utilisateur;
+import ij.ImagePlus;
+import ij.io.Opener;
+import ij.measure.ResultsTable;
 import ij.plugin.Options;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -121,6 +125,12 @@ public class PageDeConnectionController implements Initializable {
 	Button gestionAdminButton;
 
 
+	@FXML
+	TextField nbrTotatleImagesEssais;
+	@FXML
+	TextField nbrTotaleCelluleEssais;
+	@FXML
+	TextField moyenneCelluleImageEssais;
 
 
 
@@ -283,13 +293,147 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	public void TraitementEssai() {
-		
-		pageLoadingE();
-		for (int i = 0; i < 100000; i++) {
-			System.out.println(i);
+		if (idEssai <= 0) {
+			JOptionPane.showMessageDialog(null, "Veuillez sélectionner un essai.");
+			return;
 		}
+		conn = mysqlconnect.ConnectDb();
+		int algoID = 0;
+		ArrayList<Image> imageList = new ArrayList<Image>();
+		//Essai déjà effectué ?
+		String sqlCheckForResults = "SELECT * FROM essaicontientmesure WHERE idEssai = ?";
+		try {
+			
+			pst = conn.prepareStatement(sqlCheckForResults);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				pageResultatEssai(idEssai);
+				return;
+			}	
 		
-		pageResultatEssai();
+			String sqlCheckForAlgos = "SELECT * FROM essaicontientalgorithme WHERE idEssai = ?";
+			pst = conn.prepareStatement(sqlCheckForAlgos);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();		
+			
+			if (!rs.next()) {
+				JOptionPane.showMessageDialog(null, "Aucun algorithme n'est associée à cet essai");
+				return;
+			}
+			algoID = rs.getInt("idAlgorithme");
+			
+			
+			String sqlCheckForImages = "SELECT * FROM essaicontientimage WHERE idEssai = ?";
+			pst = conn.prepareStatement(sqlCheckForImages);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			
+			if (!rs.next()) {
+				JOptionPane.showMessageDialog(null, "Aucune image n'est associée à cet essai");
+				return;
+			}
+			
+			String sqlFetchImages = "SELECT * FROM image I INNER JOIN essaicontientimage ECI ON I.idImage = ECI.idImage WHERE ECI.idEssai = ?";
+			pst = conn.prepareStatement(sqlFetchImages);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				imageList.add(new Image(rs.getInt("idImage"), rs.getString("nom"), rs.getString("lienImage")));
+			}		
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors du traitement.");
+		}
+
+
+	JOptionPane.showMessageDialog(null, "Le traitement peut prendre du temps selon le nombre d'image qui vont être analysées. Vous ne pourrez plus utiliser le logiciel pendant ce temps.");
+	
+	// Analyse des images
+	
+	Opener opener = new Opener();
+	Algorithme algo = new Algorithme();
+	ArrayList<ArrayList<Amas>> listeAmas = new ArrayList<>();
+	for (int i = 0; i < imageList.size(); i++) {
+		ImagePlus imp = opener.openImage(imageList.get(i).getLienImage());
+		algo.ExecuteAlgorithm(algoID, imp);
+		ResultsTable RT1 = ResultsTable.getResultsTable();
+		int rowNbr = RT1.getCounter();
+		ArrayList<Amas> liste = new ArrayList<>();
+		
+		for (int j = 0; j < rowNbr; j++) {
+			int poids = 1;
+			if (RT1.columnExists("poids")) {
+				poids = (int)RT1.getValue("poids", j);
+			}
+			liste.add(new Amas(poids, (float)RT1.getValue("X", j), (float)RT1.getValue("Y", j)));
+		}
+		listeAmas.add(liste);
+	}
+	
+	//Insertion dans la BD
+	
+	try {
+		String sqlAddmesure = "INSERT INTO mesure VALUES ()";
+		String sqlGetMesureId = "SELECT MAX(idMesure) FROM mesure";
+		String sqlLienImage = "INSERT INTO mesureappartientimage (idImage, idMesure) VALUES (? ,?)";
+		String sqlLienEssai = "INSERT INTO essaicontientmesure (idEssai, idMesure) VALUES (? ,?)";
+		String sqlAddAmas = "INSERT INTO amas (coordonnéeX, coordonnéeY, poids) VALUES (?, ?, ?)";
+		String sqlGetAmasId = "SELECT MAX(idAmas) FROM amas";
+		String sqlLienAmas = "INSERT INTO amasappartientmesure (idAmas, idMesure) VALUES (?, ?)";
+		
+		for (int k = 0; k < imageList.size(); k++) {
+			int IDimage = imageList.get(k).getIdImage();
+			
+			pst = conn.prepareStatement(sqlAddmesure);
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlGetMesureId);
+			rs = pst.executeQuery();
+			int mesureID = 0;
+			while (rs.next()) {
+				mesureID = rs.getInt("MAX(idMesure)");
+			}
+			
+			pst = conn.prepareStatement(sqlLienImage);
+			pst.setInt(1, IDimage);
+			pst.setInt(2, mesureID);
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlLienEssai);
+			pst.setInt(1, idEssai);
+			pst.setInt(2, mesureID);
+			pst.execute();
+			
+			for (int j = 0; j < listeAmas.get(k).size(); j++) {
+				pst = conn.prepareStatement(sqlAddAmas);
+				pst.setFloat(1, listeAmas.get(k).get(j).getCoordonneesX());
+				pst.setFloat(2, listeAmas.get(k).get(j).getCoordonneesY());
+				pst.setFloat(3, listeAmas.get(k).get(j).getPoids());
+				pst.execute();
+				
+				pst = conn.prepareStatement(sqlGetAmasId);
+				rs = pst.executeQuery();
+				int amasID = 0;
+				while (rs.next()) {
+					amasID = rs.getInt("MAX(idAmas)");
+				}
+				
+				pst = conn.prepareStatement(sqlLienAmas);
+				pst.setInt(1, amasID);
+				pst.setInt(2, mesureID);
+				pst.execute();
+				
+			}
+			
+		}
+	} catch (Exception e) {
+		JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'insertion dans la base de données.");
+		return;
+	}
+		
+	pageResultatEssai(idEssai);
 	}
 
 	/**
@@ -321,7 +465,66 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	
-	public void pageResultatEssai() {
+	public void pageResultatEssai(int id) {
+		conn = mysqlconnect.ConnectDb();
+		
+		String sqlNbrImages = "SELECT COUNT(*) FROM essaicontientimage WHERE idEssai = ?";
+		String sqlNbrCells = "SELECT COUNT(*) FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
+				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure"
+				+ "WHERE ECM.idEssai = ?";
+		
+		String sqlFetchmesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure WHERE ECM.idEssai = ?";
+		String sqlMoyenneCells = "SELECT COUNT(A.idAmas) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
+				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
+				+ "WHERE ECM.idEssai = ? AND M.idMesure = ?";
+		
+		try {
+			pst = conn.prepareStatement(sqlNbrImages);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				nbrTotatleImagesEssais.setText(rs.getString("COUNT(*)"));
+			}
+			
+			pst = conn.prepareStatement(sqlNbrCells);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				nbrTotaleCelluleEssais.setText(rs.getString("COUNT(*)"));
+			}
+			
+			pst = conn.prepareStatement(sqlFetchmesures);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			int total = 0;
+			int i = 0;
+			while (rs.next()) {
+				PreparedStatement pstA;
+				pstA = conn.prepareStatement(sqlMoyenneCells);
+				pstA.setInt(1, id);
+				pstA.setInt(2, rs.getInt("M.idMesure"));
+				ResultSet rsA;
+				rsA = pstA.executeQuery();
+				while (rsA.next()) {
+					total += rsA.getInt("Moyenne");
+				}
+				i++;
+			}
+			
+			if (i != 0) {
+				moyenneCelluleImageEssais.setText(String.valueOf(total/i));
+			} else {
+				moyenneCelluleImageEssais.setText(String.valueOf(0));
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'obtention des données.");
+		}
+		
+		
+		
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
 		pageAjouterImage.setVisible(false);

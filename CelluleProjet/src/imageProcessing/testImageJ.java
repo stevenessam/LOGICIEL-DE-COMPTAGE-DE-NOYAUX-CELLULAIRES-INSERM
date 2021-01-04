@@ -34,12 +34,7 @@ public class testImageJ {
 		
 		ResultsTable RT1 = ResultsTable.getResultsTable();
 		int rowNbr = RT1.getCounter();
-		ArrayList<Amas> list = new ArrayList<>();
-		
-		for (int i = 0; i < rowNbr; i++) {
-			
-			list.add(new Amas(1, (float)RT1.getValue("X", i), (float)RT1.getValue("Y", i)));
-		}
+
 		
 		//IJ.saveAs(imp, "PNG", s+"\\Images\\Result");
 	}
