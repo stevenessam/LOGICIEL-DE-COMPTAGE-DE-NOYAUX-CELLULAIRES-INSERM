@@ -132,6 +132,13 @@ public class PageDeConnectionController implements Initializable {
 	@FXML
 	TextField moyenneCelluleImageEssais;
 
+	
+	@FXML
+    TextField nbrTotaleImagesCampagnes;
+    @FXML
+    TextField nbrTotaleCelluleCampagnes;
+    @FXML
+    TextField moyenneCelluleImageCampagnes;
 
 
 
@@ -441,8 +448,54 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	public void traitementCampagne() {
+		if (idCampagne <= 0) {
+			JOptionPane.showMessageDialog(null, "Veuillez sélectionner une campagne.");
+			return;
+		}
+		conn = mysqlconnect.ConnectDb();
 		
-		
+		String sqlCheck = "SELECT * FROM campagnecontientessai WHERE idCampagne = ?";
+		String sqlFetchEssai = "SELECT * FROM essai E INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai WHERE CCE.idCampagne = ?";
+		String sqlCheckMesure = "SELECT * FROM essaicontientmesure WHERE idEssai = ?";
+		try {
+			pst = conn.prepareStatement(sqlCheck);
+			pst.setInt(1, idCampagne);
+			rs = pst.executeQuery();
+			
+			if (!rs.next()) {
+				JOptionPane.showMessageDialog(null, "Cette campagne ne contient aucun essai.");
+				return;
+			}
+			
+			pst = conn.prepareStatement(sqlFetchEssai);
+			pst.setInt(1, idCampagne);
+			rs = pst.executeQuery();
+			
+			boolean traitementEffectue = true;
+			while (rs.next()) {
+				PreparedStatement pstC;
+				ResultSet rsC;
+				
+				pstC = conn.prepareStatement(sqlCheckMesure);
+				pstC.setString(1, rs.getString("idEssai"));	
+				rsC = pstC.executeQuery();
+				if (!rsC.next()) {
+					traitementEffectue = false;
+				}
+			}
+			
+			if (!traitementEffectue) {
+				JOptionPane.showMessageDialog(null, "Certains essais présents dans cette campagne n'ont pas été analysés.");
+				return;
+			}
+			
+			
+			pageResultatCampagnes(idCampagne);
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème.");
+			return;
+		}
 		
 	}
 	
@@ -470,7 +523,81 @@ public class PageDeConnectionController implements Initializable {
 	 */
 
 
-	public void pageResultatCampagnes() {
+	public void pageResultatCampagnes(int id) {
+		conn = mysqlconnect.ConnectDb();
+		
+		String sqlNbrImages = "SELECT COUNT(ECI.idImage) AS Total FROM essaicontientimage ECI INNER JOIN essai E ON ECI.idEssai = E.idEssai "
+				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
+				+ "WHERE CCE.idCampagne = ?";
+		
+		String sqlNbrCells = "SELECT COUNT(A.idAmas) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
+				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
+				+ "INNER JOIN essai E ON ECM.idEssai = E.idEssai "
+				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
+				+ "WHERE CCE.idCampagne = ?";
+		
+		
+		String sqlFetchmesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
+				+ "INNER JOIN essai E ON ECM.idEssai = E.idEssai "
+				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
+				+ "WHERE CCE.idCampagne = ?";
+		
+		String sqlMoyenneCells = "SELECT COUNT(A.idAmas) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
+				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
+				+ "INNER JOIN essai E ON E.idEssai = ECM.idEssai "
+				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
+				+ "WHERE CCE.idCampagne = ? AND M.idMesure = ?";
+		
+		
+		try {
+			pst = conn.prepareStatement(sqlNbrImages);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				nbrTotaleImagesCampagnes.setText(rs.getString("Total"));
+			}
+			
+			pst = conn.prepareStatement(sqlNbrCells);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				nbrTotaleCelluleCampagnes.setText(rs.getString("Nombre"));
+			}
+			
+			
+			pst = conn.prepareStatement(sqlFetchmesures);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			int total = 0;
+			int i = 0;
+			while (rs.next()) {
+				PreparedStatement pstA;
+				pstA = conn.prepareStatement(sqlMoyenneCells);
+				pstA.setInt(1, id);
+				pstA.setInt(2, rs.getInt("M.idMesure"));
+				ResultSet rsA;
+				rsA = pstA.executeQuery();
+				while (rsA.next()) {
+					total += rsA.getInt("Moyenne");
+				}
+				i++;
+			}
+
+			if (i != 0) {
+				moyenneCelluleImageCampagnes.setText(String.valueOf(total/i));
+			} else {
+				moyenneCelluleImageCampagnes.setText(String.valueOf(0));
+			}
+			
+			
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'obtention des données.");
+		}
 		pageCampagnes.setVisible(false);
 		pageEssais.setVisible(false);
 		pageAjouterImage.setVisible(false);
@@ -682,11 +809,13 @@ public class PageDeConnectionController implements Initializable {
 			pst.setString(1, idEssaiTextField.getText());
 			pst.setString(2, idCampagnes.getText());
 			rs = pst.executeQuery();
-			if (!rs.next()) { // Essai déjà associé à la campagne
+			if (!rs.next()) { // Essai déjà associé à la campagne ?
 				pst = conn.prepareStatement(sql);
 				pst.setString(1, idCampagnes.getText());
 				pst.setString(2, idEssaiTextField.getText());
 				pst.execute();
+			} else {
+				JOptionPane.showMessageDialog(null, "Cet essai est déjà associé à cette campagne.");
 			}
 
 
