@@ -292,7 +292,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-	public void TraitementEssai() {
+	public void traitementEssai() {
 		if (idEssai <= 0) {
 			JOptionPane.showMessageDialog(null, "Veuillez sélectionner un essai.");
 			return;
@@ -438,6 +438,32 @@ public class PageDeConnectionController implements Initializable {
 		pageResultatEssai(idEssai);
 	}
 
+	
+	
+	public void traitementCampagne() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Méthode qui permet de rendre visible la page pageresultatcampagnes
 	 * @author ST3VOS

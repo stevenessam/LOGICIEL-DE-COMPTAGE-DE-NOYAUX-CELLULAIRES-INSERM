@@ -53,7 +53,7 @@
             <Button fx:id="creeCampagnes" layoutX="777.0" layoutY="304.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Campagne" textFill="WHITE" />
             <Button fx:id="modifierCampagnes" layoutX="777.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Campagne" textFill="#ff8800" />
             <Button fx:id="supprimerCampagnes" layoutX="777.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Campagne" textFill="#ff2e2e" />
-            <Button fx:id="resultatCampagnes" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#pageLoadingC" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
+            <Button fx:id="resultatCampagnes" layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#traitementCampagne" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" textFill="#009fff" />
             <Label layoutX="804.0" layoutY="81.0" text="Nom" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -135,7 +135,7 @@
             <Button fx:id="creeEssais" layoutX="776.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Creer Un Essai" />
             <Button fx:id="modifierEssais" layoutX="776.0" layoutY="279.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Modifier Essai" />
             <Button fx:id="supprimerEssais" layoutX="776.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Supprimer Essai" />
-            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#TraitementEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
+            <Button fx:id="resultatEssais" layoutX="777.0" layoutY="614.0" mnemonicParsing="false" onAction="#traitementEssai" prefHeight="54.0" prefWidth="310.0" styleClass="buttons" text="Resultat" />
             <Button fx:id="importImageEssais" layoutX="777.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
             <Label layoutX="799.0" layoutY="77.0" text="Description" textFill="WHITE">
                <font>
