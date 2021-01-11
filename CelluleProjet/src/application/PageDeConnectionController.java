@@ -107,10 +107,7 @@ public class PageDeConnectionController implements Initializable {
 	Pane pageResultatCampagnes;
 	@FXML
 	Pane pageResultatEssai;
-	@FXML
-	Pane pageLoadingCampagne;
-	@FXML
-	Pane pageLoadingEssai;
+
 
 	//------------------------------exit et minimize-----------------------------------------
 
@@ -181,8 +178,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -201,8 +196,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -220,8 +213,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -239,8 +230,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -258,8 +247,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(true);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 
@@ -276,8 +263,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(true);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 	}
 
@@ -291,8 +276,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(true);
 		gestionAdminButtonSetVisible();
 
 	}
@@ -605,8 +588,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(true);
 		pageResultatEssai.setVisible(false);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 
 
@@ -689,8 +670,6 @@ public class PageDeConnectionController implements Initializable {
 		pageGestionAdmin.setVisible(false);
 		pageResultatCampagnes.setVisible(false);
 		pageResultatEssai.setVisible(true);
-		pageLoadingCampagne.setVisible(false);
-		pageLoadingEssai.setVisible(false);
 		gestionAdminButtonSetVisible();
 		//Fin du déplacement entre les pages
 
