@@ -54,8 +54,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -64,6 +66,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Screen;
@@ -2141,7 +2144,44 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
+		
+		/*--------------Wrap Tables-------------------------------*/
+		
+		
+		tableDescriptionCampagnes.setCellFactory(tc -> {
+            TableCell<Campagne, String> cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(tableDescriptionCampagnes.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell ;
+        });
+		
+		
+		
+		tableDescriptionEssais.setCellFactory(tc -> {
+            TableCell<Essai, String> cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(tableDescriptionEssais.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell ;
+        });
+		
+		
+		tableCampagneEssaiDescriptionC.setCellFactory(tc -> {
+            TableCell<Essai, String> cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(tableCampagneEssaiDescriptionC.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell ;
+        });
+		 
+		/*-----------Fin---Wrap Tables-------------------------------*/
 	}
 
 }

@@ -154,7 +154,7 @@
             <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="466.0" prefWidth="277.0">
               <columns>
                   <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="274.0" text="Images" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="274.0" text="Images Correspondante" />
               </columns>
             </TableView>
             <TableView fx:id="tableAlgo" layoutX="794.0" layoutY="416.0" onMouseClicked="#getSelectedAlgo" prefHeight="107.0" prefWidth="277.0">
@@ -176,6 +176,12 @@
             <Line endX="212.0" layoutX="861.0" layoutY="203.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="407.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="602.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3447" height="36.0" layoutX="788.0" layoutY="407.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="287.0" />
+            <Label layoutX="799.0" layoutY="418.0" prefHeight="21.0" prefWidth="210.0" text="Sélectionnez un algorithme" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
