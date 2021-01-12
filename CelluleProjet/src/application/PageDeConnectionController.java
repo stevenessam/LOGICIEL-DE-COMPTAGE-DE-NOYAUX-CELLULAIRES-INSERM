@@ -1,34 +1,23 @@
 package application;
-import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
-import com.sun.javafx.logging.Logger;
-
 import crud.Algorithme;
 import crud.Amas;
 import crud.Campagne;
@@ -38,7 +27,6 @@ import crud.Utilisateur;
 import ij.ImagePlus;
 import ij.io.Opener;
 import ij.measure.ResultsTable;
-import ij.plugin.Options;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,7 +43,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
-import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -68,7 +55,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sampleQueries.DB.mysqlconnect;
@@ -88,7 +74,7 @@ import sampleQueries.DB.mysqlconnect;
 public class PageDeConnectionController implements Initializable {
 
 
-	private Object object;
+	//private Object object;
 	/**
 	 * Connection entre scenebuilder et javafx sur eclipse
 	 * Chaque pane est representé par un bouton
@@ -283,7 +269,9 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
-
+	/**
+	 * Methode pour le Traitement d'un Essai
+	 */
 
 	public void traitementEssai() {
 		if (idEssai <= 0) {
@@ -431,7 +419,9 @@ public class PageDeConnectionController implements Initializable {
 		pageResultatEssai(idEssai);
 	}
 
-	
+	/**
+	 * Methode pour le Traitement d'un Campagne
+	 */
 	
 	public void traitementCampagne() {
 		if (idCampagne <= 0) {
@@ -485,21 +475,7 @@ public class PageDeConnectionController implements Initializable {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -720,7 +696,12 @@ public class PageDeConnectionController implements Initializable {
 
 	int idCampagne = 0;
 
-
+	/**
+	 *  Methode qui permet d'afficher les donnes selectionner dans un tableau dans un TextField
+	 * 
+	 * @param event
+	 */
+	
 	@FXML
 	public void getSelectedCampagne (MouseEvent event){
 		index = tableCampagnes.getSelectionModel().getSelectedIndex();
@@ -736,6 +717,11 @@ public class PageDeConnectionController implements Initializable {
 		refreshTableCampagneEssai();
 	}
 
+	/**
+	 *  Methode qui permet d'ajouter un campagne
+	 * 
+	 */
+	
 	public void addCampagnes (){    
 		conn = mysqlconnect.ConnectDb();
 
@@ -779,6 +765,9 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
+	/**
+	 *  Methode qui permet d'ajouter un essai dans un campagne
+	 */
 
 	public void addCampagneEssai (){    
 		conn = mysqlconnect.ConnectDb();
@@ -809,10 +798,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
-
-
-
+	/**
+	 *  Methode qui permet de modifier les donnes d'un campagne
+	 */
 
 	public void editCampagne (){   
 		try {
@@ -831,7 +819,10 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 	}
-
+	
+	/**
+	 *  Methode qui permet de supprimer un campagne
+	 */
 
 	public void deleteCampagne(){
 		conn = mysqlconnect.ConnectDb();
@@ -861,7 +852,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
+	/**
+	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données
+	 */
 
 	public void refreshTableCampagne(){
 
@@ -890,7 +883,10 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Essai> listCampagneEssai;
 
 
-
+	/**
+	 * Méthode qui met à jour le tableau Essai dans la page campagne lors de l'ajout d'un essai dans un Campagne
+	 */
+	
 	public void refreshTableCampagneEssai(){
 
 		tableEssaiIdC.setCellValueFactory(new PropertyValueFactory<Essai ,Integer>("idEssai"));
@@ -932,6 +928,11 @@ public class PageDeConnectionController implements Initializable {
 	int idAlgorithme = 0;
 
 
+	/**
+	 * Methode qui permet d'afficher les donnes selectionner dans un tableau dans un TextField
+	 * @param event
+	 */
+	
 	@FXML
 	public void getSelectedEssai (MouseEvent event){
 		index = tableEssai.getSelectionModel().getSelectedIndex();
@@ -953,6 +954,10 @@ public class PageDeConnectionController implements Initializable {
 		refreshTableAlgoEssai();
 	}
 
+	/**
+	 *  Methode qui permet d'ajouter un Essai
+	 * 
+	 */
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
@@ -983,6 +988,10 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	
+	/**
+	 *  Methode qui permet d'ajouter une image dans un Essai
+	 */
 
 	public void addEssaiImage (){    
 		conn = mysqlconnect.ConnectDb();
@@ -1007,6 +1016,10 @@ public class PageDeConnectionController implements Initializable {
 		}
 	}
 
+	
+	/**
+	 *  Methode qui permet d'ajouter un Algorithme dans un Essai
+	 */
 	public void addEssaiAlgo (){    
 		conn = mysqlconnect.ConnectDb();
 
@@ -1030,7 +1043,9 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
-
+	/**
+	 *  Methode qui permet de modifier les donnes d'un Essai
+	 */
 	public void editEssai(){   
 		try {
 			conn = mysqlconnect.ConnectDb();
@@ -1048,6 +1063,10 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	
+	/**
+	 *  Methode qui permet de supprimer un Essai
+	 */
 	public void deleteEssai(){
 		conn = mysqlconnect.ConnectDb();
 		int currIdEssai = Integer.parseInt(idEssaiTextField.getText());
@@ -1072,8 +1091,10 @@ public class PageDeConnectionController implements Initializable {
 		}
 	}
 
-
-
+	
+	/**
+	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données
+	 */
 
 
 	public void refreshTableEssai(){
@@ -1104,7 +1125,9 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Image> listImageEssai;
 
 
-
+	/**
+	 *  Méthode qui met à jour le tableau image dans la page essai lors de l'ajout d'une image ou la suppression suppression d'un essai
+	 */
 	public void refreshTableImageEssai(){
 
 		tableImageEId.setCellValueFactory(new PropertyValueFactory<Image ,Integer>("idImage"));
@@ -1131,6 +1154,9 @@ public class PageDeConnectionController implements Initializable {
 
 	ObservableList<Image> listImageEssaiResultat;
 
+	/**
+	 * Méthode qui met à jour le tableau image dans la page resultat essai
+	 */
 
 
 	public void refreshTableImageEssaiResultat(){
@@ -1160,6 +1186,11 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Algorithme> listAlgo;
 
 
+	/**
+	 *  Methode qui permet d'afficher les donnes selectionner dans le tableau alogrithme
+	 * 
+	 * @param event
+	 */
 
 	@FXML
 	public void getSelectedAlgo(MouseEvent event){
@@ -1172,7 +1203,9 @@ public class PageDeConnectionController implements Initializable {
 
 	}
 
-
+	/**
+	 * Méthode qui met à jour le tableau lors de l'ajout
+	 */
 	public void refreshTableAlgo(){
 
 		tableIdAlgo.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
@@ -1197,7 +1230,9 @@ public class PageDeConnectionController implements Initializable {
 
 	ObservableList<Algorithme> listAlgoEssai;
 
-
+	/**
+	 * Méthode qui met à jour le tableau algorithme lors de l'ajout d'un alogrithme dans un essai
+	 */
 	public void refreshTableAlgoEssai(){
 
 		tableIdAlgoEssai.setCellValueFactory(new PropertyValueFactory<Algorithme ,Integer>("idAlgorithme"));
@@ -1237,7 +1272,11 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Utilisateur> listGestioadmin;
 
 
-
+	/**
+	 *  Methode qui permet d'afficher les donnes selectionner dans le tableau utilisateur
+	 * 
+	 * @param event
+	 */
 
 	@FXML
 	void getSelectedUser(MouseEvent event){
@@ -1251,6 +1290,10 @@ public class PageDeConnectionController implements Initializable {
 
 
 	}
+	
+	/**
+	 *  Methode qui permet de supprimer un utilisateur
+	 */
 
 	public void deleteUtilisateur(){
 		conn = mysqlconnect.ConnectDb();
@@ -1301,7 +1344,9 @@ public class PageDeConnectionController implements Initializable {
 		JOptionPane.showMessageDialog(null, "Utilisateur supprimé avec succès !");
 	}
 
-
+	/**
+	 *  Methode qui permet de modifier la position d'un utilisateur
+	 */
 
 	public void editUtilisateur (){   
 		try {
@@ -1331,7 +1376,10 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 	}
-
+	
+	/**
+	 * Méthode qui met à jour les donnes du tableau utilisateur 
+	 */
 
 	public void refreshTableGestioadmin(){
 
@@ -1374,8 +1422,8 @@ public class PageDeConnectionController implements Initializable {
 	private File file;
 	private Stage stage;
 
-	@FXML
-	private Desktop desktop= Desktop.getDesktop();
+//	@FXML
+//	private Desktop desktop= Desktop.getDesktop();
 
 	@FXML
 	private javafx.scene.image.Image imageV;
@@ -1406,8 +1454,11 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
-
+	/**
+	 *  Methode qui permet d'afficher les donnes selectionner dans un tableau
+	 * 
+	 * @param event
+	 */
 
 	@FXML
 	public void getSelectedImage(MouseEvent event){
@@ -1423,7 +1474,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
+	/**
+	 *  Methode qui permet d'ajouter une image
+	 */
 
 	public void addImages (){    
 		conn = mysqlconnect.ConnectDb();
@@ -1456,6 +1509,10 @@ public class PageDeConnectionController implements Initializable {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
+	
+	/**
+	 *  Methode qui permet de supprimer une image
+	 */
 
 	public void deleteImage(){
 
@@ -1541,7 +1598,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
+	/**
+	 *  Methode qui permet d'importer une image
+	 */
 
 
 	@FXML
@@ -1559,7 +1618,9 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
-
+	/**
+	 * Méthode qui met à jour le tableau lors de l'ajout d'une image
+	 */
 
 	public void refreshTableImage(){
 
@@ -1598,6 +1659,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 
+	/**
+	 *  Methode qui permet de modifier le nom d'utilisateur,nom et prenom 
+	 */
 
 
 	public void editCompte(){   
@@ -1656,6 +1720,9 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 	}
+
+	
+
 
 
 	public void deleteEssaiComplet(int idEss) {
@@ -1758,6 +1825,10 @@ public class PageDeConnectionController implements Initializable {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
+	
+	/**
+	 *  Methode qui permet de supprimer un utilisateur plus tous les campagnes,essais et image qui a cree
+	 */
 
 	public void deleteCompte(){
 		conn = mysqlconnect.ConnectDb();
@@ -1813,38 +1884,47 @@ public class PageDeConnectionController implements Initializable {
 
 
 
-
+	/**
+	 *  Methode qui permet de fermer l'application
+	 */
 	public void closeApp(MouseEvent event) 
 	{
 		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stages.close();
 	}
 
-
-
+	
+	/**
+	 *  Methode qui permet de minimiser l'application
+	 */
 	public void miniApp(MouseEvent event) 
 	{
 		Stage stages = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stages.setIconified(true);
 	}
 
-
+	/**
+	 *  Methode qui permet de glisser la fenêtre de l'application quand on glisser le souris
+	 */
 	public void btnDraggApp(MouseEvent event) 
 	{
 		Stage s = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		s.setX(event.getScreenX()-xmouse);
 		s.setY(event.getScreenY()-ymouse);
 	}
-
-
-
-
+	/**
+	 *  Methode qui permet de  glisser la fenêtre de l'application lorsque vous restez appuyé sur la barre d'outils
+	 */
 	public void pressDraggApp(MouseEvent event) 
 	{
 		xmouse =event.getSceneX();
 		ymouse = event.getSceneY();
 	}
 
+
+	/**
+	 * La méthode vous permet de vous déconnecter de l'application et de vous envoyer à la page de connexion
+	 */
 	public void logoutCompte(Event evee) {
 
 		try {		
@@ -1907,8 +1987,10 @@ public class PageDeConnectionController implements Initializable {
 		comboBoxPosition.getSelectionModel().selectFirst();
 
 
-
-
+	
+	/**
+	 * Méthode qui permet d'afficher le nom d'utilisateur,nom et prenom de l'utilisateur connecter dans un textfield dans la page Mon Compte
+	 */
 
 		try {
 			// Connection to the database
@@ -1942,7 +2024,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 		/**
-		 * Methode pourr exporter les resultat d'un essai
+		 * Methode pour exporter les resultat d'un essai en tant que fichier Excel
 		 */
 		exporterEssais.setOnAction( e->{
 
@@ -2046,9 +2128,9 @@ public class PageDeConnectionController implements Initializable {
 		/*---------------------------------------------------------------------*/
 
 
+
 		/**
-		 * Methode pourr exporter les resultat d'un Campagne
-		 * 
+		 * Methode pour exporter les resultat d'un Campagne en tant que fichier Excel
 		 */
 
 		exporterCampagnes.setOnAction( e->{
@@ -2147,7 +2229,10 @@ public class PageDeConnectionController implements Initializable {
 		
 		/*--------------Wrap Tables-------------------------------*/
 		
-		
+		/**
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 */
+
 		tableDescriptionCampagnes.setCellFactory(tc -> {
             TableCell<Campagne, String> cell = new TableCell<>();
             Text text = new Text();
@@ -2158,7 +2243,9 @@ public class PageDeConnectionController implements Initializable {
             return cell ;
         });
 		
-		
+		/**
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 */
 		
 		tableDescriptionEssais.setCellFactory(tc -> {
             TableCell<Essai, String> cell = new TableCell<>();
@@ -2170,6 +2257,9 @@ public class PageDeConnectionController implements Initializable {
             return cell ;
         });
 		
+		/**
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 */
 		
 		tableCampagneEssaiDescriptionC.setCellFactory(tc -> {
             TableCell<Essai, String> cell = new TableCell<>();

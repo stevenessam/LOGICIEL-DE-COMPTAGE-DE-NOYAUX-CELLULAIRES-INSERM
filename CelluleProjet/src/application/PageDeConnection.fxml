@@ -176,7 +176,7 @@
             <Line endX="212.0" layoutX="861.0" layoutY="203.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="407.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="602.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3447" height="36.0" layoutX="788.0" layoutY="407.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="287.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3447" height="30.0" layoutX="788.0" layoutY="413.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="287.0" />
             <Label layoutX="799.0" layoutY="418.0" prefHeight="21.0" prefWidth="210.0" text="Sélectionnez un algorithme" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />

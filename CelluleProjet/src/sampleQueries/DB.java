@@ -17,6 +17,13 @@ import crud.Utilisateur;
 
 public class DB {
 
+	
+	/**
+	 * Méthode qui permet la connection avec la base de données (LocalHost)
+	 * @author ST3VOS
+	 *
+	 */
+	
 	public static class mysqlconnect {
 	    
 	    Connection conn = null;
@@ -32,6 +39,11 @@ public class DB {
 	        }
 	    
 	    }
+	    
+
+		/**
+		 * Méthode qui permet de récupérer les données du table campagne de la base de données
+		 */
 	    
 	    public static ObservableList<Campagne> getDataCampagne(){
 	        Connection conn = ConnectDb();
@@ -50,7 +62,9 @@ public class DB {
 	    }
 	    
 	    
-	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Essai de la base de données
+		 */
 	    
 	    public static ObservableList<Essai> getDataEssai(){
 	        Connection conn = ConnectDb();
@@ -68,6 +82,11 @@ public class DB {
 	        return list;
 	    }
 
+	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Algorithme de la base de données
+		 */
+	    
 	    public static ObservableList<Algorithme> getDataAlgo(){
 	        Connection conn = ConnectDb();
 	        ObservableList<Algorithme> list = FXCollections.observableArrayList();
@@ -84,6 +103,9 @@ public class DB {
 	        return list;
 	    }
 	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Algorithme qui fait une jonction avec la table Essai de la base de données
+		 */
 	    
 	    public static ObservableList<Algorithme> getDataAlgoEssai(int idAlgorithme ){
 	        Connection conn = ConnectDb();
@@ -102,6 +124,9 @@ public class DB {
 	        return listT;
 	    }
 	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Utilisateur de la base de données
+		 */
 	    
 	    public static ObservableList<Utilisateur> getDataUtilisateur(){
 	        Connection conn = ConnectDb();
@@ -128,7 +153,9 @@ public class DB {
 	        return list;
 	    }
 	    
-	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Image de la base de données
+		 */
 	    
 	    public static ObservableList<Image> getDataImages(){
 	        Connection conn = ConnectDb();
@@ -147,6 +174,9 @@ public class DB {
 	    }
 	    
 	    
+		/**
+		 * Méthode qui permet de récupérer les données du table Image qui fait une jonction avec la table Essai de la base de données
+		 */
 	    public static ObservableList<Image> getDataImagesEssai(int idEssai ){
 	        Connection conn = ConnectDb();
 	        ObservableList<Image> listT = FXCollections.observableArrayList();
@@ -164,6 +194,10 @@ public class DB {
 	        return listT;
 	    }
 		
+		/**
+		 * Méthode qui permet de récupérer les données du table Essai qui fait une jonction avec la table campagne de la base de données
+		 */
+	    
 	    public static ObservableList<Essai> getDataCampagneEssai(int idCampagne ){
 	        Connection conn = ConnectDb();
 	        ObservableList<Essai> listC = FXCollections.observableArrayList();
