@@ -1236,16 +1236,35 @@ public class PageDeConnectionController implements Initializable {
 	}
 	
 	public void loadImage(){
+		
+		if (idImageEssaiResultat.getCellData(index) == null) {
+			JOptionPane.showMessageDialog(null, "Veuillez sélectionner une image.");
+			return;
+		}
+		
+		int selectedImageId = idImageEssaiResultat.getCellData(index);
+		String lien = "";
+		String sqlGetLink = "SELECT lienImage FROM image WHERE idImage = ?";
+		conn = mysqlconnect.ConnectDb();
+		try {
+			pst = conn.prepareStatement(sqlGetLink);
+			pst.setInt(1, selectedImageId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				lien = rs.getString("lienImage");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu une erreur lors de la récupération des données.");
+		}
+		
+	    File fileI = new File(lien);
+	
+	    try {
+			desktop.open(fileI);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'ouverture de l'image.");
+		}
     
-    
-    File fileI = new File("Images/Capture.png");
-
-    try {
-		desktop.open(fileI);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 	}
 	
 	/*-------------------Fin-----load Image Essai Resultat------------------------------*/	
