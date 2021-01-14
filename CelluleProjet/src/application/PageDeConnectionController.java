@@ -1,4 +1,5 @@
 package application;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -242,32 +243,6 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
-
-
-	public void pageLoadingC() {
-		pageCampagnes.setVisible(false);
-		pageEssais.setVisible(false);
-		pageAjouterImage.setVisible(false);
-		pageMonCompte.setVisible(false);
-		pageGestionAdmin.setVisible(false);
-		pageResultatCampagnes.setVisible(false);
-		pageResultatEssai.setVisible(false);
-		gestionAdminButtonSetVisible();
-	}
-
-
-
-	public void pageLoadingE() {
-		pageCampagnes.setVisible(false);
-		pageEssais.setVisible(false);
-		pageAjouterImage.setVisible(false);
-		pageMonCompte.setVisible(false);
-		pageGestionAdmin.setVisible(false);
-		pageResultatCampagnes.setVisible(false);
-		pageResultatEssai.setVisible(false);
-		gestionAdminButtonSetVisible();
-
-	}
 
 	/**
 	 * Methode pour le Traitement d'un Essai
@@ -1244,7 +1219,36 @@ public class PageDeConnectionController implements Initializable {
 		tableAlgoEssai.setItems(listAlgoEssai);
 	}
 
+	
+	/*------------------------load Image Essai Resultat------------------------------*/
+	@FXML
+	TextField idImageEssaiResultatTF;
+	
+	@FXML
+	public void getSelectedImageEssaiResultat(MouseEvent event){
+		index = tableImageEssaiResultat.getSelectionModel().getSelectedIndex();
+		if (index <= -1){
 
+			return;
+		}
+		idImageEssaiResultatTF.setText(idImageEssaiResultat.getCellData(index).toString());
+
+	}
+	
+	public void loadImage(){
+    
+    
+    File fileI = new File("Images/Capture.png");
+
+    try {
+		desktop.open(fileI);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+	
+	/*-------------------Fin-----load Image Essai Resultat------------------------------*/	
 
 	/*---------------------------------Fin-----Page Essai-----------------------------------------------------------*/
 
@@ -1422,8 +1426,8 @@ public class PageDeConnectionController implements Initializable {
 	private File file;
 	private Stage stage;
 
-//	@FXML
-//	private Desktop desktop= Desktop.getDesktop();
+	@FXML
+	private Desktop desktop= Desktop.getDesktop();
 
 	@FXML
 	private javafx.scene.image.Image imageV;
@@ -1951,6 +1955,8 @@ public class PageDeConnectionController implements Initializable {
 
 	/*------------------------------------Fin logout button----------------------------------------------*/	
 
+	@FXML
+	ImageView imageViewr;
 
 	@FXML
 	Button exporterEssais;
@@ -1958,6 +1964,7 @@ public class PageDeConnectionController implements Initializable {
 
 	@FXML
 	Button exporterCampagnes;
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -2272,6 +2279,13 @@ public class PageDeConnectionController implements Initializable {
         });
 		 
 		/*-----------Fin---Wrap Tables-------------------------------*/
+		
+		
+		
+		
+		
+		
+
 	}
 
 }

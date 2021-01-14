@@ -134,9 +134,9 @@
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <Button fx:id="creeEssais" layoutX="795.0" layoutY="214.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Creer Un Essai" />
-            <Button fx:id="modifierEssais" layoutX="795.0" layoutY="279.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Modifier Essai" />
-            <Button fx:id="supprimerEssais" layoutX="795.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Supprimer Essai" />
+            <Button fx:id="creeEssais" layoutX="795.0" layoutY="212.0" mnemonicParsing="false" onAction="#addEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Creer Un Essai" />
+            <Button fx:id="modifierEssais" layoutX="795.0" layoutY="277.0" mnemonicParsing="false" onAction="#editEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Modifier Essai" />
+            <Button fx:id="supprimerEssais" layoutX="795.0" layoutY="342.0" mnemonicParsing="false" onAction="#deleteEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Supprimer Essai" />
             <Button fx:id="resultatEssais" layoutX="795.0" layoutY="613.0" mnemonicParsing="false" onAction="#traitementEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Resultat" />
             <Button fx:id="importImageEssais" layoutX="777.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiImage" prefHeight="54.0" prefWidth="125.0" styleClass="buttons" text="Ajouter Image" />
             <Label layoutX="799.0" layoutY="77.0" text="Description" textFill="WHITE">
@@ -184,7 +184,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="254.0" layoutX="53.0" layoutY="98.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
             <Label layoutX="105.0" layoutY="133.0" text="Nombre Totale d'Image" textFill="WHITE">
@@ -227,7 +227,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TableView fx:id="tableImageEssaiResultat" layoutX="70.0" layoutY="402.0" prefHeight="254.0" prefWidth="596.0">
+            <TableView fx:id="tableImageEssaiResultat" layoutX="70.0" layoutY="402.0" onMouseClicked="#getSelectedImageEssaiResultat" prefHeight="254.0" prefWidth="596.0">
               <columns>
                 <TableColumn fx:id="idImageEssaiResultat" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                 <TableColumn fx:id="nomImageEssaiResultat" prefWidth="593.0" text="Images" />
@@ -235,6 +235,8 @@
             </TableView>
             <Line endX="763.0" layoutX="207.0" layoutY="185.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
             <Line endX="763.0" layoutX="207.0" layoutY="261.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <Button fx:id="btnLoadImage" layoutX="842.0" layoutY="456.0" mnemonicParsing="false" onAction="#loadImage" text="Button" />
+            <TextField fx:id="idImageEssaiResultatTF" layoutX="796.0" layoutY="379.0" />
          </children>
       </Pane>
       <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
