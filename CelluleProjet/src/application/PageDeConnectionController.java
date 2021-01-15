@@ -497,7 +497,7 @@ public class PageDeConnectionController implements Initializable {
 				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
 				+ "WHERE CCE.idCampagne = ?";
 		
-		String sqlNbrCells = "SELECT COUNT(A.idAmas) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+		String sqlNbrCells = "SELECT SUM(A.poids) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "INNER JOIN essai E ON ECM.idEssai = E.idEssai "
@@ -510,7 +510,7 @@ public class PageDeConnectionController implements Initializable {
 				+ "INNER JOIN campagnecontientessai CCE ON E.idEssai = CCE.idEssai "
 				+ "WHERE CCE.idCampagne = ?";
 		
-		String sqlMoyenneCells = "SELECT COUNT(A.idAmas) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+		String sqlMoyenneCells = "SELECT SUM(A.poids) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "INNER JOIN essai E ON E.idEssai = ECM.idEssai "
@@ -591,13 +591,13 @@ public class PageDeConnectionController implements Initializable {
 		String sqlNbrImages = "SELECT COUNT(*) FROM essaicontientimage WHERE idEssai = ?";
 		
 		
-		String sqlNbrCells = "SELECT COUNT(A.idAmas) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+		String sqlNbrCells = "SELECT SUM(A.poids) AS Nombre FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "WHERE ECM.idEssai = ?";
 
 		String sqlFetchmesures = "SELECT M.idMesure FROM mesure M INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure WHERE ECM.idEssai = ?";
-		String sqlMoyenneCells = "SELECT COUNT(A.idAmas) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+		String sqlMoyenneCells = "SELECT SUM(A.poids) AS Moyenne FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON M.idMesure = AAM.idMesure "
 				+ "INNER JOIN essaicontientmesure ECM ON M.idMesure = ECM.idMesure "
 				+ "WHERE ECM.idEssai = ? AND M.idMesure = ?";
@@ -1280,7 +1280,28 @@ public class PageDeConnectionController implements Initializable {
 			return;
 		}
 		idImageEssaiResultatTF.setText(idImageEssaiResultat.getCellData(index).toString());
-
+		String idImage = idImageEssaiResultatTF.getText();
+		int cellNumber = 0;
+		
+		conn = mysqlconnect.ConnectDb();
+		String sqlGetCellnumber = "SELECT SUM(A.poids) AS Total FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
+				+ "INNER JOIN mesure M ON AAM.idMesure = M.idMesure "
+				+ "INNER JOIN mesureappartientimage MAI ON M.idMesure = MAI.idMesure "
+				+ "WHERE MAI.idImage = ?";
+		
+		try {
+			pst = conn.prepareStatement(sqlGetCellnumber);
+			pst.setString(1, idImage);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				cellNumber = rs.getInt("Total");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de la récupération des données.");
+		}
+		
+		
+		infoImageResuTF.setText(String.valueOf(cellNumber));
 	}
 	
 	public void loadImage(){
@@ -1570,46 +1591,32 @@ public class PageDeConnectionController implements Initializable {
 	/*------------------------------Load image Page liste Image----------------------------------------------------------------*/
 public void loadImageLI(){
 		
-		if (idImageEssaiResultat.getCellData(index) == null) {
+		if (tableIdImage.getCellData(index) == null) {
 			JOptionPane.showMessageDialog(null, "Veuillez sélectionner une image.");
 			return;
 		}
 		
 		
-		int selectedImageId = idImageEssaiResultat.getCellData(index);
-		String nom = "";
-		String date = "";
-		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
-		String sqlGetName = "SELECT nom FROM image WHERE idImage = ?";
+		int selectedImageId = tableIdImage.getCellData(index);
+		String lien = "";
+		String sqlGetImage = "SELECT lienImage FROM image WHERE idImage = ?";
 		conn = mysqlconnect.ConnectDb();
 		try {
 			
-			pst = conn.prepareStatement(sqlGetDate);
-			pst.setInt(1, idEssai);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				date = rs.getString("date");
-			}
-			
-			
-			pst = conn.prepareStatement(sqlGetName);
+			pst = conn.prepareStatement(sqlGetImage);
 			pst.setInt(1, selectedImageId);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				nom = rs.getString("nom");
+				lien = rs.getString("lienImage");
 			}
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Il y a eu une erreur lors de la récupération des données.");
 		}
 		
-		String trueNom = nom.substring(0, nom.lastIndexOf('.'));
-		String trueDate = date.replace(":", "-");
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
-		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate+"\\"+trueNom+"RESULTS.png";
+
 		
-	    File fileI = new File(folderPath);
+	    File fileI = new File(lien);
 	
 	    try {
 			desktop.open(fileI);
@@ -1934,13 +1941,19 @@ public void loadImageLI(){
 			while (rsDate.next()) {
 				date = rsDate.getString("date");
 			}
-			String trueDate = date.replace(":", "-");
-			Path currentRelativePath = Paths.get("");
-			String s = currentRelativePath.toAbsolutePath().toString();
-			String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
+			if (date != null) {
+				String trueDate = date.replace(":", "-");
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
+				
+				File folder = new File(folderPath);
+				if (folder.exists()) {
+					deleteDirectory(folder);
+				}
+			}
+
 			
-			File folder = new File(folderPath);
-			deleteDirectory(folder);
 			
 			
 			pst2 = conn.prepareStatement(sqlDeleteAlgo);
