@@ -1525,6 +1525,10 @@ public class PageDeConnectionController implements Initializable {
 	@FXML
 	private File fis;
 
+	@FXML
+	Button btnImageLI;
+	@FXML
+	TextField infoImageResuTF;
 
 
 	/**
@@ -1546,6 +1550,60 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 
+	/*------------------------------Load image Page liste Image----------------------------------------------------------------*/
+public void loadImageLI(){
+		
+		if (idImageEssaiResultat.getCellData(index) == null) {
+			JOptionPane.showMessageDialog(null, "Veuillez sélectionner une image.");
+			return;
+		}
+		
+		
+		int selectedImageId = idImageEssaiResultat.getCellData(index);
+		String nom = "";
+		String date = "";
+		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
+		String sqlGetName = "SELECT nom FROM image WHERE idImage = ?";
+		conn = mysqlconnect.ConnectDb();
+		try {
+			
+			pst = conn.prepareStatement(sqlGetDate);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				date = rs.getString("date");
+			}
+			
+			
+			pst = conn.prepareStatement(sqlGetName);
+			pst.setInt(1, selectedImageId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				nom = rs.getString("nom");
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu une erreur lors de la récupération des données.");
+		}
+		
+		String trueNom = nom.substring(0, nom.lastIndexOf('.'));
+		String trueDate = date.replace(":", "-");
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate+"\\"+trueNom+"RESULTS.png";
+		
+	    File fileI = new File(folderPath);
+	
+	    try {
+			desktop.open(fileI);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'ouverture de l'image.");
+		}
+    
+		
+	}
+
+/*----------------------------------------Fin-------Load image Page liste Image------------------------------------------------------------*/
 
 	/**
 	 *  Methode qui permet d'ajouter une image

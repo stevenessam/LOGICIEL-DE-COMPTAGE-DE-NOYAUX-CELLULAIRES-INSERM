@@ -184,7 +184,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pageResultatEssai" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="254.0" layoutX="53.0" layoutY="98.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
             <Label layoutX="105.0" layoutY="133.0" text="Nombre Totale d'Image" textFill="WHITE">
@@ -235,8 +235,9 @@
             </TableView>
             <Line endX="763.0" layoutX="207.0" layoutY="185.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
             <Line endX="763.0" layoutX="207.0" layoutY="261.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
-            <Button fx:id="btnLoadImage" layoutX="842.0" layoutY="456.0" mnemonicParsing="false" onAction="#loadImage" text="Button" />
-            <TextField fx:id="idImageEssaiResultatTF" layoutX="796.0" layoutY="379.0" />
+            <Button fx:id="btnLoadImage" layoutX="875.0" layoutY="529.0" mnemonicParsing="false" onAction="#loadImage" text="Button" />
+            <TextField fx:id="idImageEssaiResultatTF" layoutX="807.0" layoutY="372.0" prefHeight="31.0" prefWidth="18.0" />
+            <TextField fx:id="infoImageResuTF" layoutX="807.0" layoutY="457.0" />
          </children>
       </Pane>
       <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -260,7 +261,7 @@
               </columns>
             </TableView>
             <TextField fx:id="idImageImg" layoutX="14.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="765.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="452.0" layoutX="765.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
             <Button fx:id="supprimerImage" layoutX="797.0" layoutY="390.0" mnemonicParsing="false" onAction="#deleteImage" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Supprimer Image" />
             <Button fx:id="importImageImg" layoutX="807.0" layoutY="145.0" mnemonicParsing="false" onAction="#importImages" prefHeight="54.0" prefWidth="250.0" style="-fx-background-color: grey;" styleClass="buttons" text="Import Image">
                <font>
@@ -276,6 +277,7 @@
                </font>
             </Label>
             <Line endX="212.0" layoutX="863.0" layoutY="301.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
+            <Button fx:id="btnImageLI" layoutX="900.0" layoutY="476.0" mnemonicParsing="false" onAction="#loadImageLI" text="Button" />
          </children>
       </Pane>
       <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
