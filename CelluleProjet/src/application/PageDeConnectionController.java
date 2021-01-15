@@ -25,6 +25,7 @@ import crud.Campagne;
 import crud.Essai;
 import crud.Image;
 import crud.Utilisateur;
+import ij.IJ;
 import ij.ImagePlus;
 import ij.io.Opener;
 import ij.measure.ResultsTable;
@@ -309,13 +310,42 @@ public class PageDeConnectionController implements Initializable {
 		JOptionPane.showMessageDialog(null, "Le traitement peut prendre du temps selon le nombre d'image qui vont être analysées. Vous ne pourrez plus utiliser le logiciel pendant ce temps.");
 
 		// Analyse des images
+		
+		
+		String sqlAddDate = "UPDATE essai SET date = NOW() WHERE idEssai = ?";
+		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
+		String date = "";
+		try {
+			pst = conn.prepareStatement(sqlAddDate);
+			pst.setInt(1, idEssai);
+			pst.execute();
+			
+			pst = conn.prepareStatement(sqlGetDate);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				date = rs.getString("date");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de la mise à jour de l'essai.");
+			return;
+		}
+		
+		refreshTableEssai();
+		
+		String trueDate = date.replace(":", "-");
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
+		new File(folderPath).mkdirs();
+			
 
-		Opener opener = new Opener();
+		
 		Algorithme algo = new Algorithme();
 		ArrayList<ArrayList<Amas>> listeAmas = new ArrayList<>();
 		for (int i = 0; i < imageList.size(); i++) {
-			ImagePlus imp = opener.openImage(imageList.get(i).getLienImage());
-			algo.ExecuteAlgorithm(algoID, imp);
+			ImagePlus imp = IJ.openImage(imageList.get(i).getLienImage());
+			algo.ExecuteAlgorithm(algoID, imp, idEssai);
 			ResultsTable RT1 = ResultsTable.getResultsTable();
 			int rowNbr = RT1.getCounter();
 			ArrayList<Amas> liste = new ArrayList<>();
@@ -936,7 +966,7 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addEssai (){    
 		conn = mysqlconnect.ConnectDb();
-		String sql = "INSERT INTO essai (description,date) VALUES (?,NOW())";
+		String sql = "INSERT INTO essai (description) VALUES (?)";
 		String sqlFetch = "SELECT idEssai FROM essai ORDER BY idEssai DESC LIMIT 1";
 		String sqlLink = "INSERT INTO utilisateureffectueessai (idUtilisateur, idEssai) VALUES (?, ?)";
 		try {
@@ -1242,22 +1272,41 @@ public class PageDeConnectionController implements Initializable {
 			return;
 		}
 		
+		
 		int selectedImageId = idImageEssaiResultat.getCellData(index);
-		String lien = "";
-		String sqlGetLink = "SELECT lienImage FROM image WHERE idImage = ?";
+		String nom = "";
+		String date = "";
+		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
+		String sqlGetName = "SELECT nom FROM image WHERE idImage = ?";
 		conn = mysqlconnect.ConnectDb();
 		try {
-			pst = conn.prepareStatement(sqlGetLink);
+			
+			pst = conn.prepareStatement(sqlGetDate);
+			pst.setInt(1, idEssai);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				date = rs.getString("date");
+			}
+			
+			
+			pst = conn.prepareStatement(sqlGetName);
 			pst.setInt(1, selectedImageId);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				lien = rs.getString("lienImage");
+				nom = rs.getString("nom");
 			}
+			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Il y a eu une erreur lors de la récupération des données.");
 		}
 		
-	    File fileI = new File(lien);
+		String trueNom = nom.substring(0, nom.lastIndexOf('.'));
+		String trueDate = date.replace(":", "-");
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate+"\\"+trueNom+"RESULTS.png";
+		
+	    File fileI = new File(folderPath);
 	
 	    try {
 			desktop.open(fileI);
@@ -1265,6 +1314,7 @@ public class PageDeConnectionController implements Initializable {
 			JOptionPane.showMessageDialog(null, "Il y a eu un problème lors de l'ouverture de l'image.");
 		}
     
+		
 	}
 	
 	/*-------------------Fin-----load Image Essai Resultat------------------------------*/	
@@ -1540,6 +1590,10 @@ public class PageDeConnectionController implements Initializable {
 	public void deleteImage(){
 
 		conn = mysqlconnect.ConnectDb();
+		String sqlFetchDates = "SELECT date FROM essai E INNER JOIN essaicontientimage ECI ON E.idEssai = ECI.idEssai "
+				+ "INNER JOIN image I ON ECI.idImage = I.idImage "
+				+ "WHERE I.idImage = ?";
+		String sqlGetNom = "SELECT nom FROM image WHERE idImage = ?";
 		String sqlFetchImage = "SELECT * FROM image WHERE idImage = ?";
 		String sqlDeleteLienEssai = "DELETE FROM essaicontientimage WHERE idImage = ?";
 		String sqlFetchAllMesures = "SELECT * FROM mesure M INNER JOIN mesureappartientimage MAI ON MAI.idMesure = M.idMesure WHERE MAI.idImage = ?";
@@ -1547,6 +1601,7 @@ public class PageDeConnectionController implements Initializable {
 		String sqlDeleteAmasLien = "DELETE FROM amasappartientmesure WHERE idAmas = ?";
 		String sqlDeleteAmas = "DELETE FROM amas WHERE idAmas = ?";  
 		String sqlDeleteLienMesure = "DELETE FROM mesureappartientimage WHERE idImage = ?";
+		String sqlDeleteLienEssaiMesure = "DELETE FROM essaicontientmesure WHERE idMesure = ?";
 		String sqlDeleteMesure = "DELETE FROM mesure WHERE idMesure = ?";
 		String sqlDelete = "DELETE FROM image WHERE idImage = ?";
 
@@ -1558,7 +1613,29 @@ public class PageDeConnectionController implements Initializable {
 		}
 
 		try {
-
+			String name = "";
+			pst = conn.prepareStatement(sqlGetNom);
+			pst.setString(1, selectedImage);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				name = rs.getString("nom");
+			}
+			
+			
+			pst = conn.prepareStatement(sqlFetchDates);
+			pst.setString(1, selectedImage);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String trueDate = rs.getString("date").replace(":", "-");
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				String imagePath = s + "\\imageProcessing\\Résultats\\"+trueDate+"\\"+name.substring(0, name.lastIndexOf('.'))+"RESULTS.png";
+				File file = new File(imagePath);
+				file.delete();
+			}
+			
+			
+			
 			pst = conn.prepareStatement(sqlDeleteLienEssai);
 			pst.setString(1, selectedImage);
 			pst.execute();
@@ -1568,6 +1645,11 @@ public class PageDeConnectionController implements Initializable {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
+				
+				pst = conn.prepareStatement(sqlDeleteLienEssaiMesure);
+				pst.setString(1, rs.getString("idMesure"));
+				pst.execute();
+				
 				pst = conn.prepareStatement(sqlFetchAllAmas);
 				pst.setString(1, rs.getString("idMesure"));
 				ResultSet rsA;
@@ -1750,6 +1832,7 @@ public class PageDeConnectionController implements Initializable {
 
 	public void deleteEssaiComplet(int idEss) {
 		conn = mysqlconnect.ConnectDb();
+		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
 		String sqlDeleteAlgo = "DELETE FROM essaicontientalgorithme WHERE idEssai = ?";
 		String sqlDeleteCampagne = "DELETE FROM campagnecontientessai WHERE idEssai = ?";
 		String sqlDeleteImage = "DELETE FROM essaicontientimage WHERE idEssai = ?";
@@ -1768,6 +1851,23 @@ public class PageDeConnectionController implements Initializable {
 
 		try {
 			PreparedStatement pst2;
+			
+			String date = "";
+			pst2 = conn.prepareStatement(sqlGetDate);
+			pst2.setInt(1, idEss);
+			ResultSet rsDate = pst2.executeQuery();
+			while (rsDate.next()) {
+				date = rsDate.getString("date");
+			}
+			String trueDate = date.replace(":", "-");
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();
+			String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
+			
+			File folder = new File(folderPath);
+			deleteDirectory(folder);
+			
+			
 			pst2 = conn.prepareStatement(sqlDeleteAlgo);
 			pst2.setInt(1, idEss);
 			pst2.execute();
@@ -2301,10 +2401,18 @@ public class PageDeConnectionController implements Initializable {
 		
 		
 		
-		
-		
-		
 
 	}
+	
+	public boolean deleteDirectory (File directoryToBeDeleted) {
+	    File[] allContents = directoryToBeDeleted.listFiles();
+	    if (allContents != null) {
+	        for (File file : allContents) {
+	            deleteDirectory(file);
+	        }
+	    }
+	    return directoryToBeDeleted.delete();
+	}
+	
 
 }

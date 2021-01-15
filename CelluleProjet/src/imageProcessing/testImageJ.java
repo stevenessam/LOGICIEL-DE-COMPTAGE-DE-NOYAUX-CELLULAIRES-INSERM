@@ -24,13 +24,14 @@ public class testImageJ {
 		
 		Opener opener = new Opener();  
 		String imageFilePath = s + "\\Images\\Capture.png";
-		ImagePlus imp = opener.openImage(imageFilePath);
+		ImagePlus imp = IJ.openImage(imageFilePath);
+		
 		
 		//Macro_Runner test_runner = new Macro_Runner();
 		//test_runner.run(path);
 		
 		Algorithme algo = new Algorithme();
-		algo.ExecuteAlgorithm(1, imp);
+		//algo.ExecuteAlgorithm(1, imp);
 		
 		ResultsTable RT1 = ResultsTable.getResultsTable();
 		int rowNbr = RT1.getCounter();
