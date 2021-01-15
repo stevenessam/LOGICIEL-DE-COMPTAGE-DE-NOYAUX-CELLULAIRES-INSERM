@@ -1175,7 +1175,25 @@ public class PageDeConnectionController implements Initializable {
 		tableImageEssaiResultat.setItems(listImageEssaiResultat);
 	}
 
+	/*---------------------Afficher les donnes du image selectionner-------------------------------------------------*/
+	@FXML
+	TextField infoImageResuTF;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	/*---------------------Afficher les donnes du image selectionner-------------------------------------------------*/
 
 
 
@@ -1527,8 +1545,7 @@ public class PageDeConnectionController implements Initializable {
 
 	@FXML
 	Button btnImageLI;
-	@FXML
-	TextField infoImageResuTF;
+
 
 
 	/**
