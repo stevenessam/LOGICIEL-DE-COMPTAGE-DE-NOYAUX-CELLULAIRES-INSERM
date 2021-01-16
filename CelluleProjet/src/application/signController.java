@@ -216,10 +216,6 @@ public class signController implements Initializable{
 	private String getEncodedString(String mdp) {
 		return Base64.getEncoder().encodeToString(mdp.getBytes());
 	}
-
-	private String getDecodeString(String mdpEncoded) {
-		return new String(Base64.getMimeDecoder().decode(mdpEncoded));
-	}
 	
 	
 
