@@ -3,6 +3,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
@@ -121,11 +122,12 @@ public class signController implements Initializable{
 		conn = mysqlconnect.ConnectDb();
 		String sql = "SELECT * FROM utilisateur WHERE userName = ? AND motDePasse = ? ";
 
+		String mdpEncoded = getEncodedString(passowrdSignin.getText());
 
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, userNameSignin.getText());
-			pst.setString(2, passowrdSignin.getText());
+			pst.setString(2, mdpEncoded);
 
 			rs = pst.executeQuery();
 
@@ -155,8 +157,10 @@ public class signController implements Initializable{
 		String sqlT = "SELECT * FROM utilisateur WHERE userName = ?";
 		String sql = "INSERT INTO utilisateur (userName,nom,prenom,motDePasse) VALUES (?,?,?,?)";
 
+		String mdp = passowrdSignup.getText();
+		String mdpEncoded = getEncodedString(mdp);
 
-
+		
 		try {
 			pst = conn.prepareStatement(sqlT);
 			pst.setString(1, userNameSignup.getText());
@@ -180,7 +184,7 @@ public class signController implements Initializable{
 						pst.setString(1, userNameSignup.getText());
 						pst.setString(2, nomSignup.getText());
 						pst.setString(3, prenomSignup.getText());
-						pst.setString(4, passowrdSignup.getText());
+						pst.setString(4, mdpEncoded);
 						pst.execute();
 						userAdded = true;
 
@@ -204,8 +208,20 @@ public class signController implements Initializable{
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 	}
 
+
+
+	private String getEncodedString(String mdp) {
+		return Base64.getEncoder().encodeToString(mdp.getBytes());
+	}
+
+	private String getDecodeString(String mdpEncoded) {
+		return new String(Base64.getMimeDecoder().decode(mdpEncoded));
+	}
+	
+	
 
 	private boolean validateInput(){
 		if(
