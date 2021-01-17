@@ -1000,10 +1000,20 @@ public class PageDeConnectionController implements Initializable {
 
 	public void addEssaiImage (){    
 		conn = mysqlconnect.ConnectDb();
-
+		
+		String sqlCheckMesure = "SELECT * FROM essaicontientmesure WHERE idEssai = ?";
 		String sqlCheck = "SELECT * FROM essaicontientimage WHERE idImage = ? AND idEssai = ?";
 		String sql = "INSERT INTO essaicontientimage (idImage, idEssai) VALUES (?, ?)";
 		try {
+			pst = conn.prepareStatement(sqlCheckMesure);
+			pst.setString(1, idEssaiTextField.getText());
+			rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				JOptionPane.showMessageDialog(null, "Cet essai a déjà été effectué.");
+				return;
+			}
+			
 			pst = conn.prepareStatement(sqlCheck);
 			pst.setString(1, idImageImg.getText());
 			pst.setString(2, idEssaiTextField.getText());
@@ -1017,7 +1027,7 @@ public class PageDeConnectionController implements Initializable {
 			}
 			refreshTableImageEssai();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné");
+			JOptionPane.showMessageDialog(null, "Aucun élément correspondant n'a été sélectionné.");
 		}
 	}
 

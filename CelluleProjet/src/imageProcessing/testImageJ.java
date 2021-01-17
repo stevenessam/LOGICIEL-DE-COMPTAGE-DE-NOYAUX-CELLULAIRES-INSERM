@@ -23,7 +23,7 @@ public class testImageJ {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
 		Opener opener = new Opener();  
-		String imageFilePath = s + "\\Images\\Capture.png";
+		String imageFilePath = s + "\\Images\\image.jpg";
 		ImagePlus imp = IJ.openImage(imageFilePath);
 		
 		
@@ -31,7 +31,7 @@ public class testImageJ {
 		//test_runner.run(path);
 		
 		Algorithme algo = new Algorithme();
-		//algo.ExecuteAlgorithm(1, imp);
+		algo.ExecuteAlgorithm(3, imp, 5);
 		
 		ResultsTable RT1 = ResultsTable.getResultsTable();
 		int rowNbr = RT1.getCounter();
