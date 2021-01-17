@@ -586,6 +586,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 	public void pageResultatEssai(int id) {
+		
+		refreshTableImageEssai();
+		
 		conn = mysqlconnect.ConnectDb();
 
 		String sqlNbrImages = "SELECT COUNT(*) FROM essaicontientimage WHERE idEssai = ?";
