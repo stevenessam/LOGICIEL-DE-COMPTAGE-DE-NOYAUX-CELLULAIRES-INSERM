@@ -122,8 +122,10 @@ public class Algorithme {
 			
 			impCopy.show();
 			IJ.selectWindow("DUP_"+main1);
-			ROI.runCommand("Show All without labels");
-			IJ.run(impCopy, "From ROI Manager", "");
+			if (ROI != null) {
+				ROI.runCommand("Show All without labels");
+				IJ.run(impCopy, "From ROI Manager", "");
+			}
 			IJ.saveAs("PNG", folderPath +"\\"+Nom1+ "RESULTS.png");
 			WindowManager.closeAllWindows();
 			
@@ -153,8 +155,10 @@ public class Algorithme {
 			
 			impCopy2.show();
 			IJ.selectWindow("DUP_"+main2);
-			ROI2.runCommand("Show All without labels");
-			IJ.run(impCopy2, "From ROI Manager", "");
+			if (ROI2 != null) {
+				ROI2.runCommand("Show All without labels");
+				IJ.run(impCopy2, "From ROI Manager", "");
+			}
 			IJ.saveAs("PNG", folderPath +"\\"+Nom2+ "RESULTS.png");
 			WindowManager.closeAllWindows();
 		break;
@@ -184,8 +188,11 @@ public class Algorithme {
 			
 			impCopy3.show();
 			IJ.selectWindow("DUP_"+main3);
-			ROI3.runCommand("Show All without labels");
-			IJ.run(impCopy3, "From ROI Manager", "");
+			if (ROI3 != null) {
+				ROI3.runCommand("Show All without labels");
+				IJ.run(impCopy3, "From ROI Manager", "");
+			}
+
 			IJ.saveAs("PNG", folderPath +"\\"+Nom3+ "RESULTS.png");
 			WindowManager.closeAllWindows();
 		break;

@@ -1297,11 +1297,13 @@ public class PageDeConnectionController implements Initializable {
 		String sqlGetCellnumber = "SELECT SUM(A.poids) AS Total FROM amas A INNER JOIN amasappartientmesure AAM ON A.idAmas = AAM.idAmas "
 				+ "INNER JOIN mesure M ON AAM.idMesure = M.idMesure "
 				+ "INNER JOIN mesureappartientimage MAI ON M.idMesure = MAI.idMesure "
-				+ "WHERE MAI.idImage = ?";
+				+ "INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure "
+				+ "WHERE MAI.idImage = ? AND ECM.idEssai = ?";
 		
 		try {
 			pst = conn.prepareStatement(sqlGetCellnumber);
 			pst.setString(1, idImage);
+			pst.setInt(2, idEssai);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				cellNumber = rs.getInt("Total");
