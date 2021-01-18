@@ -12,39 +12,31 @@
 }
 
 
-	/* .tablesstyle{
-		
-    -fx-background-color: rgb(47,47,47);
-
-}
-
-
-*/
 
 
 
-.tablerow .cell{
+	.tablerow .cell{
 	
--fx-wrap-text: true;
+	-fx-wrap-text: true;
 	    
 
-}
+	}
 
-.resuField{
-	
-	-fx-font-size:20; 
-	-fx-text-fill: White;
-	-fx-font-weight: bold;
-	-fx-background-color:#2d3447;
-}
+	.resuField{
+		
+		-fx-font-size:20; 
+		-fx-text-fill: White;
+		-fx-font-weight: bold;
+		-fx-background-color:#2d3447;
+	}
 
-.infoCompte{
-	-fx-font-size:20; 
-	-fx-text-fill: #00c7ff;
-	-fx-font-weight: bold;
-	-fx-background-color:#2d3447;
-	
-}
+	.infoCompte{
+		-fx-font-size:20; 
+		-fx-text-fill: #00c7ff;
+		-fx-font-weight: bold;
+		-fx-background-color:#2d3447;
+		
+	}
 
 
 

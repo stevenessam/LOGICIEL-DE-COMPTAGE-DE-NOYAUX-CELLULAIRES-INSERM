@@ -84,13 +84,13 @@
       </Pane>
       <Pane fx:id="pageResultatCampagnes" layoutX="230.0" prefHeight="691.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="310.0" layoutX="50.0" layoutY="141.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
-            <Label layoutX="131.0" layoutY="205.0" text="Nombre Totale D'Images" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="310.0" layoutX="50.0" layoutY="227.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
+            <Label layoutX="131.0" layoutY="291.0" text="Nombre Totale D'Images" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="131.0" layoutY="278.0" text="Nombre Totale De Cellules Detectes" textFill="WHITE">
+            <Label layoutX="131.0" layoutY="364.0" text="Nombre Totale De Cellules Detectes" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -105,23 +105,38 @@
                   <Image url="@Images/arrow.png" />
                </image>
             </ImageView>
-            <Label layoutX="131.0" layoutY="350.0" prefHeight="30.0" prefWidth="337.0" text="Moyenne De cellules Image" textFill="WHITE">
+            <Label layoutX="131.0" layoutY="436.0" prefHeight="30.0" prefWidth="337.0" text="Moyenne De cellules Image" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="nbrTotaleImagesCampagnes" editable="false" layoutX="674.0" layoutY="201.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
-            <TextField fx:id="nbrTotaleCelluleCampagnes" editable="false" layoutX="674.0" layoutY="274.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
-            <TextField fx:id="moyenneCelluleImageCampagnes" editable="false" layoutX="674.0" layoutY="346.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
+            <TextField fx:id="nbrTotaleImagesCampagnes" editable="false" layoutX="674.0" layoutY="287.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
+            <TextField fx:id="nbrTotaleCelluleCampagnes" editable="false" layoutX="674.0" layoutY="360.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
+            <TextField fx:id="moyenneCelluleImageCampagnes" editable="false" layoutX="674.0" layoutY="432.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
-            <Label layoutX="390.0" text="Resultat" textFill="WHITE">
+            <Label layoutX="390.0" text="Resultat Campagne" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
             <Button fx:id="exporterCampagnes" layoutX="823.0" layoutY="586.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="230.0" styleClass="buttons" text="Exporter" />
-            <Line endX="763.0" layoutX="233.0" layoutY="257.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
-            <Line endX="763.0" layoutX="233.0" layoutY="334.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <Line endX="763.0" layoutX="233.0" layoutY="343.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <Line endX="763.0" layoutX="233.0" layoutY="420.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <ImageView fitHeight="139.0" fitWidth="144.0" layoutX="7.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@Images/cell6.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="139.0" fitWidth="144.0" layoutX="967.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@Images/cell6.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="132.0" fitWidth="453.0" layoutX="326.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell8.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="pageEssais" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -151,23 +166,23 @@
                </font>
             </Label>
             <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="466.0" prefWidth="277.0">
+            <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="466.0" prefWidth="270.0">
               <columns>
                   <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="274.0" text="Images Correspondante" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="267.0" text="Images Correspondante" />
               </columns>
             </TableView>
-            <TableView fx:id="tableAlgo" layoutX="794.0" layoutY="416.0" onMouseClicked="#getSelectedAlgo" prefHeight="107.0" prefWidth="277.0">
+            <TableView fx:id="tableAlgo" layoutX="794.0" layoutY="420.0" onMouseClicked="#getSelectedAlgo" prefHeight="99.0" prefWidth="277.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgo" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgo" prefWidth="274.0" resizable="false" text="Algorithme" />
+                <TableColumn fx:id="tableNomAlgo" prefWidth="273.0" resizable="false" text="Algorithme" />
               </columns>
             </TableView>
             <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
-            <TableView fx:id="tableAlgoEssai" layoutX="480.0" layoutY="550.0" prefHeight="132.0" prefWidth="277.0">
+            <TableView fx:id="tableAlgoEssai" layoutX="480.0" layoutY="550.0" prefHeight="132.0" prefWidth="270.0">
               <columns>
                 <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="274.0" text="Algorithme Correspondante" />
+                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="268.0" text="Algorithme Correspondante" />
               </columns>
             </TableView>
             <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
@@ -176,8 +191,8 @@
             <Line endX="212.0" layoutX="861.0" layoutY="203.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="407.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="602.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3447" height="30.0" layoutX="788.0" layoutY="413.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="287.0" />
-            <Label layoutX="799.0" layoutY="418.0" prefHeight="21.0" prefWidth="210.0" text="Sélectionnez un algorithme" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3447" height="30.0" layoutX="788.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="287.0" />
+            <Label layoutX="799.0" layoutY="422.0" prefHeight="21.0" prefWidth="210.0" text="Sélectionnez un algorithme" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -221,7 +236,7 @@
             <TextField fx:id="nbrTotaleCelluleEssais" editable="false" layoutX="705.0" layoutY="203.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
             <TextField fx:id="moyenneCelluleImageEssais" editable="false" layoutX="705.0" layoutY="275.0" prefHeight="31.0" prefWidth="91.0" styleClass="resuField" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
-            <Label layoutX="390.0" text="Resultat" textFill="WHITE">
+            <Label layoutX="390.0" text="Resultat Essai" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -246,6 +261,26 @@
                </font>
             </Label>
             <Line endX="754.0" layoutX="298.0" layoutY="530.0" startX="477.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <ImageView fitHeight="64.0" fitWidth="72.0" layoutX="34.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell6.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="154.0" fitWidth="125.0" layoutX="973.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell11.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="72.0" layoutX="727.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="72.0" layoutX="1035.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -287,44 +322,59 @@
             <Line endX="212.0" layoutX="863.0" layoutY="301.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Button fx:id="btnImageLI" layoutX="797.0" layoutY="480.0" mnemonicParsing="false" onAction="#loadImageLI" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Afficher L'Image" />
             <Line endX="212.0" layoutX="863.0" layoutY="463.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
+            <ImageView fitHeight="73.0" fitWidth="72.0" layoutX="1052.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" rotate="-66.6">
+               <image>
+                  <Image url="@Images/cell5.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="81.0" layoutX="739.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" rotate="-80.0">
+               <image>
+                  <Image url="@Images/cell5.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="pageMonCompte" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="53.0" layoutY="177.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
-            <Label layoutX="85.0" layoutY="196.0" text="Username :" textFill="WHITE">
+            <ImageView fitHeight="364.0" fitWidth="1112.0" layoutX="5.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/im.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="384.0" layoutX="54.0" layoutY="143.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="1014.0" />
+            <Label layoutX="86.0" layoutY="162.0" text="Username :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="86.0" layoutY="251.0" text="Prenom :" textFill="WHITE">
+            <Label layoutX="87.0" layoutY="217.0" text="Prenom :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="86.0" layoutY="314.0" text="Nom :" textFill="WHITE">
+            <Label layoutX="87.0" layoutY="280.0" text="Nom :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="409.0" text="Modifier Prenom :" textFill="WHITE">
+            <Label layoutX="86.0" layoutY="375.0" text="Modifier Prenom :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="86.0" layoutY="447.0" text="Modifier Nom :" textFill="WHITE">
+            <Label layoutX="87.0" layoutY="413.0" text="Modifier Nom :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="86.0" layoutY="485.0" text="Modifier mot de passe :" textFill="WHITE">
+            <Label layoutX="87.0" layoutY="451.0" text="Modifier mot de passe :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="modifierPrenomCompte" layoutX="321.0" layoutY="409.0" prefHeight="31.0" prefWidth="250.0" promptText="Prenom" />
-            <TextField fx:id="modifierNomCompte" layoutX="321.0" layoutY="447.0" prefHeight="31.0" prefWidth="250.0" promptText="Nom" />
-            <PasswordField fx:id="modifierPasswordCompte" layoutX="321.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" promptText="Mot de passe" />
+            <TextField fx:id="modifierPrenomCompte" layoutX="322.0" layoutY="375.0" prefHeight="31.0" prefWidth="250.0" promptText="Prenom" />
+            <TextField fx:id="modifierNomCompte" layoutX="322.0" layoutY="413.0" prefHeight="31.0" prefWidth="250.0" promptText="Nom" />
+            <PasswordField fx:id="modifierPasswordCompte" layoutX="322.0" layoutY="451.0" prefHeight="31.0" prefWidth="250.0" promptText="Mot de passe" />
             <Button fx:id="validerCompte" layoutX="911.0" layoutY="607.0" mnemonicParsing="false" onAction="#editCompte" prefHeight="54.0" prefWidth="159.0" styleClass="buttons" text="Valider">
                <font>
                   <Font size="20.0" />
@@ -335,28 +385,28 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <ImageView fitHeight="89.0" fitWidth="80.0" layoutX="53.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/cellule.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="991.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/cellule2.png" />
-               </image>
-            </ImageView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="47.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" styleClass="toprectangle" width="1127.0" />
             <Label layoutX="390.0" text="Mon Compte" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="showPrenom" editable="false" layoutX="257.0" layoutY="250.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
-            <TextField fx:id="showNom" editable="false" layoutX="257.0" layoutY="314.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
-            <TextField fx:id="showUsername" editable="false" layoutX="257.0" layoutY="192.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
-            <Line endX="848.0" layoutX="182.0" layoutY="377.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
-            <Line endX="359.0" layoutX="187.0" layoutY="240.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
-            <Line endX="359.0" layoutX="187.0" layoutY="301.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <TextField fx:id="showPrenom" editable="false" layoutX="258.0" layoutY="216.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
+            <TextField fx:id="showNom" editable="false" layoutX="258.0" layoutY="280.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
+            <TextField fx:id="showUsername" editable="false" layoutX="258.0" layoutY="158.0" prefHeight="31.0" prefWidth="250.0" styleClass="infoCompte" />
+            <Line endX="848.0" layoutX="183.0" layoutY="343.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <Line endX="359.0" layoutX="188.0" layoutY="206.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <Line endX="359.0" layoutX="188.0" layoutY="267.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
+            <ImageView fitHeight="80.0" fitWidth="125.0" layoutX="54.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="125.0" layoutX="993.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@Images/cell1.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="pageGestionAdmin" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -367,7 +417,7 @@
                   <TableColumn fx:id="tableUserNameGestioadmin" prefWidth="155.0" text="UserName" />
                 <TableColumn fx:id="tableNomGestioadmin" prefWidth="194.0" styleClass="tablerow" text="Nom" />
                 <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="188.0" styleClass="tablerow" text="Prenom" />
-                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="183.0" styleClass="tablerow" text="Position" />
+                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="182.0" styleClass="tablerow" text="Position" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -387,6 +437,11 @@
             <TextField fx:id="idUtilisateur" layoutX="1095.0" layoutY="655.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
             <Line endX="212.0" layoutX="862.0" layoutY="219.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="862.0" layoutY="317.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
+            <ImageView fitHeight="204.0" fitWidth="349.0" layoutX="757.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/cell17.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane layoutX="1150.0" prefHeight="47.0" prefWidth="200.0">

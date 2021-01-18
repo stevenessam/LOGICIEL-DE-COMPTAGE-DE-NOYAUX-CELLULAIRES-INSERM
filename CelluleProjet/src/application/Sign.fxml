@@ -14,8 +14,13 @@
 
 <AnchorPane fx:id="signLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#btnDraggApp" onMousePressed="#pressDraggApp" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2d3447; -fx-border-color: rgb(0,100,170); -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.signController">
    <children>
-      <Line endX="8.0" endY="-105.0" layoutX="442.0" layoutY="105.0" startX="8.0" startY="495.0" />
-      <ImageView fitHeight="136.0" fitWidth="126.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Line endX="8.0" endY="-98.5" layoutX="442.0" layoutY="105.0" startX="8.0" startY="489.0" />
+      <ImageView fitHeight="286.0" fitWidth="883.0" layoutX="10.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/im.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="124.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/cellule.png" />
          </image>
