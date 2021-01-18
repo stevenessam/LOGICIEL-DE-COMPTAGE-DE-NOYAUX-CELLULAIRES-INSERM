@@ -96,10 +96,15 @@ public class Algorithme {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
 		
+		
+		
+		ResultsTable RT = ResultsTable.getResultsTable();
+		
+		
 		switch (idAlgo) {
 		case 1:
 			
-			ResultsTable RT1 = ResultsTable.getResultsTable();
+			
 			imp.show();
 			String main1 = imp.getTitle();
 			String Nom1 = main1.substring(0, main1.lastIndexOf('.'));
@@ -133,7 +138,6 @@ public class Algorithme {
 		
 		
 		case 2:
-			ResultsTable RT2 = ResultsTable.getResultsTable();
 			imp.show();
 			String main2 = imp.getTitle();
 			String Nom2 = main2.substring(0, main2.lastIndexOf('.'));
@@ -164,7 +168,6 @@ public class Algorithme {
 		break;
 		
 		case 3:
-			ResultsTable RT3 = ResultsTable.getResultsTable();
 			imp.show();
 			String main3 = imp.getTitle();
 			String Nom3 = main3.substring(0, main3.lastIndexOf('.'));

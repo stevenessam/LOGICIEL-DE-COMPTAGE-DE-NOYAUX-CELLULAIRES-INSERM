@@ -2366,24 +2366,37 @@ public void loadImageLI(){
 
 			try {
 
-				String query = "Select * from amas";
+				String query = "SELECT A.idAmas, A.coordonnéeX, A.coordonnéeY, A.poids, I.nom, C.nom AS Campagne FROM amas A "
+						+ "INNER JOIN amasappartientmesure AAM ON AAM.idAmas = A.idAmas "
+						+ "INNER JOIN mesure M ON AAM.idMesure = M.idMesure "
+						+ "INNER JOIN essaicontientmesure ECM ON ECM.idMesure = M.idMesure "
+						+ "INNER JOIN essai E ON ECM.idEssai = E.idEssai "
+						+ "INNER JOIN campagnecontientessai CCE ON CCE.idEssai = E.idEssai "
+						+ "INNER JOIN campagne C ON CCE.idCampagne = C.idCampagne "
+						+ "INNER JOIN mesureappartientimage MAI ON M.idMesure = MAI.idMesure "
+						+ "INNER JOIN image I ON MAI.idImage = I.idImage "
+						+ "WHERE CCE.idCampagne = ?";
 
 				pst = conn.prepareStatement(query);
-
+				pst.setInt(1, idCampagne);
 				rs = pst.executeQuery();
 
 
 				XSSFWorkbook wb = new XSSFWorkbook();
 
-				XSSFSheet sheet = wb.createSheet("Amas Details");
+				XSSFSheet sheet = wb.createSheet("Campagne");
 
 				XSSFRow header = sheet.createRow(0);
 
-				header.createCell(0).setCellValue("idamas");
+				header.createCell(0).setCellValue("Campagne");
+				
+				header.createCell(1).setCellValue("Image");
 
-				header.createCell(1).setCellValue("coordonnéeX");
+				header.createCell(2).setCellValue("X");
 
-				header.createCell(2).setCellValue("coordonnéeY");
+				header.createCell(3).setCellValue("Y");
+				
+				header.createCell(4).setCellValue("Poids");
 
 
 				sheet.autoSizeColumn(1);
@@ -2400,11 +2413,16 @@ public void loadImageLI(){
 
 					XSSFRow row = sheet.createRow(index);
 
-					row.createCell(0).setCellValue(rs.getString("idamas"));
+					row.createCell(0).setCellValue(rs.getString("Campagne"));
+					
+					row.createCell(1).setCellValue(rs.getString("nom"));
 
-					row.createCell(1).setCellValue(rs.getString("coordonnéeX"));
+					row.createCell(2).setCellValue(rs.getString("coordonnéeX"));
 
-					row.createCell(2).setCellValue(rs.getString("coordonnéeY"));
+					row.createCell(3).setCellValue(rs.getString("coordonnéeY"));
+					
+					row.createCell(4).setCellValue(rs.getString("poids"));
+				
 
 
 					index++;                  
