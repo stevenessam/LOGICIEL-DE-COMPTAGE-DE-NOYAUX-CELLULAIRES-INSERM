@@ -23,7 +23,7 @@ public class testImageJ {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
 		Opener opener = new Opener();  
-		String imageFilePath = s + "\\Images\\image.jpg";
+		String imageFilePath = s + "\\Images\\Capture(1).jpg";
 		ImagePlus imp = IJ.openImage(imageFilePath);
 		
 		

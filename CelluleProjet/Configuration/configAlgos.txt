@@ -1,0 +1,14 @@
+Analyse par seuillage et découpage
+ThresholdMin=[25]
+ThresholdMax=[255]
+CellSize=[4-Infinity]
+
+Analyse par seuillage
+ThresholdMin=[25]
+ThresholdMax=[255]
+CellSize=[4-Infinity]
+
+Seuillage ovale pour microscope
+ThresholdMin=[140]
+ThresholdMax=[208]
+CellSize=[2-75]

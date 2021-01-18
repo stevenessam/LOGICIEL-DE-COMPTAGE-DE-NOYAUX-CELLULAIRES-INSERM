@@ -1,10 +1,13 @@
 package crud;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -78,13 +81,22 @@ public class Algorithme {
 		Connection conn = mysqlconnect.ConnectDb();
 		
 		String sqlGetDate = "SELECT date FROM essai WHERE idEssai = ?";
+		String sqlGetNom = "SELECT nom FROM algorithme WHERE idAlgorithme = ?";
 		String date = "";
+		String nom = "";
 		try {
 			PreparedStatement pst = conn.prepareStatement(sqlGetDate);
 			pst.setInt(1, idEssai);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				date = rs.getString("date");
+			}
+			
+			pst = conn.prepareStatement(sqlGetNom);
+			pst.setInt(1, idAlgo);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				nom = rs.getString("nom");
 			}
 		} catch (Exception e) {
 			return;
@@ -94,15 +106,44 @@ public class Algorithme {
 		String trueDate = date.replace(":", "-");
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
+		String configFile = s + "\\Configuration\\configAlgos.txt";
 		String folderPath = s + "\\imageProcessing\\Résultats\\"+trueDate;
 		
 		
 		
 		ResultsTable RT = ResultsTable.getResultsTable();
+		File config = new File(configFile);
+		
+		int tMin = 25;
+		int tMax = 255;
+		String size = "4-Infinity";
 		
 		
 		switch (idAlgo) {
 		case 1:
+			try {
+				
+				Scanner reader = new Scanner(config);
+
+				while (reader.hasNextLine()) {
+					String line = reader.nextLine();
+					if (line.equals(nom)) {
+						line = reader.next();
+						tMin = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						tMax = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						size = line.substring(line.indexOf('[')+1, line.lastIndexOf(']'));
+					}
+				}
+
+				
+				reader.close();
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Fichier de configuration des algorithmes non trouvé.");
+				return;
+			}
+			
 			
 			
 			imp.show();
@@ -115,13 +156,13 @@ public class Algorithme {
 			IJ.run(imp, "8-bit", "");
 			IJ.setAutoThreshold(imp, "Default dark");
 			//IJ.run(imp, "Threshold...", "");
-			IJ.setThreshold(imp, 25, 255);
+			IJ.setThreshold(imp, tMin, tMax);
 			IJ.run(imp, "Convert to Mask", "");
 			IJ.run(imp, "Fill Holes", "");
 			IJ.run(imp, "Convert to Mask", "");
 			IJ.run(imp, "Watershed", "");
 			IJ.run(imp, "Set Measurements...", "area centroid redirect=None decimal=3");
-			IJ.run(imp, "Analyze Particles...", "size=4-Infinity show=Outlines display exclude clear add");
+			IJ.run(imp, "Analyze Particles...", "size="+size+" show=Outlines display exclude clear add");
 			
 			RoiManager ROI = RoiManager.getInstance();
 			
@@ -138,6 +179,32 @@ public class Algorithme {
 		
 		
 		case 2:
+			
+			try {
+				
+				Scanner reader = new Scanner(config);
+
+				while (reader.hasNextLine()) {
+					String line = reader.nextLine();
+					if (line.equals(nom)) {
+						line = reader.next();
+						tMin = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						tMax = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						size = line.substring(line.indexOf('[')+1, line.lastIndexOf(']'));
+					}
+				}
+
+				
+				reader.close();
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Fichier de configuration des algorithmes non trouvé.");
+				return;
+			}
+			
+			
+			
 			imp.show();
 			String main2 = imp.getTitle();
 			String Nom2 = main2.substring(0, main2.lastIndexOf('.'));
@@ -148,12 +215,12 @@ public class Algorithme {
 			IJ.run(imp, "8-bit", "");
 			IJ.setAutoThreshold(imp, "Default dark");
 			//IJ.run(imp, "Threshold...", "");
-			IJ.setThreshold(imp, 25, 255);
+			IJ.setThreshold(imp, tMin, tMax);
 			IJ.run(imp, "Convert to Mask", "");
 			IJ.run(imp, "Fill Holes", "");
 			IJ.run(imp, "Convert to Mask", "");
 			IJ.run(imp, "Set Measurements...", "area centroid redirect=None decimal=3");
-			IJ.run(imp, "Analyze Particles...", "size=4-Infinity show=Outlines display exclude clear add");
+			IJ.run(imp, "Analyze Particles...", "size="+size+" show=Outlines display exclude clear add");
 			
 			RoiManager ROI2 = RoiManager.getInstance();
 			
@@ -168,6 +235,32 @@ public class Algorithme {
 		break;
 		
 		case 3:
+			
+			try {
+				
+				Scanner reader = new Scanner(config);
+
+				while (reader.hasNextLine()) {
+					String line = reader.nextLine();
+					if (line.equals(nom)) {
+						line = reader.next();
+						tMin = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						tMax = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						line = reader.next();
+						size = line.substring(line.indexOf('[')+1, line.lastIndexOf(']'));
+					}
+				}
+
+				
+				reader.close();
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Fichier de configuration des algorithmes non trouvé.");
+				return;
+			}
+			
+			
+			
 			imp.show();
 			String main3 = imp.getTitle();
 			String Nom3 = main3.substring(0, main3.lastIndexOf('.'));
@@ -180,12 +273,12 @@ public class Algorithme {
 			IJ.setBackgroundColor(0, 0, 0);
 			IJ.run(imp, "Clear Outside", "");
 			IJ.run(imp, "8-bit", "");
-			IJ.setThreshold(imp, 140, 208, "Red");
+			IJ.setThreshold(imp, tMin, tMax, "Red");
 			Prefs.blackBackground = false;
 			IJ.run(imp, "Convert to Mask", "");
 			IJ.run(imp, "Watershed", "");
 			IJ.run(imp, "Set Measurements...", "area centroid redirect=None decimal=3");
-			IJ.run(imp, "Analyze Particles...", "size=2-75 show=Outlines display exclude clear add");
+			IJ.run(imp, "Analyze Particles...", "size="+size+" show=Outlines display exclude clear add");
 			
 			RoiManager ROI3 = RoiManager.getInstance();
 			
