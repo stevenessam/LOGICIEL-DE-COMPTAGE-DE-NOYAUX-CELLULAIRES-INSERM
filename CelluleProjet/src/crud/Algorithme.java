@@ -76,7 +76,13 @@ public class Algorithme {
 		return "algorithme [idAlgorithme=" + idAlgorithme + ", nom=" + nom + ", description=" + description + "]";
 	}
 
-	
+	/**
+	 * Applique un algorithme sur une image.
+	 * @author Cinna
+	 * @param idAlgo ID de l'algorithme correspondant dans la base de données.
+	 * @param imp Image sur laquelle le traitement va être effectué.
+	 * @param idEssai ID de l'essai auquel va appartenir la mesure.
+	 */
 	public void ExecuteAlgorithm(int idAlgo, ImagePlus imp, int idEssai) {
 		Connection conn = mysqlconnect.ConnectDb();
 		

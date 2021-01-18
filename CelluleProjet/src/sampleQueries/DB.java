@@ -42,7 +42,8 @@ public class DB {
 	    
 
 		/**
-		 * Méthode qui permet de récupérer les données du table campagne de la base de données
+		 * Méthode qui permet de récupérer les données de la table campagne de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Campagne> getDataCampagne(){
@@ -63,7 +64,8 @@ public class DB {
 	    
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Essai de la base de données
+		 * Méthode qui permet de récupérer les données de la table Essai de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Essai> getDataEssai(){
@@ -84,7 +86,8 @@ public class DB {
 
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Algorithme de la base de données
+		 * Méthode qui permet de récupérer les données de la table Algorithme de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Algorithme> getDataAlgo(){
@@ -104,7 +107,8 @@ public class DB {
 	    }
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Algorithme qui fait une jonction avec la table Essai de la base de données
+		 * Méthode qui permet de récupérer les données de la table Algorithme qui fait une jonction avec la table Essai de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Algorithme> getDataAlgoEssai(int idAlgorithme ){
@@ -125,7 +129,8 @@ public class DB {
 	    }
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Utilisateur de la base de données
+		 * Méthode qui permet de récupérer les données de la table Utilisateur de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Utilisateur> getDataUtilisateur(){
@@ -154,7 +159,8 @@ public class DB {
 	    }
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Image de la base de données
+		 * Méthode qui permet de récupérer les données de la table Image de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Image> getDataImages(){
@@ -175,7 +181,8 @@ public class DB {
 	    
 	    
 		/**
-		 * Méthode qui permet de récupérer les données du table Image qui fait une jonction avec la table Essai de la base de données
+		 * Méthode qui permet de récupérer les données de la table Image qui fait une jonction avec la table Essai de la base de données.
+		 * @author ST3VOS
 		 */
 	    public static ObservableList<Image> getDataImagesEssai(int idEssai ){
 	        Connection conn = ConnectDb();
@@ -195,7 +202,8 @@ public class DB {
 	    }
 		
 		/**
-		 * Méthode qui permet de récupérer les données du table Essai qui fait une jonction avec la table campagne de la base de données
+		 * Méthode qui permet de récupérer les données de la table Essai qui fait une jonction avec la table campagne de la base de données.
+		 * @author ST3VOS
 		 */
 	    
 	    public static ObservableList<Essai> getDataCampagneEssai(int idCampagne ){

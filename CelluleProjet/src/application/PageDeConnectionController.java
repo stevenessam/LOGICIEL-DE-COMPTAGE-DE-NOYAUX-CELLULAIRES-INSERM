@@ -128,7 +128,10 @@ public class PageDeConnectionController implements Initializable {
     @FXML
     TextField moyenneCelluleImageCampagnes;
 
-
+/**
+ * Rend visible ou non le bouton d'accès à la page "gestion admin" selon les droits de l'utilisateur connecté.
+ * @author Cinna
+ */
 
 	public void gestionAdminButtonSetVisible() {
 
@@ -175,7 +178,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 * Méthode qui permet de rendre visible la page pageessais
+	 * Méthode qui permet de rendre visible la "page page essais".
 	 * @author ST3VOS
 	 */
 
@@ -192,7 +195,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Méthode qui permet de rendre visible la page pageajouterimage
+	 * Méthode qui permet de rendre visible la page "ajouter image".
 	 * @author ST3VOS
 	 */
 
@@ -209,7 +212,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Méthode qui permet de rendre visible la page pagemoncompte 
+	 * Méthode qui permet de rendre visible la page "page mon compte". 
 	 * @author ST3VOS
 	 */
 
@@ -226,7 +229,7 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Méthode qui permet de rendre visible la page pagegestionadmin
+	 * Méthode qui permet de rendre visible la page "page gestion admin".
 	 * @author ST3VOS
 	 */
 
@@ -246,7 +249,11 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
+	 * Vérifie que l'essai n'a pas déjà été effectué. Si oui, affiche la page "résultat" de l'essai, sinon, 
+	 * traite les images de l'essai avec l'algorithme sélectionné.
+	 * 
 	 * Methode pour le Traitement d'un Essai
+	 * @author Cinna
 	 */
 
 	public void traitementEssai() {
@@ -425,7 +432,9 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
+	 * Vérifie si tous les essais liés à la campagne ont été effectués et affiche la page "résultat" de la campagne.
 	 * Methode pour le Traitement d'un Campagne
+	 * @author Cinna
 	 */
 	
 	public void traitementCampagne() {
@@ -485,7 +494,7 @@ public class PageDeConnectionController implements Initializable {
 	
 	
 	/**
-	 * Méthode qui permet de rendre visible la page pageresultatcampagnes
+	 * Méthode qui permet de rendre visible la page "page résultats campagnes".
 	 * @author ST3VOS
 	 */
 
@@ -579,7 +588,7 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 * Méthode qui permet de rendre visible la page pageresultatessai
+	 * Méthode qui permet de rendre visible la page "page résultats essai".
 	 * @author ST3VOS
 	 */
 
@@ -705,9 +714,10 @@ public class PageDeConnectionController implements Initializable {
 	int idCampagne = 0;
 
 	/**
-	 *  Methode qui permet d'afficher les donnes selectionner dans un tableau dans un TextField
+	 *  Methode qui permet d'afficher les données selectionnées dans un tableau TextField.
 	 * 
 	 * @param event
+	 * @author Cinna
 	 */
 	
 	@FXML
@@ -726,8 +736,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 *  Methode qui permet d'ajouter un campagne
-	 * 
+	 *  Méthode qui permet de créer une nouvelle campagne.
+	 * @author Cinna
 	 */
 	
 	public void addCampagnes (){    
@@ -774,7 +784,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 *  Methode qui permet d'ajouter un essai dans un campagne
+	 *  Méthode qui permet de lier un essai à une campagne.
+	 *  @author Cinna
 	 */
 
 	public void addCampagneEssai (){    
@@ -807,7 +818,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Methode qui permet de modifier les donnes d'un campagne
+	 *  Methode qui permet de modifier les données d'une campagne.
+	 *  @author ST3VOS
 	 */
 
 	public void editCampagne (){   
@@ -861,7 +873,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données
+	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données.
+	 *  @author ST3VOS
 	 */
 
 	public void refreshTableCampagne(){
@@ -893,6 +906,7 @@ public class PageDeConnectionController implements Initializable {
 
 	/**
 	 * Méthode qui met à jour le tableau Essai dans la page campagne lors de l'ajout d'un essai dans un Campagne
+	 * @author ST3VOS
 	 */
 	
 	public void refreshTableCampagneEssai(){
@@ -937,8 +951,9 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 * Methode qui permet d'afficher les donnes selectionner dans un tableau dans un TextField
+	 * Methode qui permet de récupérer l'id de l'essai sélectionné dans la liste.
 	 * @param event
+	 * @author Cinna
 	 */
 	
 	@FXML
@@ -963,8 +978,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 *  Methode qui permet d'ajouter un Essai
-	 * 
+	 *  Méthode qui permet de créer un nouvel essai.
+	 * @author Cinna
 	 */
 
 	public void addEssai (){    
@@ -998,7 +1013,8 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 *  Methode qui permet d'ajouter une image dans un Essai
+	 *  Méthode qui permet de lier une image à un essai.
+	 *  @author Cinna
 	 */
 
 	public void addEssaiImage (){    
@@ -1036,7 +1052,8 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 *  Methode qui permet d'ajouter un Algorithme dans un Essai
+	 *  Methode qui permet de lier un Algorithme à un essai.
+	 *  @author Cinna
 	 */
 	public void addEssaiAlgo (){    
 		conn = mysqlconnect.ConnectDb();
@@ -1062,7 +1079,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Methode qui permet de modifier les donnes d'un Essai
+	 *  Methode qui permet de modifier les données d'un essai.
+	 *  @author ST3VOS
 	 */
 	public void editEssai(){   
 		try {
@@ -1083,7 +1101,8 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 *  Methode qui permet de supprimer un Essai
+	 *  Methode qui permet de supprimer un essai.
+	 *  @author ST3VOS
 	 */
 	public void deleteEssai(){
 		conn = mysqlconnect.ConnectDb();
@@ -1111,7 +1130,8 @@ public class PageDeConnectionController implements Initializable {
 
 	
 	/**
-	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données
+	 *  Méthode qui met à jour le tableau lors de l'ajout, de la modification ou de la suppression de données.
+	 *  @author Cinna
 	 */
 
 
@@ -1144,7 +1164,8 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Méthode qui met à jour le tableau image dans la page essai lors de l'ajout d'une image ou la suppression suppression d'un essai
+	 *  Méthode qui met à jour le tableau image dans la page essai lors de l'ajout d'une image ou la suppression suppression d'un essai.
+	 *  @author Cinna
 	 */
 	public void refreshTableImageEssai(){
 
@@ -1173,7 +1194,8 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Image> listImageEssaiResultat;
 
 	/**
-	 * Méthode qui met à jour le tableau image dans la page resultat essai
+	 * Méthode qui met à jour le tableau des images dans la page résultat essai.
+	 * @author Cinna
 	 */
 
 
@@ -1223,9 +1245,10 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Methode qui permet d'afficher les donnes selectionner dans le tableau alogrithme
+	 *  Methode qui permet d'afficher les donnes selectionnées dans le tableau alogrithme.
 	 * 
 	 * @param event
+	 * @author ST3VOS
 	 */
 
 	@FXML
@@ -1240,7 +1263,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 * Méthode qui met à jour le tableau lors de l'ajout
+	 * Méthode qui met à jour le tableau "algorithme" lors de l'ajout.
+	 * @author ST3VOS
 	 */
 	public void refreshTableAlgo(){
 
@@ -1267,7 +1291,8 @@ public class PageDeConnectionController implements Initializable {
 	ObservableList<Algorithme> listAlgoEssai;
 
 	/**
-	 * Méthode qui met à jour le tableau algorithme lors de l'ajout d'un alogrithme dans un essai
+	 * Méthode qui met à jour le tableau algorithme lors de l'ajout d'un alogrithme dans un essai.
+	 * @author Cinna
 	 */
 	public void refreshTableAlgoEssai(){
 
@@ -1319,6 +1344,10 @@ public class PageDeConnectionController implements Initializable {
 		infoImageResuTF.setText(String.valueOf(cellNumber));
 	}
 	
+	/**
+	 * Affiche l'image sélectionnée après traitement.
+	 * @author Cinna
+	 */
 	public void loadImage(){
 		
 		if (idImageEssaiResultat.getCellData(index) == null) {
@@ -1400,9 +1429,10 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Methode qui permet d'afficher les donnes selectionner dans le tableau utilisateur
+	 *  Méthode qui permet d'afficher les données selectionnées dans le tableau "utilisateur".
 	 * 
 	 * @param event
+	 * @author ST3VOS
 	 */
 
 	@FXML
@@ -1420,6 +1450,7 @@ public class PageDeConnectionController implements Initializable {
 	
 	/**
 	 *  Methode qui permet de supprimer un utilisateur
+	 *  @author Cinna
 	 */
 
 	public void deleteUtilisateur(){
@@ -1472,7 +1503,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 
 	/**
-	 *  Methode qui permet de modifier la position d'un utilisateur
+	 *  Methode qui permet de modifier la position d'un utilisateur.
+	 *  @author Cinna
 	 */
 
 	public void editUtilisateur (){   
@@ -1505,7 +1537,8 @@ public class PageDeConnectionController implements Initializable {
 	}
 	
 	/**
-	 * Méthode qui met à jour les donnes du tableau utilisateur 
+	 * Méthode qui met à jour les données du tableau utilisateur.
+	 * @author Cinna 
 	 */
 
 	public void refreshTableGestioadmin(){
@@ -1585,9 +1618,10 @@ public class PageDeConnectionController implements Initializable {
 
 
 	/**
-	 *  Methode qui permet d'afficher les donnes selectionner dans un tableau
+	 *  Méthode qui permet d'afficher l'image selectionnée dans le tableau.
 	 * 
 	 * @param event
+	 * @author ST3VOS
 	 */
 
 	@FXML
@@ -1645,7 +1679,8 @@ public void loadImageLI(){
 /*----------------------------------------Fin-------Load image Page liste Image------------------------------------------------------------*/
 
 	/**
-	 *  Methode qui permet d'ajouter une image
+	 *  Méthode qui permet d'ajouter une image dans la base de données.
+	 *  @author Cinna
 	 */
 
 	public void addImages (){    
@@ -1681,7 +1716,8 @@ public void loadImageLI(){
 	}
 	
 	/**
-	 *  Methode qui permet de supprimer une image
+	 *  Méthode qui permet de supprimer une image.
+	 *  @author ST3VOS
 	 */
 
 	public void deleteImage(){
@@ -1801,7 +1837,8 @@ public void loadImageLI(){
 
 
 	/**
-	 *  Methode qui permet d'importer une image
+	 *  Methode qui permet d'importer une image depuis l'ordinateur.
+	 *  @author ST3VOS
 	 */
 
 
@@ -1821,7 +1858,8 @@ public void loadImageLI(){
 
 
 	/**
-	 * Méthode qui met à jour le tableau lors de l'ajout d'une image
+	 * Méthode qui met à jour le tableau "image" lors de l'ajout d'une image dans la base de données.
+	 * @author Cinna
 	 */
 
 	public void refreshTableImage(){
@@ -1862,7 +1900,8 @@ public void loadImageLI(){
 
 
 	/**
-	 *  Methode qui permet de modifier le nom d'utilisateur,nom et prenom 
+	 *  Méthode qui permet de modifier le nom d'utilisateur, nom et prenom. 
+	 *  @author ST3VOS
 	 */
 
 
@@ -1924,7 +1963,10 @@ public void loadImageLI(){
 	}
 
 	
-
+	/**
+	 * Supprime l'essai de la base de données.
+	 * @param idEss ID de l'essai à supprimer
+	 */
 
 
 	public void deleteEssaiComplet(int idEss) {
@@ -2053,7 +2095,8 @@ public void loadImageLI(){
 	}
 	
 	/**
-	 *  Methode qui permet de supprimer un utilisateur plus tous les campagnes,essais et image qui a cree
+	 *  Méthode qui permet de supprimer un utilisateur du système.
+	 *  @author Cinna
 	 */
 
 	public void deleteCompte(){
@@ -2111,7 +2154,8 @@ public void loadImageLI(){
 
 
 	/**
-	 *  Methode qui permet de fermer l'application
+	 *  Méthode qui permet de fermer l'application.
+	 *  @author ST3VOS
 	 */
 	public void closeApp(MouseEvent event) 
 	{
@@ -2121,7 +2165,8 @@ public void loadImageLI(){
 
 	
 	/**
-	 *  Methode qui permet de minimiser l'application
+	 *  Méthode qui permet de minimiser l'application.
+	 *  @author ST3VOS
 	 */
 	public void miniApp(MouseEvent event) 
 	{
@@ -2130,7 +2175,8 @@ public void loadImageLI(){
 	}
 
 	/**
-	 *  Methode qui permet de glisser la fenêtre de l'application quand on glisser le souris
+	 *  Méthode qui permet de glisser la fenêtre de l'application quand on glisse la souris.
+	 *  @author ST3VOS
 	 */
 	public void btnDraggApp(MouseEvent event) 
 	{
@@ -2139,7 +2185,8 @@ public void loadImageLI(){
 		s.setY(event.getScreenY()-ymouse);
 	}
 	/**
-	 *  Methode qui permet de  glisser la fenêtre de l'application lorsque vous restez appuyé sur la barre d'outils
+	 *  Méthode qui permet de  glisser la fenêtre de l'application lorsque vous restez appuyé sur la barre d'outils.
+	 *  @author ST3VOS
 	 */
 	public void pressDraggApp(MouseEvent event) 
 	{
@@ -2149,7 +2196,8 @@ public void loadImageLI(){
 
 
 	/**
-	 * La méthode vous permet de vous déconnecter de l'application et de vous envoyer à la page de connexion
+	 * La méthode vous permet de vous déconnecter de l'application et de vous envoyer à la page de connexion.
+	 * @author ST3VOS
 	 */
 	public void logoutCompte(Event evee) {
 
@@ -2187,6 +2235,10 @@ public void loadImageLI(){
 	@FXML
 	Button exporterCampagnes;
 
+	/**
+	 * Initialise la page au démarrage de l'application.
+	 * @author ST3VOS
+	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -2218,7 +2270,8 @@ public void loadImageLI(){
 
 	
 	/**
-	 * Méthode qui permet d'afficher le nom d'utilisateur,nom et prenom de l'utilisateur connecter dans un textfield dans la page Mon Compte
+	 * Méthode qui permet d'afficher le nom d'utilisateur,nom et prenom de l'utilisateur connecter dans un textfield dans la page Mon Compte.
+	 * @author ST3VOS
 	 */
 
 		try {
@@ -2253,7 +2306,8 @@ public void loadImageLI(){
 
 
 		/**
-		 * Methode pour exporter les resultat d'un essai en tant que fichier Excel
+		 * Méthode pour exporter les résultats d'un essai en tant que fichier Excel.
+		 * @author ST3VOS
 		 */
 		exporterEssais.setOnAction( e->{
 
@@ -2358,7 +2412,8 @@ public void loadImageLI(){
 
 
 		/**
-		 * Methode pour exporter les resultat d'un Campagne en tant que fichier Excel
+		 * Méthode pour exporter les résultats d'une campagne en tant que fichier Excel.
+		 * @author ST3VOS
 		 */
 
 		exporterCampagnes.setOnAction( e->{
@@ -2476,7 +2531,8 @@ public void loadImageLI(){
 		/*--------------Wrap Tables-------------------------------*/
 		
 		/**
-		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule.
+		 * @author ST3VOS
 		 */
 
 		tableDescriptionCampagnes.setCellFactory(tc -> {
@@ -2490,7 +2546,8 @@ public void loadImageLI(){
         });
 		
 		/**
-		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule.
+		 * @author ST3VOS
 		 */
 		
 		tableDescriptionEssais.setCellFactory(tc -> {
@@ -2504,7 +2561,8 @@ public void loadImageLI(){
         });
 		
 		/**
-		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule
+		 * Méthode pour afficher du texte long sur plusieurs lignes dans une seule cellule.
+		 * @author ST3VOS
 		 */
 		
 		tableCampagneEssaiDescriptionC.setCellFactory(tc -> {
@@ -2523,6 +2581,12 @@ public void loadImageLI(){
 		
 
 	}
+	
+	/**
+	 * Fonction qui permet de supprimer un dossier de manière récursive.
+	 * @param directoryToBeDeleted Chemin du dossier à supprimer.
+	 * @author Cinna
+	 */
 	
 	public boolean deleteDirectory (File directoryToBeDeleted) {
 	    File[] allContents = directoryToBeDeleted.listFiles();

@@ -116,7 +116,13 @@ public class signController implements Initializable{
 	ResultSet rs = null;
 	PreparedStatement pst = null;
 
-
+	/**
+	 * Méthode permettant la connection d'un utilisateur sur l'application.
+	 * @param event
+	 * @throws Exception
+	 * @author Cinna
+	 */
+	
 	@FXML  
 	private void Login (ActionEvent event) throws Exception{  
 		conn = mysqlconnect.ConnectDb();
@@ -152,6 +158,10 @@ public class signController implements Initializable{
 
 	}
 
+	/**
+	 * @param event
+	 */
+	
 	public void signUp(ActionEvent event){    
 		conn = mysqlconnect.ConnectDb();
 		String sqlT = "SELECT * FROM utilisateur WHERE userName = ?";
@@ -211,13 +221,22 @@ public class signController implements Initializable{
 		
 	}
 
-
+/**
+ * Encode une chaîne de caractère
+ * @param mdp Chaîne à encoder.
+ * @return Retourne la chaîne encodée.
+ * @author Cinna
+ */
 
 	private String getEncodedString(String mdp) {
 		return Base64.getEncoder().encodeToString(mdp.getBytes());
 	}
 	
-	
+	/**
+	 * Vérifie si tous les champs ont bien étés renseignés.
+	 * @return Vrai si tout est rempli, faux sinon.
+	 * @author Cinna
+	 */
 
 	private boolean validateInput(){
 		if(
