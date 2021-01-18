@@ -2289,7 +2289,6 @@ public void loadImageLI(){
 
 				sheet.setColumnWidth(0, 256*20);
 				sheet.setColumnWidth(1, 256*25);
-
 				sheet.setColumnWidth(2, 256*25);
 				sheet.setZoom(150);
 
@@ -2375,7 +2374,7 @@ public void loadImageLI(){
 						+ "INNER JOIN campagne C ON CCE.idCampagne = C.idCampagne "
 						+ "INNER JOIN mesureappartientimage MAI ON M.idMesure = MAI.idMesure "
 						+ "INNER JOIN image I ON MAI.idImage = I.idImage "
-						+ "WHERE CCE.idCampagne = ?";
+						+ "WHERE C.idCampagne = ?";
 
 				pst = conn.prepareStatement(query);
 				pst.setInt(1, idCampagne);
@@ -2399,11 +2398,11 @@ public void loadImageLI(){
 				header.createCell(4).setCellValue("Poids");
 
 
-				sheet.autoSizeColumn(1);
-
-				sheet.autoSizeColumn(2);
-
+				sheet.setColumnWidth(0, 256*25);
+				sheet.setColumnWidth(1, 256*25);
 				sheet.setColumnWidth(2, 256*25);
+				sheet.setColumnWidth(3, 256*25);
+				sheet.setColumnWidth(4, 256*25);
 				sheet.setZoom(150);
 
 
