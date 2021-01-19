@@ -2368,7 +2368,7 @@ public void loadImageLI(){
 
 
 
-				FileOutputStream fileOut = new FileOutputStream("AmasDetails.xlsx");
+				FileOutputStream fileOut = new FileOutputStream("Essai_Details.xlsx");
 
 				wb.write(fileOut);
 
@@ -2485,7 +2485,7 @@ public void loadImageLI(){
 
 
 
-				FileOutputStream fileOut = new FileOutputStream("CampagneDetails.xlsx");
+				FileOutputStream fileOut = new FileOutputStream("Campagne_Details.xlsx");
 
 				wb.write(fileOut);
 
