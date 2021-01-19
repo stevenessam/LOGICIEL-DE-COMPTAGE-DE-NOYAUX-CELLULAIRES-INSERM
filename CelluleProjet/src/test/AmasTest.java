@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import crud.Amas;
-import crud.Utilisateur;
 
 class AmasTest {
 

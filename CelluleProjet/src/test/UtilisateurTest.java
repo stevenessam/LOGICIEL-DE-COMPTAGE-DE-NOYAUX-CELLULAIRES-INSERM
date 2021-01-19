@@ -2,16 +2,11 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.smartcardio.Card;
-
 import org.junit.jupiter.api.Test;
-
-import crud.Campagne;
 import crud.Utilisateur;
 
 class UtilisateurTest {
 
-	
 	/**
 	 * permet de tester si tous les getters; testGetIdUtilisateur, testGetNom, testGetPrenom, testGetLogin, testGetMotDePasse
 	 * renvoi la valeurs des variables de chaque méthode
@@ -30,18 +25,18 @@ class UtilisateurTest {
 	 */
 	@Test
 	public void testGetNom() {
-		Utilisateur Utilisateur = new Utilisateur("jean");
-		//Utilisateur.setNom("");
-		assertEquals("jean", Utilisateur.getNom() );
+		Utilisateur Utilisateur = new Utilisateur("admin");
+		Utilisateur.setNom("admin");
+		assertEquals("admin", Utilisateur.getNom() );
 	}
 	/**
 	 * permet de tester testGetPrenom de la classe Utilisateur
 	 */
 	@Test
 	public void testGetPrenom() {
-		Utilisateur Utilisateur = new Utilisateur("loic");
-		//Utilisateur.setPrenom("test");
-		assertEquals("loic", Utilisateur.getPrenom() );
+		Utilisateur Utilisateur = new Utilisateur("admin");
+		Utilisateur.setPrenom("admin");
+		assertEquals("admin", Utilisateur.getPrenom() );
 	}
 	/**
 	 * permet de tester testGetLogin de la classe Utilisateur
@@ -112,5 +107,4 @@ class UtilisateurTest {
 	    IdUtilisateur.setIdUtilisateur(2);
 	    assertTrue(IdUtilisateur.getIdUtilisateur() == 2);
 	}
-
 }
