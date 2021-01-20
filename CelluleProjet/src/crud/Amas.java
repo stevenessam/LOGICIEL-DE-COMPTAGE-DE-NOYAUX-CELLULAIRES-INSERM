@@ -11,6 +11,9 @@ public class Amas {
 		this.coordonneesY = Y;
 	}
 	
+	public Amas() {
+        super();
+    }
 	
 	public int getIdAmas() {
 		return idAmas;

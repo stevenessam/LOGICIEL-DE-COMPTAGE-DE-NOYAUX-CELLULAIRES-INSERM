@@ -8,6 +8,7 @@ import crud.Amas;
 
 class AmasTest {
 
+
 	/**
 	 * permet de tester si tous les getters; testGetIdAmas, testGetCoordonneesX, testGetCoordonneesY, testGetPoids
 	 * renvoi la valeurs des variables de chaque méthode
@@ -17,7 +18,7 @@ class AmasTest {
 	 */
 	@Test
 	public void testGetIdAmas(){
-		Amas IdAmas = new Amas(2, 2, 1);
+		Amas IdAmas = new Amas();
 	    IdAmas.setIdAmas(2);
 	    assertTrue(IdAmas.getIdAmas() == 2);
 	}
@@ -35,7 +36,7 @@ class AmasTest {
 	 */
 	@Test
 	public void testGetCoordonneesX(){
-		Amas CoordonneesX = new Amas(2, 0, 1);
+		Amas CoordonneesX = new Amas(2, 2, 2);
 	    CoordonneesX.setCoordonneesX(2);
 	    assertTrue(CoordonneesX.getCoordonneesX() == 1);
 	}
