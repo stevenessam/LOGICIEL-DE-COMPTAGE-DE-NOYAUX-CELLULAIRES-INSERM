@@ -42,13 +42,13 @@
          <children>
             <TableView fx:id="tableCampagnes" layoutX="14.0" layoutY="72.0" onMouseClicked="#getSelectedCampagne" prefHeight="610.0" prefWidth="472.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomCampagnes" prefWidth="241.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="227.0" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableIdCampagnes" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="tableNomCampagnes" prefWidth="236.0" resizable="false" styleClass="tablerow" text="Nom" />
+                <TableColumn fx:id="tableDescriptionCampagnes" prefWidth="232.0" resizable="false" styleClass="tablerow" text="Description" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
-            <TextField fx:id="idCampagnes" editable="false" layoutX="1054.0" layoutY="87.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
+            <TextField fx:id="idCampagnes" editable="false" layoutX="1076.0" layoutY="87.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" />
             <Button fx:id="creeCampagnes" layoutX="797.0" layoutY="304.0" mnemonicParsing="false" onAction="#addCampagnes" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Creer Campagne" textFill="WHITE" />
             <Button fx:id="modifierCampagnes" layoutX="797.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCampagne" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Modifier Campagne" textFill="#ff8800" />
             <Button fx:id="supprimerCampagnes" layoutX="797.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteCampagne" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Supprimer Campagne" textFill="#ff2e2e" />
@@ -71,8 +71,8 @@
             </Label>
             <TableView fx:id="tableCampagneEssai" layoutX="502.0" layoutY="72.0" prefHeight="610.0" prefWidth="250.0">
               <columns>
-                <TableColumn fx:id="tableEssaiIdC" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="247.0" text="Essai - Description" />
+                <TableColumn fx:id="tableEssaiIdC" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="tableCampagneEssaiDescriptionC" prefWidth="247.0" resizable="false" text="Essai - Description" />
               </columns>
             </TableView>
             <Button fx:id="addEssaiCampagne" layoutX="797.0" layoutY="527.0" mnemonicParsing="false" onAction="#addCampagneEssai" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Ajouter Essai" />
@@ -143,9 +143,9 @@
          <children>
             <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="247.0" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="203.0" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" resizable="false" text="ID" visible="false" />
+                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="261.0" resizable="false" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="189.0" resizable="false" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
@@ -168,8 +168,8 @@
             <TextField fx:id="idEssaiTextField" layoutX="756.0" layoutY="597.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
             <TableView fx:id="tableImageE" layoutX="480.0" layoutY="72.0" prefHeight="466.0" prefWidth="270.0">
               <columns>
-                  <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="267.0" text="Images Correspondante" />
+                  <TableColumn fx:id="tableImageEId" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="tableImageEssaiIMG" prefWidth="267.0" resizable="false" text="Images Correspondante" />
               </columns>
             </TableView>
             <TableView fx:id="tableAlgo" layoutX="794.0" layoutY="420.0" onMouseClicked="#getSelectedAlgo" prefHeight="99.0" prefWidth="277.0">
@@ -181,12 +181,12 @@
             <TextField fx:id="idAlgoTF" layoutX="1072.0" layoutY="86.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
             <TableView fx:id="tableAlgoEssai" layoutX="480.0" layoutY="550.0" prefHeight="132.0" prefWidth="270.0">
               <columns>
-                <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="268.0" text="Algorithme Correspondante" />
+                <TableColumn fx:id="tableIdAlgoEssai" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="tableNomAlgoEssai" prefWidth="268.0" resizable="false" text="Algorithme Correspondante" />
               </columns>
             </TableView>
             <Button fx:id="ajouterAlgoEssai" layoutX="909.0" layoutY="536.0" mnemonicParsing="false" onAction="#addEssaiAlgo" prefHeight="54.0" prefWidth="172.0" styleClass="buttons" text="Ajouter Algorithme" />
-            <Line endX="294.0" endY="-0.012328783981502056" layoutX="455.0" layoutY="544.0" startX="32.0" startY="-0.01985589601099491" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
+            <Line endX="294.0" endY="-0.012328783981502056" layoutX="452.0" layoutY="544.0" startX="32.0" startY="-0.01985589601099491" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="280.0" endY="-207.4267120361328" layoutX="193.0" layoutY="486.0" startX="280.0" startY="-7.81433629989624" stroke="#ffcc00" strokeWidth="2.0" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="203.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Line endX="212.0" layoutX="861.0" layoutY="407.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
@@ -243,8 +243,8 @@
             </Label>
             <TableView fx:id="tableImageEssaiResultat" layoutX="70.0" layoutY="399.0" onMouseClicked="#getSelectedImageEssaiResultat" prefHeight="193.0" prefWidth="619.0">
               <columns>
-                <TableColumn fx:id="idImageEssaiResultat" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                <TableColumn fx:id="nomImageEssaiResultat" prefWidth="616.0" text="Images" />
+                <TableColumn fx:id="idImageEssaiResultat" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                <TableColumn fx:id="nomImageEssaiResultat" prefWidth="616.0" resizable="false" text="Images" />
               </columns>
             </TableView>
             <Line endX="763.0" layoutX="207.0" layoutY="185.0" startX="-100.0" stroke="#ffcc00" strokeWidth="3.0" />
@@ -285,7 +285,7 @@
       </Pane>
       <Pane fx:id="pageAjouterImage" layoutX="230.0" prefHeight="700.0" prefWidth="1120.0" styleClass="pane" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="32.0" layoutY="63.0" text="Liste Des Images" textFill="WHITE">
+            <Label layoutX="32.0" layoutY="65.0" text="Liste Des Images" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -298,9 +298,9 @@
             </Label>
             <TableView fx:id="tableImages" layoutX="23.0" layoutY="102.0" onMouseClicked="#getSelectedImage" prefHeight="564.0" prefWidth="721.0">
               <columns>
-                <TableColumn fx:id="tableIdImage" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tableNomImage" prefWidth="316.0" text="Nom" />
-                <TableColumn fx:id="tableImageImg" prefWidth="401.0" text="Images" />
+                <TableColumn fx:id="tableIdImage" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                  <TableColumn fx:id="tableNomImage" prefWidth="316.0" resizable="false" text="Nom" />
+                <TableColumn fx:id="tableImageImg" prefWidth="401.0" resizable="false" text="Images" />
               </columns>
             </TableView>
             <TextField fx:id="idImageImg" layoutX="14.0" layoutY="657.0" prefHeight="31.0" prefWidth="0.0" style="-fx-background-color: #2d3447;" visible="false" />
@@ -322,7 +322,7 @@
             <Line endX="212.0" layoutX="863.0" layoutY="301.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
             <Button fx:id="btnImageLI" layoutX="797.0" layoutY="480.0" mnemonicParsing="false" onAction="#loadImageLI" prefHeight="54.0" prefWidth="270.0" styleClass="buttons" text="Afficher L'Image" />
             <Line endX="212.0" layoutX="863.0" layoutY="463.0" startX="-74.0" stroke="#ffcc00" strokeWidth="0.7" style="-fx-scale-y: 3;" />
-            <ImageView fitHeight="73.0" fitWidth="72.0" layoutX="1052.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" rotate="-66.6">
+            <ImageView fitHeight="73.0" fitWidth="72.0" layoutX="1054.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" rotate="-66.6">
                <image>
                   <Image url="@Images/cell5.png" />
                </image>
@@ -413,11 +413,11 @@
          <children>
             <TableView fx:id="tableGestioadmin" layoutX="22.0" layoutY="72.0" onMouseClicked="#getSelectedUser" prefHeight="610.0" prefWidth="721.0" styleClass="tablesstyle">
               <columns>
-                  <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tableUserNameGestioadmin" prefWidth="155.0" text="UserName" />
-                <TableColumn fx:id="tableNomGestioadmin" prefWidth="194.0" styleClass="tablerow" text="Nom" />
-                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="188.0" styleClass="tablerow" text="Prenom" />
-                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="182.0" styleClass="tablerow" text="Position" />
+                  <TableColumn fx:id="tableIdGestionAdmin" minWidth="0.0" prefWidth="0.0" resizable="false" text="ID" visible="false" />
+                  <TableColumn fx:id="tableUserNameGestioadmin" prefWidth="173.99996948242188" resizable="false" text="UserName" />
+                <TableColumn fx:id="tableNomGestioadmin" prefWidth="188.0" resizable="false" styleClass="tablerow" text="Nom" />
+                <TableColumn fx:id="tablePrenomGestioadmin" prefWidth="182.0" resizable="false" styleClass="tablerow" text="Prenom" />
+                  <TableColumn fx:id="tablePositionGestioadmin" prefWidth="175.0" resizable="false" styleClass="tablerow" text="Position" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="343.0" layoutX="764.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />

@@ -1707,7 +1707,7 @@ public void loadImageLI(){
 				pst.execute();
 				//JOptionPane.showMessageDialog(null, "campagne Add succes");
 			} else {
-				System.out.println("Aucun fichier sélectionné.");
+				JOptionPane.showMessageDialog(null, "Aucun fichier sélectionné.");
 			}
 			refreshTableImage();
 		} catch (Exception e) {
