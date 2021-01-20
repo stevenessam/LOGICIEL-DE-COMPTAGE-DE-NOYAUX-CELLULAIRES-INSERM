@@ -6,6 +6,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+ 
 
 /**
  * Main class "MaincelluleInterface" qui étend Application
