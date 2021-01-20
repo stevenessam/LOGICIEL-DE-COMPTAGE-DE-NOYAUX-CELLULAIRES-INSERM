@@ -144,8 +144,8 @@
             <TableView fx:id="tableEssai" layoutX="13.0" layoutY="72.0" onMouseClicked="#getSelectedEssai" prefHeight="610.0" prefWidth="453.0" styleClass="tablesstyle">
               <columns>
                   <TableColumn fx:id="tableIdEssai" minWidth="0.0" prefWidth="23.0" resizable="false" text="ID" visible="false" />
-                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="261.0" resizable="false" styleClass="tablerow" text="Description" />
-                  <TableColumn fx:id="tableDateEssais" prefWidth="189.0" resizable="false" styleClass="tablerow" text="Date" />
+                  <TableColumn fx:id="tableDescriptionEssais" prefWidth="334.0" resizable="false" styleClass="tablerow" text="Description" />
+                  <TableColumn fx:id="tableDateEssais" prefWidth="116.0" resizable="false" styleClass="tablerow" text="Date" />
               </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c6c6c6" height="610.0" layoutX="765.0" layoutY="72.0" opacity="0.64" stroke="BLACK" strokeType="INSIDE" styleClass="rectangleshape" width="334.0" />
