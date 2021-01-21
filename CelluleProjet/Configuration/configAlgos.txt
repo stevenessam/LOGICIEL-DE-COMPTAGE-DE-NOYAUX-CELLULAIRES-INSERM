@@ -12,3 +12,4 @@ Seuillage ovale pour microscope
 ThresholdMin=[140]
 ThresholdMax=[208]
 CellSize=[2-75]
+OvalSize=[0.99]

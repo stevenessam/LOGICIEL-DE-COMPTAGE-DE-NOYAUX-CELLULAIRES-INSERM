@@ -241,7 +241,8 @@ public class Algorithme {
 		break;
 		
 		case 3:
-			
+			double ovalSizeEnd = 0.99;
+			double ovalSizeBeg = 1 - ovalSizeEnd;
 			try {
 				
 				Scanner reader = new Scanner(config);
@@ -255,6 +256,9 @@ public class Algorithme {
 						tMax = Integer.parseInt(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
 						line = reader.next();
 						size = line.substring(line.indexOf('[')+1, line.lastIndexOf(']'));
+						line = reader.next();
+						ovalSizeEnd = Double.parseDouble(line.substring(line.indexOf('[')+1, line.lastIndexOf(']')));
+						ovalSizeBeg = 1 - ovalSizeEnd;
 					}
 				}
 
@@ -275,7 +279,7 @@ public class Algorithme {
 			int width = imp.getWidth();
 			int height = imp.getHeight();
 			
-			imp.setRoi(new OvalRoi(width*0.01,height*0.01,width*0.99,height*0.99));
+			imp.setRoi(new OvalRoi(width*ovalSizeBeg,height*ovalSizeBeg,width*ovalSizeEnd,height*ovalSizeEnd));
 			IJ.setBackgroundColor(0, 0, 0);
 			IJ.run(imp, "Clear Outside", "");
 			IJ.run(imp, "8-bit", "");
